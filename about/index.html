@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <title>Who am I ? | William&#39;s Blog</title>
-  <meta name="description" content="Stay hungry, Stay Foolish.">
+  <meta name="description" content="Recording what I have learned.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -149,6 +149,10 @@
 	
 	</section>
 	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
 <script>
 	window.subData = {
@@ -166,7 +170,10 @@
 
 <div class="header">William Lin</div>
 <div class="content">
-<div class="desc">Tempora mutantur, nos et mutamur in illis ...</div>
+<div class="desc">
+  <span>這裡為整理我各種學習的記錄手札的小小部落格</span><br><br>
+  <span>下方連結有我在HackMD上面隨手紀錄的筆記，也可以參考囉</span>
+</div>
 </div>
 </section>
 
@@ -175,12 +182,20 @@
 <div class="content">
     <ul class="entry">
     
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/Lln8jajXSQGRwc1Csey7rA">
+            <div class="name">Linux筆記整理</div>
+        </a></li>
+    
         <li><a class="flat-box" target="_blank" href="https://hackmd.io/TqzyDhnRQXaoXktvgiyMwQ">
             <div class="name">OS筆記整理</div>
         </a></li>
     
-        <li><a class="flat-box" target="_blank" href="https://frantic1048.logdown.com/">
-            <div class="name">以太坊智能合約筆記整理</div>
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/tfFCQKFOS3eAuoYaclAcwg">
+            <div class="name">後端工程師面試錦囊</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://github.com/a10000005588/Leetcode-Java">
+            <div class="name">Leetcode苦行僧(使用Java)</div>
         </a></li>
     
     </ul>
@@ -202,6 +217,8 @@
         <li><a class="flat-box" href="/categories/Hexo/"><div class="name">Hexo</div><div class="badget">1</div></a></li>
     
         <li><a class="flat-box" href="/categories/Javascript/"><div class="name">Javascript</div><div class="badget">2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Life/"><div class="name">Life</div><div class="badget">1</div></a></li>
     
         <li><a class="flat-box" href="/categories/Solidity/"><div class="name">Solidity</div><div class="badget">4</div></a></li>
     
@@ -251,6 +268,20 @@
 
   <script>setLoadingBarProgress(80);</script>
   
+<script>
+  var disqus_shortname = 'William';
+  
+  var disqus_url = 'http://yoursite.com/about/index.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/node-waves/0.7.5/waves.min.js"></script>
