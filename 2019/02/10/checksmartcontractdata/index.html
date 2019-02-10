@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Archives: 2019/2 | William&#39;s Blog</title>
+  <title>checksmartcontractdata | William&#39;s Blog</title>
   <meta name="description" content="Recording what I have learned.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
@@ -12,16 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's Blog">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Recording what I have learned.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="William&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/02/index.html">
+  <meta name="description" content="如何查看透過智能合約存在以太坊上的資料？在看這篇文章之前必須要知道一件事，那就是透過智能合約存在區塊鏈上的資訊都是公開的。 不管你是否有在智能合約上面有用requre(), revert(), assert()等等來限制某地址的人來存取智能合約上的變數，但這些變數都會存以太坊EVM的Storage上面，每個節點都可以透過以下方式來對EVM的Storage內的編碼進行解析，並還原當初透過合約所儲存的">
+<meta name="keywords" content="Ethereum,Solidity,Smart Contract">
+<meta property="og:type" content="article">
+<meta property="og:title" content="checksmartcontractdata">
+<meta property="og:url" content="http://yoursite.com/2019/02/10/checksmartcontractdata/index.html">
 <meta property="og:site_name" content="William&#39;s Blog">
-<meta property="og:description" content="Recording what I have learned.">
+<meta property="og:description" content="如何查看透過智能合約存在以太坊上的資料？在看這篇文章之前必須要知道一件事，那就是透過智能合約存在區塊鏈上的資訊都是公開的。 不管你是否有在智能合約上面有用requre(), revert(), assert()等等來限制某地址的人來存取智能合約上的變數，但這些變數都會存以太坊EVM的Storage上面，每個節點都可以透過以下方式來對EVM的Storage內的編碼進行解析，並還原當初透過合約所儲存的">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-10T15:27:32.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="William&#39;s Blog">
-<meta name="twitter:description" content="Recording what I have learned.">
+<meta name="twitter:title" content="checksmartcontractdata">
+<meta name="twitter:description" content="如何查看透過智能合約存在以太坊上的資料？在看這篇文章之前必須要知道一件事，那就是透過智能合約存在區塊鏈上的資訊都是公開的。 不管你是否有在智能合約上面有用requre(), revert(), assert()等等來限制某地址的人來存取智能合約上的變數，但這些變數都會存以太坊EVM的Storage上面，每個節點都可以透過以下方式來對EVM的Storage內的編碼進行解析，並還原當初透過合約所儲存的">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -122,36 +124,29 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
+        <article id="post-checksmartcontractdata" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2019/02/10/checksmartcontractdata/">
+    	checksmartcontractdata
+    </a>
+  </h2>
+	<time>
+	  Feb 10, 2019
+	</time>
 	
-  <script>
-    window.subData= { title:'Year : 2019.2'}
-  </script>
-
-<section class="post-list">
-	
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/02/10/checksmartcontractdata/">
-        checksmartcontractdata
-      </a>
-    </h2>
-    
-    <time>
-      Feb 10, 2019
-    </time>
-		
     
     <div class="cats">
         <a href="/categories/Solidity/">Solidity</a>
     </div>
 
-  </section>
-  <section class="article typo">
-	  <h1 id="如何查看透過智能合約存在以太坊上的資料？"><a href="#如何查看透過智能合約存在以太坊上的資料？" class="headerlink" title="如何查看透過智能合約存在以太坊上的資料？"></a>如何查看透過智能合約存在以太坊上的資料？</h1><p>在看這篇文章之前必須要知道一件事，那就是透過智能合約存在區塊鏈上的資訊都是<span style="color:red">公開的</span>。</p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何查看透過智能合約存在以太坊上的資料？"><span class="toc-number">1.</span> <span class="toc-text">如何查看透過智能合約存在以太坊上的資料？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#智能合約範例："><span class="toc-number">1.0.0.1.</span> <span class="toc-text">智能合約範例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-0-storeduint1"><span class="toc-number">1.0.1.</span> <span class="toc-text">index 0 - storeduint1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constuint"><span class="toc-number">1.0.2.</span> <span class="toc-text">constuint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-1-investmentsLimit-investmentsDeadlineTimeStamp"><span class="toc-number">1.0.3.</span> <span class="toc-text">index 1 - investmentsLimit, investmentsDeadlineTimeStamp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-2-string1"><span class="toc-number">1.0.4.</span> <span class="toc-text">index 2 - string1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-3-string2"><span class="toc-number">1.0.5.</span> <span class="toc-text">index 3 - string2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-4-string3"><span class="toc-number">1.0.6.</span> <span class="toc-text">index 4 - string3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-5-—-uints1"><span class="toc-number">1.0.7.</span> <span class="toc-text">index 5 — uints1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index6-structs1"><span class="toc-number">1.0.8.</span> <span class="toc-text">index6 - structs1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-7-uintarray"><span class="toc-number">1.0.9.</span> <span class="toc-text">index 7 - uintarray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-8-deviceDataArray"><span class="toc-number">1.0.10.</span> <span class="toc-text">index 8 - deviceDataArray</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">1.1.</span> <span class="toc-text">Reference</span></a></li></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h1 id="如何查看透過智能合約存在以太坊上的資料？"><a href="#如何查看透過智能合約存在以太坊上的資料？" class="headerlink" title="如何查看透過智能合約存在以太坊上的資料？"></a>如何查看透過智能合約存在以太坊上的資料？</h1><p>在看這篇文章之前必須要知道一件事，那就是透過智能合約存在區塊鏈上的資訊都是<span style="color:red">公開的</span>。</p>
 <p>不管你是否有在智能合約上面有用<code>requre(), revert(), assert()</code>等等來限制某地址的人來存取智能合約上的變數，但這些變數都會存以太坊EVM的Storage上面，每個節點都可以透過以下方式來對EVM的Storage內的編碼進行解析，並還原當初透過合約所儲存的變數資料！！！</p>
 <p>以下透過一個範例來瞭解如何透過web3.js library中的<code>eth.getStorage()</code>方法來解析Storage內儲存的資訊。</p>
 <h4 id="智能合約範例："><a href="#智能合約範例：" class="headerlink" title="智能合約範例："></a>智能合約範例：</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">prama solidity ^<span class="number">0.4</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract testStorage &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint</span> storeduint1 = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">uint</span> constant constuint = <span class="number">16</span>;</span><br><span class="line">    uint128 investmentsLimit = <span class="number">17055</span>;</span><br><span class="line">    <span class="keyword">uint32</span> investmentsDeadlinedTimeStamp = <span class="keyword">uint32</span>(now);</span><br><span class="line">    </span><br><span class="line">    bytes16 string1 = <span class="string">'test1'</span>;</span><br><span class="line">    bytes32 string2 = <span class="string">'test1236'</span>;</span><br><span class="line">    <span class="keyword">string</span> string3 = <span class="string">'lets string something'</span>;</span><br><span class="line">    </span><br><span class="line">    mapping (address =&gt; <span class="keyword">uint</span>) uints1;</span><br><span class="line">    mapping (address =&gt; DeviceData) structs1;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">uint</span>[] uintarray;</span><br><span class="line">    DeviceData[] deviceDataArray;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">struct</span> DeviceData &#123;</span><br><span class="line">        <span class="keyword">string</span> deviceBrand;</span><br><span class="line">        <span class="keyword">string</span> deviceYear;</span><br><span class="line">        <span class="keyword">string</span> batteryWearLevel;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function testStorage() &#123;</span><br><span class="line">        address address1 = <span class="number">0xbccc714d56bc0da0fd33d96d2a87b680dd6d0df</span>6</span><br><span class="line">        address address2 = <span class="number">0xaee905fdd3ed851e48d22059575b9f</span>4245a82b04;</span><br><span class="line">        </span><br><span class="line">        uints1[address1] = <span class="number">88</span>;</span><br><span class="line">        uints1[address2] = <span class="number">99</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> dev1 = DeviceData(<span class="string">'deviceBrand'</span>, <span class="string">'deviceYear'</span>, <span class="string">'wearLevel'</span>);</span><br><span class="line">        <span class="keyword">var</span> dev2 = DeviceData(<span class="string">'deviceBrand2'</span>, <span class="string">'deviceYear2'</span>, <span class="string">'wearLevel2'</span>);</span><br><span class="line">        </span><br><span class="line">        structs1[addresss1] = dev1;</span><br><span class="line">        structs1[addresss2] = dev2;</span><br><span class="line">        </span><br><span class="line">        uintarray.push(<span class="number">8000</span>);</span><br><span class="line">        uintarray.push(<span class="number">9000</span>);</span><br><span class="line">        </span><br><span class="line">        deviceDataArray.push(dev1);</span><br><span class="line">        deviceDataArray.push(dev2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -187,11 +182,9 @@
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>How to read Ethereum contract storage - Darius</p>
 <p><a href="https://medium.com/aigang-network/how-to-read-ethereum-contract-storage-44252c8af925" target="_blank" rel="noopener">https://medium.com/aigang-network/how-to-read-ethereum-contract-storage-44252c8af925</a></p>
 
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/Ethereum/">Ethereum</a>
       
@@ -201,47 +194,30 @@
       
 	  </div>
     
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/02/05/2019年的想法與規劃/">
-        2019年的想法與規劃
-      </a>
-    </h2>
-    
-    <time>
-      Feb 5, 2019
-    </time>
 		
-    
-    <div class="cats">
-        <a href="/categories/Life/">Life</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>剛好在農曆新年第一天，為自己的Blog換的新的Skin，<br>同時也想勉勵自己重拾寫部落格的手感。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2019/02/05/2019年的想法與規劃/">Read More</a>
-    </div>
-    
-    
-    
-  </section>
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2019/02/05/2019年的想法與規劃/" rel="next" title="2019年的想法與規劃">
+						2019年的想法與規劃
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
-    </div>
-  
-</section>
-
-
+<script>
+	window.subData = {
+		title: 'checksmartcontractdata',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
@@ -353,11 +329,13 @@
 <script>
   var disqus_shortname = 'William';
   
+  var disqus_url = 'http://yoursite.com/2019/02/10/checksmartcontractdata/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
