@@ -235,11 +235,12 @@
 
   </section>
   <section class="article typo">
-	  <a id="more"></a>
-<h2 id="Defer"><a href="#Defer" class="headerlink" title="Defer"></a>Defer</h2><p>Take an example:<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// RetrieveFeeds reads and unmarshals the feed data file.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RetrieveFeeds</span><span class="params">()</span> <span class="params">([]*Feed, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// Open the file.</span></span><br><span class="line">	file, err := os.Open(dataFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Schedule the file to be closed once</span></span><br><span class="line">	<span class="comment">// the function returns.</span></span><br><span class="line">	<span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Decode the file into a slice of pointers</span></span><br><span class="line">	<span class="comment">// to Feed values.</span></span><br><span class="line">	<span class="keyword">var</span> feeds []*Feed</span><br><span class="line">	err = json.NewDecoder(file).Decode(&amp;feeds)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// We don't need to check for errors, the caller can do this.</span></span><br><span class="line">	<span class="keyword">return</span> feeds, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>When declare a <code>defer</code> file.Close(), which means when the <code>RetrieveFeeds()</code>is finished (no matter how <code>RetrivedFeeds()</code> is panic or not.) , then <code>defer</code> will trigger the <code>file.Close()</code> to safely close the thread.</p>
+	  <p>Defer, Paic, Recover 是Golang 用來做錯誤處理的常用函式</p>
 
-
+    
+	  <div class="readmore">
+      <a href="/2018/05/13/go-defer/">Read More</a>
+    </div>
     
     
     
