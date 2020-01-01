@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-10T15:36:44.807Z</updated>
+  <updated>2020-01-01T13:31:31.068Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020年的想法與自修規劃</title>
+    <link href="http://yoursite.com/2020/01/01/2020%E5%B9%B4%E7%9A%84%E6%83%B3%E6%B3%95%E8%88%87%E8%87%AA%E4%BF%AE%E8%A6%8F%E5%8A%83/"/>
+    <id>http://yoursite.com/2020/01/01/2020年的想法與自修規劃/</id>
+    <published>2020-01-01T13:30:48.000Z</published>
+    <updated>2020-01-01T13:31:31.068Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Life" scheme="http://yoursite.com/tags/Life/"/>
+    
+  </entry>
   
   <entry>
     <title>如何查看透過智能合約存在以太坊上的資料？</title>
@@ -104,9 +128,9 @@
       <category term="Ethereum" scheme="http://yoursite.com/categories/Ethereum/"/>
     
     
-      <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
-    
       <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
+    
+      <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
     
   </entry>
   
@@ -312,9 +336,9 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
-    
       <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
+    
+      <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
     
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
     

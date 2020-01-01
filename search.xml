@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>2020年的想法與自修規劃</title>
+      <link href="/2020/01/01/2020%E5%B9%B4%E7%9A%84%E6%83%B3%E6%B3%95%E8%88%87%E8%87%AA%E4%BF%AE%E8%A6%8F%E5%8A%83/"/>
+      <url>/2020/01/01/2020%E5%B9%B4%E7%9A%84%E6%83%B3%E6%B3%95%E8%88%87%E8%87%AA%E4%BF%AE%E8%A6%8F%E5%8A%83/</url>
+      
+        <content type="html"><![CDATA[<a id="more"></a>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Life </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何查看透過智能合約存在以太坊上的資料？</title>
       <link href="/2019/02/10/checksmartcontractdata/"/>
       <url>/2019/02/10/checksmartcontractdata/</url>
@@ -93,9 +112,9 @@
       
         <tags>
             
-            <tag> Blockchain </tag>
-            
             <tag> Ethereum </tag>
+            
+            <tag> Blockchain </tag>
             
         </tags>
       
@@ -324,9 +343,9 @@
       
         <tags>
             
-            <tag> Blockchain </tag>
-            
             <tag> Ethereum </tag>
+            
+            <tag> Blockchain </tag>
             
             <tag> Solidity </tag>
             
