@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-01T13:31:31.068Z</updated>
+  <updated>2020-01-01T14:20:55.321Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,21 +17,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2020年的想法與自修規劃</title>
+    <title>2020年的想法</title>
     <link href="http://yoursite.com/2020/01/01/2020%E5%B9%B4%E7%9A%84%E6%83%B3%E6%B3%95%E8%88%87%E8%87%AA%E4%BF%AE%E8%A6%8F%E5%8A%83/"/>
     <id>http://yoursite.com/2020/01/01/2020年的想法與自修規劃/</id>
     <published>2020-01-01T13:30:48.000Z</published>
-    <updated>2020-01-01T13:31:31.068Z</updated>
+    <updated>2020-01-01T14:20:55.321Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>回顧了一下2019年對自己的期許，<br>自己與期許的似乎還有所差距，<br>希望能夠透過自修來強化自身的網站開發的實力(以後端為主)</p><a id="more"></a><p>接下來2020年想要趁下班閒暇時間時來做：</p><ul><li>刷刷leetcode</li><li>找一個side project來經營 (預計用Java Spring Boot後端, Angular前端)</li><li>複習資料結構，資料庫SQL語法等</li></ul><p>以上繼續精進，自我勉勵</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-      
+      &lt;p&gt;回顧了一下2019年對自己的期許，&lt;br&gt;自己與期許的似乎還有所差距，&lt;br&gt;希望能夠透過自修來強化自身的網站開發的實力(以後端為主)&lt;/p&gt;
     
     </summary>
     
@@ -128,9 +124,9 @@
       <category term="Ethereum" scheme="http://yoursite.com/categories/Ethereum/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
   </entry>
   
@@ -336,9 +332,9 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
     
