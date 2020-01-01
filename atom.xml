@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>William&#39;s Blog</title>
   
-  <subtitle>Blog of William Lin</subtitle>
+  <subtitle>Blog of William</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>William Lin</name>
+    <name>William</name>
     
   </author>
   
@@ -34,11 +34,11 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Smart Contract" scheme="http://yoursite.com/tags/Smart-Contract/"/>
-    
       <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
+    
+      <category term="Smart Contract" scheme="http://yoursite.com/tags/Smart-Contract/"/>
     
   </entry>
   
@@ -47,9 +47,9 @@
     <link href="http://yoursite.com/2019/02/05/2019%E5%B9%B4%E7%9A%84%E6%83%B3%E6%B3%95%E8%88%87%E8%A6%8F%E5%8A%83/"/>
     <id>http://yoursite.com/2019/02/05/2019年的想法與規劃/</id>
     <published>2019-02-05T13:24:10.000Z</published>
-    <updated>2019-02-05T13:35:17.955Z</updated>
+    <updated>2020-01-01T13:14:35.237Z</updated>
     
-    <content type="html"><![CDATA[<p>剛好在農曆新年第一天，為自己的Blog換的新的Skin，<br>同時也想勉勵自己重拾寫部落格的手感。</p><a id="more"></a><p>由於自己想往區塊鏈或是雲端後端工程師發展，<br>所以在2019年希望自己能夠再次複習網路以及作業系統等知識，<br>並且專心把論文做完。</p><p>預計2019年這一年會在上部落格記錄：</p><ul><li>如何操作以太坊聯盟鏈: Quorum</li><li>Trace Code: Quorum</li><li>Docker、Docker-Compose、K8S使用</li><li>Openstack概觀</li></ul><p>以上，希望2019年能夠順利完成論文，<br>且能夠找到一份好工作，並且持續精進自己的技術。</p>]]></content>
+    <content type="html"><![CDATA[<p>剛好在農曆新年第一天，為自己的Blog換的新的Skin，<br>同時也想勉勵自己重拾寫部落格的手感。</p><a id="more"></a><p>由於自己想往區塊鏈或是雲端後端工程師發展，<br>所以在2019年希望自己能夠再次複習網路以及作業系統等知識，</p><p>以上，希望2019年能夠順利完成論文，<br>且能夠找到一份好工作，並且持續精進自己的技術。</p>]]></content>
     
     <summary type="html">
     
