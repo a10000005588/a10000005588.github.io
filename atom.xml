@@ -124,9 +124,9 @@
       <category term="Ethereum" scheme="http://yoursite.com/categories/Ethereum/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
   </entry>
   
@@ -332,9 +332,9 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
     
