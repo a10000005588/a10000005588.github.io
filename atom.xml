@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-16T12:53:14.051Z</updated>
+  <updated>2020-05-16T14:48:46.294Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="http://yoursite.com/2020/05/16/%E4%B8%8B%E7%8F%AD%E8%87%AA%E4%BF%AE%E7%9A%84%E7%B6%93%E9%A9%97%E5%88%86%E4%BA%AB/"/>
     <id>http://yoursite.com/2020/05/16/下班自修的經驗分享/</id>
     <published>2020-05-16T12:47:39.000Z</published>
-    <updated>2020-05-16T12:53:14.051Z</updated>
+    <updated>2020-05-16T14:48:46.294Z</updated>
     
-    <content type="html"><![CDATA[<p>最近剛好在Backend版上看到有人Po文問說: “下班後要如何精進自修”, 意外看到許多大大們在下面留言, 正好最近我也在思考要如何精進自己, 所以趁這機會來統整一下大大們提出來的想法並且與自己目前的進修方式做結合, 來做個紀錄分享</p><a id="more"></a><h2 id="如果對某程式語言-amp-框架掌握度還不夠-請先熟悉之！"><a href="#如果對某程式語言-amp-框架掌握度還不夠-請先熟悉之！" class="headerlink" title="如果對某程式語言&amp;框架掌握度還不夠, 請先熟悉之！"></a>如果對某程式語言&amp;框架掌握度還不夠, 請先熟悉之！</h2><p>如果上班接觸到某種自己不熟悉的語言或框架, 像我就是畢業後被公司指派要寫Java &amp; Spring, 與Angular &amp; Typescript</p><p>所以我會偏好先到線上程式語言線上平台進修之, 因為這些學習平台能夠提供完整的學習輪廓, 能夠讓我快速掌握該程式語言&amp;框架所需具備的硬知識為何.</p><p>說到線上程式學習平台, 我蠻推薦 <a href="https://app.pluralsight.com/" target="_blank" rel="noopener">Pluralsight</a>, 因為該平台提供了該程式語言或框架推薦學習的影片, 並且透過測驗推估你對該技術的知識程度為何</p><p><img src="https://i.imgur.com/2vtrkLm.png" alt=""></p><p>有興趣可以到該平台試試看, 不過每個月會收取29美元的花費, 不過這花費當作投資是蠻值得的.</p><h2 id="若已經對程式語言-amp-框架有經驗-可以嘗試看看Side-Project"><a href="#若已經對程式語言-amp-框架有經驗-可以嘗試看看Side-Project" class="headerlink" title="若已經對程式語言&amp;框架有經驗, 可以嘗試看看Side Project"></a>若已經對程式語言&amp;框架有經驗, 可以嘗試看看Side Project</h2><p>為什麼會特地提到Side Project?? 那是因為在公司其實很難自己能夠負責專案的所有全貌, 例如可能只是負責寫API, 也可能只負責前端頁面的刻畫.</p><p>所以透過Side Project, 便能夠有機會嘗試所有技術的機會, 並且從中去體會到自己最想要加強的領域是哪邊, 例如後端效能? 前端渲染速度? Container, CI/CD的運作? 諸如此類.</p><p>所以下班後自己跑一個Side Project是個不錯的精進方式</p><h3 id="但要怎麼樣想出一個Side-Project"><a href="#但要怎麼樣想出一個Side-Project" class="headerlink" title="但要怎麼樣想出一個Side Project?"></a>但要怎麼樣想出一個Side Project?</h3><p>我覺得學習最快的方式就是模仿, 可以到Github上搜尋有興趣的專案, 並且試著用自己的程式語言與框架自己做出一套是最快的方式.</p><p>像我因為很喜歡用Markdown方式來做筆記, 目前打算自己做個小型的線上筆記編輯系統, 並看到Github上有提供<a href="https://github.com/codimd/server" target="_blank" rel="noopener">CodiMD</a> 的開源專案可參考, 來試著自己建造出一個看看. 之後會再分享到自己的部落格上怎麼一步一步進行的.</p><h2 id="嘗試撰寫線上筆記或部落格吧"><a href="#嘗試撰寫線上筆記或部落格吧" class="headerlink" title="嘗試撰寫線上筆記或部落格吧"></a>嘗試撰寫線上筆記或部落格吧</h2><p>我認為現在技術真的太多太多了, 如果沒有將自己看過的技術文章或學習影片給消化和記錄起來, 很快就又會忘記. 所以最好的方式是有個做筆記的習慣!</p><p>做筆記的話我都是用Hackmd先記錄起來, 之後等有空的時間會再消化審視自己寫過的內容, 並發佈到自己的Bloger上, 這樣有助於將學習過的知識給內化到自己的腦海中</p><h2 id="其他更進階的進修方法"><a href="#其他更進階的進修方法" class="headerlink" title="其他更進階的進修方法"></a>其他更進階的進修方法</h2><h3 id="根據技能樹-RoadMap-來補充自己最常用-有興趣但所缺乏的觀念與技術"><a href="#根據技能樹-RoadMap-來補充自己最常用-有興趣但所缺乏的觀念與技術" class="headerlink" title="根據技能樹(RoadMap)來補充自己最常用,有興趣但所缺乏的觀念與技術"></a>根據技能樹(RoadMap)來補充自己最常用,有興趣但所缺乏的觀念與技術</h3><p>這網站<a href="https://roadmap.sh/roadmaps" target="_blank" rel="noopener">Roadmap</a>提供了各開發者(Frontend, Backend, DevOps)所需要具備的技能樹為何<br>, 若像我想要往後端精進, 可以看到下面這張圖會碰到哪些所需具備的能力</p><p><img src="https://i.imgur.com/tGdhgGX.png" alt=""></p><p>看完之後會發覺有太多東西需要Cover了, 學海無涯 (茶)</p><h3 id="經營-Stackoverflow"><a href="#經營-Stackoverflow" class="headerlink" title="經營 Stackoverflow"></a>經營 Stackoverflow</h3><p>這點是我看到大大們提出來可以嘗試的方式, 不過我目前也只有在Stackoverflow上面問幾個小問題, 對這方面還沒有涉略, 可參考下面大大所寫的Stackoverflow的介紹, 未來我會想在這邊嘗試看看能不能也試著回答別人遇到的問題</p><p><a href="https://lab.howie.tw/2019/04/learn-from-stackoverflow.html?fbclid=IwAR2VuMNEjP8gvE-IFa69zJZaHNROM8-pj8dgt0-641gcjGwmkCNuBzNal8k" target="_blank" rel="noopener">工程師鍛鍊接軌世界的能力從stackoverflow 開始 - 阿貝好威的實驗室</a></p><h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>下班後要再自修真的需要有興趣使然以及強大的毅力, 否則很容易就會半途而廢 </p><p>所以最重要的還是要讓自己有個規劃, 並且從實踐規劃中內化成自己的日常習慣, 久而久之就會讓自己變得更強的！</p>]]></content>
+    <content type="html"><![CDATA[<p>最近剛好在Backend版上看到有人Po文問說: “下班後要如何精進自修”, 意外看到許多大大們在下面留言, 正好最近我也在思考要如何精進自己, 所以趁這機會來統整一下大大們提出來的想法並且與自己目前的進修方式做結合, 主要會以Full-Stack engineer的精進方式來做個紀錄分享.</p><a id="more"></a><h2 id="如果對某程式語言-amp-框架掌握度還不夠-請先熟悉之！"><a href="#如果對某程式語言-amp-框架掌握度還不夠-請先熟悉之！" class="headerlink" title="如果對某程式語言&amp;框架掌握度還不夠, 請先熟悉之！"></a>如果對某程式語言&amp;框架掌握度還不夠, 請先熟悉之！</h2><p>如果上班接觸到某種自己不熟悉的語言或框架, 像我就是畢業後被公司指派要寫Java &amp; Spring, 與Angular &amp; Typescript.</p><p>所以我會偏好先到線上程式語言線上平台進修之, 因為這些學習平台能夠提供完整的學習輪廓, 能夠讓我快速掌握該程式語言&amp;框架所需具備的硬知識為何.</p><p>說到線上程式學習平台, 我蠻推薦 <a href="https://app.pluralsight.com/" target="_blank" rel="noopener">Pluralsight</a>, 因為該平台提供了該程式語言或框架推薦學習的影片, 並且透過測驗推估你對該技術的知識程度為何.</p><p><img src="https://i.imgur.com/2vtrkLm.png" alt=""></p><p>有興趣可以到該平台試試看, 不過每個月會收取29美元的花費, 不過這花費當作投資是蠻值得的.</p><h2 id="若已經對程式語言-amp-框架有經驗-可以嘗試看看Side-Project"><a href="#若已經對程式語言-amp-框架有經驗-可以嘗試看看Side-Project" class="headerlink" title="若已經對程式語言&amp;框架有經驗, 可以嘗試看看Side Project"></a>若已經對程式語言&amp;框架有經驗, 可以嘗試看看Side Project</h2><p>為什麼會特地提到Side Project?? 那是因為在公司其實很難自己能夠負責專案的所有全貌, 例如可能只是負責寫API, 也可能只負責前端頁面的刻畫.</p><p>所以透過Side Project, 便能夠有機會嘗試所有技術的機會, 並且從中去體會到自己最想要加強的領域是哪邊, 例如後端效能? 前端渲染速度? Container, CI/CD的運作? 諸如此類, 從而培養一個Full-Stack的經驗.</p><p>所以下班後自己跑一個Side Project是個不錯的精進方式.</p><h3 id="但要怎麼樣想出一個Side-Project"><a href="#但要怎麼樣想出一個Side-Project" class="headerlink" title="但要怎麼樣想出一個Side Project?"></a>但要怎麼樣想出一個Side Project?</h3><p>我覺得學習最快的方式就是模仿, 可以到Github上搜尋有興趣的專案, 並且試著用自己的程式語言與框架自己做出一套是最快的方式.</p><p>像我因為很喜歡用Markdown方式來做筆記, 目前打算自己做個小型的線上筆記編輯系統, 並看到Github上有提供<a href="https://github.com/codimd/server" target="_blank" rel="noopener">CodiMD</a> 的開源專案可參考, 來試著自己建造出一個看看. 之後會再分享到自己的部落格上怎麼一步一步進行的.</p><h2 id="嘗試撰寫線上筆記或部落格吧"><a href="#嘗試撰寫線上筆記或部落格吧" class="headerlink" title="嘗試撰寫線上筆記或部落格吧"></a>嘗試撰寫線上筆記或部落格吧</h2><p>我認為現在技術真的太多太多了, 如果沒有將自己看過的技術文章或學習影片給消化和記錄起來, 很快就又會忘記. 所以最好的方式是有個做筆記的習慣!</p><p>做筆記的話我都是用Hackmd先記錄起來, 之後等有空的時間會再消化審視自己寫過的內容, 並發佈到自己的Bloger上, 這樣有助於將學習過的知識給內化到自己的腦海中.</p><h2 id="其他更進階的進修方法"><a href="#其他更進階的進修方法" class="headerlink" title="其他更進階的進修方法"></a>其他更進階的進修方法</h2><h3 id="根據技能樹-RoadMap-來補充自己最常用-有興趣但所缺乏的觀念與技術"><a href="#根據技能樹-RoadMap-來補充自己最常用-有興趣但所缺乏的觀念與技術" class="headerlink" title="根據技能樹(RoadMap)來補充自己最常用,有興趣但所缺乏的觀念與技術"></a>根據技能樹(RoadMap)來補充自己最常用,有興趣但所缺乏的觀念與技術</h3><p>這網站<a href="https://roadmap.sh/roadmaps" target="_blank" rel="noopener">Roadmap</a>提供了各開發者(Frontend, Backend, DevOps)所需要具備的技能樹為何<br>, 若想要往後端精進, 可以看到下面這張圖會碰到哪些所需具備的能力.</p><p><img src="https://i.imgur.com/tGdhgGX.png" alt=""></p><p>看完之後會發覺有太多東西需要Cover了, 學海無涯 (茶).</p><h3 id="經營-Stackoverflow"><a href="#經營-Stackoverflow" class="headerlink" title="經營 Stackoverflow"></a>經營 Stackoverflow</h3><p>這點是我看到大大們提出來可以嘗試的方式, 不過我目前也只有在Stackoverflow上面問幾個小問題, 對這方面還沒有涉略, 可參考下面大大所寫的Stackoverflow的介紹, 未來我會想在這邊嘗試看看能不能也試著回答別人遇到的問題.</p><p><a href="https://lab.howie.tw/2019/04/learn-from-stackoverflow.html?fbclid=IwAR2VuMNEjP8gvE-IFa69zJZaHNROM8-pj8dgt0-641gcjGwmkCNuBzNal8k" target="_blank" rel="noopener">工程師鍛鍊接軌世界的能力從stackoverflow 開始 - 阿貝好威的實驗室</a></p><h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>下班後要再自修真的需要有興趣使然以及強大的毅力, 否則很容易就會半途而廢.</p><p>所以最重要的還是要讓自己有個規劃, 並且從實踐規劃中內化成自己的日常習慣, 久而久之就會讓自己變得更強的！</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;最近剛好在Backend版上看到有人Po文問說: “下班後要如何精進自修”, 意外看到許多大大們在下面留言, 正好最近我也在思考要如何精進自己, 所以趁這機會來統整一下大大們提出來的想法並且與自己目前的進修方式做結合, 來做個紀錄分享&lt;/p&gt;
+      &lt;p&gt;最近剛好在Backend版上看到有人Po文問說: “下班後要如何精進自修”, 意外看到許多大大們在下面留言, 正好最近我也在思考要如何精進自己, 所以趁這機會來統整一下大大們提出來的想法並且與自己目前的進修方式做結合, 主要會以Full-Stack engineer的精進方式來做個紀錄分享.&lt;/p&gt;
     
     </summary>
     
@@ -74,9 +74,9 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
       <category term="Smart Contract" scheme="http://yoursite.com/tags/Smart-Contract/"/>
     
@@ -144,9 +144,9 @@
       <category term="Ethereum" scheme="http://yoursite.com/categories/Ethereum/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
   </entry>
   
@@ -352,11 +352,11 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://yoursite.com/tags/Blockchain/"/>
     
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
   </entry>
   
@@ -379,11 +379,11 @@
       <category term="Solidity" scheme="http://yoursite.com/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
-    
       <category term="Solidity" scheme="http://yoursite.com/tags/Solidity/"/>
     
       <category term="Truffle" scheme="http://yoursite.com/tags/Truffle/"/>
+    
+      <category term="Ethereum" scheme="http://yoursite.com/tags/Ethereum/"/>
     
   </entry>
   
