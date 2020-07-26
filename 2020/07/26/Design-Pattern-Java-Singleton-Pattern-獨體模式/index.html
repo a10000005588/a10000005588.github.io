@@ -12,18 +12,19 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+  <meta name="description" content="每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Design Pattern(Java)] Singleton Pattern 獨體模式">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta property="og:description" content="每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/OjAKXpb.png">
-<meta property="og:updated_time" content="2020-07-26T08:56:50.736Z">
+<meta property="og:updated_time" content="2020-07-26T09:16:48.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Design Pattern(Java)] Singleton Pattern 獨體模式">
-<meta name="twitter:description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta name="twitter:description" content="每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
 <meta name="twitter:image" content="https://i.imgur.com/OjAKXpb.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -138,11 +139,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#獨體模式-Singleton"><span class="toc-number">1.</span> <span class="toc-text">獨體模式  Singleton</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作法"><span class="toc-number">1.1.</span> <span class="toc-text">作法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多執行緒下獨體模式會遇到的狀況"><span class="toc-number">1.2.</span> <span class="toc-text">多執行緒下獨體模式會遇到的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法一：只要把getInstance-給同步化-會有效能不佳的狀況，可能造成效率下降100倍"><span class="toc-number">1.2.1.</span> <span class="toc-text">解法一：只要把getInstance()給同步化 (會有效能不佳的狀況，可能造成效率下降100倍)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體"><span class="toc-number">1.2.2.</span> <span class="toc-text">解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法三：利用-“雙重檢查上鎖”-在getInstance-中減少使用同步化"><span class="toc-number">1.2.3.</span> <span class="toc-text">解法三：利用 “雙重檢查上鎖” 在getInstance()中減少使用同步化</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作法"><span class="toc-number">1.</span> <span class="toc-text">作法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多執行緒下獨體模式會遇到的狀況"><span class="toc-number">2.</span> <span class="toc-text">多執行緒下獨體模式會遇到的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法一：只要把getInstance-給同步化-會有效能不佳的狀況，可能造成效率下降100倍"><span class="toc-number">2.1.</span> <span class="toc-text">解法一：只要把getInstance()給同步化 (會有效能不佳的狀況，可能造成效率下降100倍)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體"><span class="toc-number">2.2.</span> <span class="toc-text">解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法三：利用-“雙重檢查上鎖”-在getInstance-中減少使用同步化"><span class="toc-number">2.3.</span> <span class="toc-text">解法三：利用 “雙重檢查上鎖” 在getInstance()中減少使用同步化</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="獨體模式-Singleton"><a href="#獨體模式-Singleton" class="headerlink" title="獨體模式  Singleton"></a>獨體模式  Singleton</h1><p>每次引用類別都只會產出相同的物件</p>
+    	<p>每次引用類別都只會產出相同的物件</p>
 <p>適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。</p>
 <a id="more"></a>
 <h2 id="作法"><a href="#作法" class="headerlink" title="作法"></a>作法</h2><p>假如有一個類別叫做MyClass，現在要讓MyClass變成獨體模式，讓外面的類別只能透過 MyClass.getInstance() 取得MyClass物件。</p>
@@ -176,6 +177,12 @@ public static MyClass getInstance() {
 
   	</div>
 	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
 		
 	
 		<div class="art-item-footer">
@@ -289,7 +296,7 @@ public static MyClass getInstance() {
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

@@ -12,17 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="策略模式 Strategy Pattern可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
+  <meta name="description" content="可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Design Pattern(Java)] Strategy Pattern 策略模式">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Strategy-Pattern-策略模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="策略模式 Strategy Pattern可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
+<meta property="og:description" content="可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-26T08:58:49.726Z">
+<meta property="og:updated_time" content="2020-07-26T09:16:44.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Design Pattern(Java)] Strategy Pattern 策略模式">
-<meta name="twitter:description" content="策略模式 Strategy Pattern可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
+<meta name="twitter:description" content="可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -136,11 +137,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#策略模式-Strategy-Pattern"><span class="toc-number">1.</span> <span class="toc-text">策略模式 Strategy Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#沒有思考使用設計模式的時候-模擬鴨子版本"><span class="toc-number">1.1.</span> <span class="toc-text">沒有思考使用設計模式的時候:模擬鴨子版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用繼承的可以改善作法"><span class="toc-number">1.1.1.</span> <span class="toc-text">用繼承的可以改善作法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#問題"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">問題</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改用介面做改善"><span class="toc-number">1.1.2.</span> <span class="toc-text">改用介面做改善</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#問題-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">問題</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則-一"><span class="toc-number">1.1.3.</span> <span class="toc-text">設計守則(一)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽離會變動的部分成為獨立類別"><span class="toc-number">1.1.4.</span> <span class="toc-text">抽離會變動的部分成為獨立類別</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則-二"><span class="toc-number">1.1.5.</span> <span class="toc-text">設計守則(二)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用介面代表每個行為-FlyBehavior-QuackBehavior"><span class="toc-number">1.1.6.</span> <span class="toc-text">用介面代表每個行為: FlyBehavior, QuackBehavior</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#實踐鴨子的行為"><span class="toc-number">1.2.</span> <span class="toc-text">實踐鴨子的行為</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#問題與思考"><span class="toc-number">1.2.1.</span> <span class="toc-text">問題與思考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合鴨子的行為"><span class="toc-number">1.3.</span> <span class="toc-text">整合鴨子的行為</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整測試的code：實作一個MiniDuck"><span class="toc-number">1.4.</span> <span class="toc-text">完整測試的code：實作一個MiniDuck</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Duck-class"><span class="toc-number">1.4.1.</span> <span class="toc-text">Duck class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FlyBehavior-and-QuackBehavior介面與實踐之的動作"><span class="toc-number">1.4.2.</span> <span class="toc-text">FlyBehavior and QuackBehavior介面與實踐之的動作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實踐綠頭鴨的類別：MallardDuck-java"><span class="toc-number">1.4.3.</span> <span class="toc-text">實踐綠頭鴨的類別：MallardDuck.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#測試用類別：MiniDuckSimulator-java"><span class="toc-number">1.4.4.</span> <span class="toc-text">測試用類別：MiniDuckSimulator.java</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#動態設定行為"><span class="toc-number">1.5.</span> <span class="toc-text">動態設定行為</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則"><span class="toc-number">1.5.1.</span> <span class="toc-text">設計守則</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#沒有思考使用設計模式的時候-模擬鴨子版本"><span class="toc-number">1.</span> <span class="toc-text">沒有思考使用設計模式的時候:模擬鴨子版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用繼承的可以改善作法"><span class="toc-number">1.1.</span> <span class="toc-text">用繼承的可以改善作法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#問題"><span class="toc-number">1.1.1.</span> <span class="toc-text">問題</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改用介面做改善"><span class="toc-number">1.2.</span> <span class="toc-text">改用介面做改善</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#問題-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">問題</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則-一"><span class="toc-number">1.3.</span> <span class="toc-text">設計守則(一)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽離會變動的部分成為獨立類別"><span class="toc-number">1.4.</span> <span class="toc-text">抽離會變動的部分成為獨立類別</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則-二"><span class="toc-number">1.5.</span> <span class="toc-text">設計守則(二)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用介面代表每個行為-FlyBehavior-QuackBehavior"><span class="toc-number">1.6.</span> <span class="toc-text">用介面代表每個行為: FlyBehavior, QuackBehavior</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#實踐鴨子的行為"><span class="toc-number">2.</span> <span class="toc-text">實踐鴨子的行為</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#問題與思考"><span class="toc-number">2.1.</span> <span class="toc-text">問題與思考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合鴨子的行為"><span class="toc-number">3.</span> <span class="toc-text">整合鴨子的行為</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完整測試的code：實作一個MiniDuck"><span class="toc-number">4.</span> <span class="toc-text">完整測試的code：實作一個MiniDuck</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Duck-class"><span class="toc-number">4.1.</span> <span class="toc-text">Duck class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FlyBehavior-and-QuackBehavior介面與實踐之的動作"><span class="toc-number">4.2.</span> <span class="toc-text">FlyBehavior and QuackBehavior介面與實踐之的動作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實踐綠頭鴨的類別：MallardDuck-java"><span class="toc-number">4.3.</span> <span class="toc-text">實踐綠頭鴨的類別：MallardDuck.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#測試用類別：MiniDuckSimulator-java"><span class="toc-number">4.4.</span> <span class="toc-text">測試用類別：MiniDuckSimulator.java</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#動態設定行為"><span class="toc-number">5.</span> <span class="toc-text">動態設定行為</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#設計守則"><span class="toc-number">5.1.</span> <span class="toc-text">設計守則</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="策略模式-Strategy-Pattern"><a href="#策略模式-Strategy-Pattern" class="headerlink" title="策略模式 Strategy Pattern"></a>策略模式 Strategy Pattern</h1><p>可以在執行期動態更換物件的行為</p>
+    	<p>可以在執行期動態更換物件的行為</p>
 <p>『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。</p>
 <a id="more"></a>
 <h2 id="沒有思考使用設計模式的時候-模擬鴨子版本"><a href="#沒有思考使用設計模式的時候-模擬鴨子版本" class="headerlink" title="沒有思考使用設計模式的時候:模擬鴨子版本"></a>沒有思考使用設計模式的時候:模擬鴨子版本</h2><p>假設我們要開發模擬鴨子遊戲，會有各種不同的鴨子，這時候會們通常都會先設計出一個class叫做 Duck，然後Duck會包含鴨子的共同行為：發出叫聲 quack(), 游泳 swin(), 以及展現外觀 display()，然後有綠頭鴨 MallardDuck class和 紅頭鴨 RedheadDuck class分別繼承 Duck類別</p>
@@ -223,6 +224,12 @@
 
   	</div>
 	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
 		
 	
 		<div class="art-item-footer">
@@ -336,7 +343,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

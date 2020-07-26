@@ -12,18 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="以太坊測試網連接：Connect to the Rospen NetworkEnviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
+  <meta name="description" content="Enviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
 <meta name="keywords" content="Blockchain,Ethereum">
 <meta property="og:type" content="article">
 <meta property="og:title" content="以太坊測試網連接：Connect to the Rospen Network">
 <meta property="og:url" content="http://a10000005588.github.io/2018/05/13/rospen/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="以太坊測試網連接：Connect to the Rospen NetworkEnviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
+<meta property="og:description" content="Enviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-26T09:06:52.251Z">
+<meta property="og:updated_time" content="2020-07-26T09:17:43.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="以太坊測試網連接：Connect to the Rospen Network">
-<meta name="twitter:description" content="以太坊測試網連接：Connect to the Rospen NetworkEnviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
+<meta name="twitter:description" content="Enviroment: MacOS Assume reader has basic understanding of geth and ethereum.">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -142,11 +142,11 @@
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#以太坊測試網連接：Connect-to-the-Rospen-Network"><span class="toc-number">1.</span> <span class="toc-text">以太坊測試網連接：Connect to the Rospen Network</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Create-a-Ethereum-Wallet"><span class="toc-number">1.1.</span> <span class="toc-text">Create a Ethereum Wallet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Start-to-build-a-node-and-synchronize-the-Rospen-network"><span class="toc-number">1.2.</span> <span class="toc-text">Start to build a node and synchronize the Rospen network.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Before-sync-the-node-Put-your-keystore-file-in-the-testnet-document"><span class="toc-number">1.2.1.</span> <span class="toc-text">Before sync the node , Put your keystore file in the testnet document.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sync-to-the-Rospen-network"><span class="toc-number">1.2.2.</span> <span class="toc-text">Sync to the Rospen network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attach-your-geth"><span class="toc-number">1.2.3.</span> <span class="toc-text">Attach your geth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-for-connecting-the-ropsten-network"><span class="toc-number">1.2.4.</span> <span class="toc-text">Problem for connecting the ropsten network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-rospen-network-toturial"><span class="toc-number">1.2.5.</span> <span class="toc-text">Deploy to rospen network toturial:</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Create-a-Ethereum-Wallet"><span class="toc-number">1.</span> <span class="toc-text">Create a Ethereum Wallet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Start-to-build-a-node-and-synchronize-the-Rospen-network"><span class="toc-number">2.</span> <span class="toc-text">Start to build a node and synchronize the Rospen network.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Before-sync-the-node-Put-your-keystore-file-in-the-testnet-document"><span class="toc-number">2.1.</span> <span class="toc-text">Before sync the node , Put your keystore file in the testnet document.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sync-to-the-Rospen-network"><span class="toc-number">2.2.</span> <span class="toc-text">Sync to the Rospen network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attach-your-geth"><span class="toc-number">2.3.</span> <span class="toc-text">Attach your geth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-for-connecting-the-ropsten-network"><span class="toc-number">2.4.</span> <span class="toc-text">Problem for connecting the ropsten network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-rospen-network-toturial"><span class="toc-number">2.5.</span> <span class="toc-text">Deploy to rospen network toturial:</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="以太坊測試網連接：Connect-to-the-Rospen-Network"><a href="#以太坊測試網連接：Connect-to-the-Rospen-Network" class="headerlink" title="以太坊測試網連接：Connect to the Rospen Network"></a>以太坊測試網連接：Connect to the Rospen Network</h1><p>Enviroment: MacOS</p>
+    	<p>Enviroment: MacOS</p>
 <p>Assume reader has basic understanding of geth and ethereum.</p>
 <a id="more"></a>
 <h2 id="Create-a-Ethereum-Wallet"><a href="#Create-a-Ethereum-Wallet" class="headerlink" title="Create a Ethereum Wallet"></a>Create a Ethereum Wallet</h2><p>We can via <code>myetherwallet</code> to create a wallet.<br><a href="https://www.myetherwallet.com/#generate-wallet" target="_blank" rel="noopener">https://www.myetherwallet.com/#generate-wallet</a></p>
@@ -306,7 +306,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

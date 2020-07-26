@@ -12,18 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ERC Token 介紹即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
+  <meta name="description" content="即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
 <meta name="keywords" content="Ethereum">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ERC Token介紹：ERC20 &amp; ERC721">
 <meta property="og:url" content="http://a10000005588.github.io/2018/03/25/erctoken/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="ERC Token 介紹即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
+<meta property="og:description" content="即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-26T09:02:30.395Z">
+<meta property="og:updated_time" content="2020-07-26T09:16:56.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ERC Token介紹：ERC20 &amp; ERC721">
-<meta name="twitter:description" content="ERC Token 介紹即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
+<meta name="twitter:description" content="即利用當今火紅的以太坊上的智能合約，實作出代幣功能。可擁有與虛擬貨幣作為價值傳遞功能。">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -142,11 +142,11 @@
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ERC-Token-介紹"><span class="toc-number">1.</span> <span class="toc-text">ERC Token 介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#好處"><span class="toc-number">1.0.1.</span> <span class="toc-text">好處</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#為何需要ERC標準合約？"><span class="toc-number">1.0.2.</span> <span class="toc-text">為何需要ERC標準合約？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC代幣有自己的錢包嗎？？"><span class="toc-number">1.0.3.</span> <span class="toc-text">ERC代幣有自己的錢包嗎？？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ERC20-介紹"><span class="toc-number">1.1.</span> <span class="toc-text">ERC20 介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#記載ERC20規則-官方文件"><span class="toc-number">1.1.1.</span> <span class="toc-text">記載ERC20規則 官方文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC20-Token-Standard-Interface"><span class="toc-number">1.1.2.</span> <span class="toc-text">ERC20 Token Standard Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設定ERC-Token資訊"><span class="toc-number">1.1.3.</span> <span class="toc-text">設定ERC Token資訊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC20-詳述"><span class="toc-number">1.1.4.</span> <span class="toc-text">ERC20 詳述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用例子"><span class="toc-number">1.1.5.</span> <span class="toc-text">使用例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Token-Balance"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">Token Balance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transfer-Token-Balance"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">Transfer Token Balance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Approve-And-TransferFrom-Token-Balance"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">Approve And TransferFrom Token Balance</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ERC721-介紹"><span class="toc-number">1.2.</span> <span class="toc-text">ERC721 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">1.3.</span> <span class="toc-text">參考資料</span></a></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#好處"><span class="toc-number">1.</span> <span class="toc-text">好處</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#為何需要ERC標準合約？"><span class="toc-number">2.</span> <span class="toc-text">為何需要ERC標準合約？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC代幣有自己的錢包嗎？？"><span class="toc-number">3.</span> <span class="toc-text">ERC代幣有自己的錢包嗎？？</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#ERC20-介紹"><span class="toc-number"></span> <span class="toc-text">ERC20 介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#記載ERC20規則-官方文件"><span class="toc-number">1.</span> <span class="toc-text">記載ERC20規則 官方文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC20-Token-Standard-Interface"><span class="toc-number">2.</span> <span class="toc-text">ERC20 Token Standard Interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#設定ERC-Token資訊"><span class="toc-number">3.</span> <span class="toc-text">設定ERC Token資訊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ERC20-詳述"><span class="toc-number">4.</span> <span class="toc-text">ERC20 詳述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用例子"><span class="toc-number">5.</span> <span class="toc-text">使用例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Token-Balance"><span class="toc-number">5.1.</span> <span class="toc-text">Token Balance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transfer-Token-Balance"><span class="toc-number">5.2.</span> <span class="toc-text">Transfer Token Balance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Approve-And-TransferFrom-Token-Balance"><span class="toc-number">5.3.</span> <span class="toc-text">Approve And TransferFrom Token Balance</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ERC721-介紹"><span class="toc-number"></span> <span class="toc-text">ERC721 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number"></span> <span class="toc-text">參考資料</span></a></li></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="ERC-Token-介紹"><a href="#ERC-Token-介紹" class="headerlink" title="ERC Token 介紹"></a>ERC Token 介紹</h1><p>即利用當今火紅的以太坊上的智能合約，實作出代幣功能。<br>可擁有與虛擬貨幣作為價值傳遞功能。</p>
+    	<p>即利用當今火紅的以太坊上的智能合約，實作出代幣功能。<br>可擁有與虛擬貨幣作為價值傳遞功能。</p>
 <a id="more"></a>
 <h3 id="好處"><a href="#好處" class="headerlink" title="好處"></a>好處</h3><ul>
 <li>不用自己架設公有鏈，就可以擁有自己發行的代幣</li>
@@ -312,7 +312,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

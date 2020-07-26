@@ -12,19 +12,20 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="工廠模式 Factory Pattern工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。">
+  <meta name="description" content="工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。 以下會依序做介紹">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Design Pattern(Java)] Factory Pattern 工廠模式">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Factory-Pattern-工廠模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="工廠模式 Factory Pattern工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。">
+<meta property="og:description" content="工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。 以下會依序做介紹">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/cmWuZ3v.png">
 <meta property="og:image" content="https://i.imgur.com/Wp4QRfE.png">
-<meta property="og:updated_time" content="2020-07-26T08:57:42.350Z">
+<meta property="og:updated_time" content="2020-07-26T09:16:27.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Design Pattern(Java)] Factory Pattern 工廠模式">
-<meta name="twitter:description" content="工廠模式 Factory Pattern工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。">
+<meta name="twitter:description" content="工廠模式提供了可創建(new)各種不同類別(class)的實例(instance) 工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式 簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)然而工廠方法和抽象方法則比較能讓模組間耦合度降低。 以下會依序做介紹">
 <meta name="twitter:image" content="https://i.imgur.com/cmWuZ3v.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -139,11 +140,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工廠模式-Factory-Pattern"><span class="toc-number">1.</span> <span class="toc-text">工廠模式 Factory Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#簡單工廠模式-Simple-Factory-Method"><span class="toc-number">1.1.</span> <span class="toc-text">簡單工廠模式 Simple Factory Method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工廠方法模式"><span class="toc-number">1.2.</span> <span class="toc-text">工廠方法模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工廠"><span class="toc-number">1.3.</span> <span class="toc-text">抽象工廠</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象工廠-原料工廠-在透過工廠方法來製作原料產品"><span class="toc-number">1.3.1.</span> <span class="toc-text">抽象工廠(原料工廠)在透過工廠方法來製作原料產品</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#簡單工廠模式-Simple-Factory-Method"><span class="toc-number">1.</span> <span class="toc-text">簡單工廠模式 Simple Factory Method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工廠方法模式"><span class="toc-number">2.</span> <span class="toc-text">工廠方法模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽象工廠"><span class="toc-number">3.</span> <span class="toc-text">抽象工廠</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象工廠-原料工廠-在透過工廠方法來製作原料產品"><span class="toc-number">3.1.</span> <span class="toc-text">抽象工廠(原料工廠)在透過工廠方法來製作原料產品</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="工廠模式-Factory-Pattern"><a href="#工廠模式-Factory-Pattern" class="headerlink" title="工廠模式 Factory Pattern"></a>工廠模式 Factory Pattern</h1><p>工廠模式提供了可創建(new)各種不同類別(class)的實例(instance)</p>
+    	<p>工廠模式提供了可創建(new)各種不同類別(class)的實例(instance)</p>
 <p>工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式</p>
 <p>簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)<br>然而工廠方法和抽象方法則比較能讓模組間耦合度降低。</p>
 <p>以下會依序做介紹</p>
@@ -221,6 +222,12 @@
 
   	</div>
 	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
 		
 	
 		<div class="art-item-footer">
@@ -334,7 +341,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

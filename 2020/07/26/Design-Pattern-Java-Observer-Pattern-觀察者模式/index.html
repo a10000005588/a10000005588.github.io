@@ -12,21 +12,22 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="觀察者模式 Observer Pattern觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
+  <meta name="description" content="觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
+<meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Design Pattern(Java)] Observer Pattern 觀察者模式">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="觀察者模式 Observer Pattern觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
+<meta property="og:description" content="觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/gpIs58H.png">
 <meta property="og:image" content="https://i.imgur.com/d1zWR3x.png">
 <meta property="og:image" content="https://i.imgur.com/C155cCF.png">
 <meta property="og:image" content="https://i.imgur.com/GJTGp80.png">
-<meta property="og:updated_time" content="2020-07-26T09:00:10.255Z">
+<meta property="og:updated_time" content="2020-07-26T09:16:39.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Design Pattern(Java)] Observer Pattern 觀察者模式">
-<meta name="twitter:description" content="觀察者模式 Observer Pattern觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
+<meta name="twitter:description" content="觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。">
 <meta name="twitter:image" content="https://i.imgur.com/gpIs58H.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -141,11 +142,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#觀察者模式-Observer-Pattern"><span class="toc-number">1.</span> <span class="toc-text">觀察者模式 Observer Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以氣象監測系統的概況來當做例子"><span class="toc-number">1.0.1.</span> <span class="toc-text">以氣象監測系統的概況來當做例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沒使用觀察者模式-Observer-Pattern的情況"><span class="toc-number">1.0.2.</span> <span class="toc-text">沒使用觀察者模式 Observer Pattern的情況</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#佈告欄"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">佈告欄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WeatherData-class"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">WeatherData.class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#觀察者模式解析"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">觀察者模式解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以觀察者模式來重寫氣象監測系統"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">以觀察者模式來重寫氣象監測系統</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#補充"><span class="toc-number">1.0.3.</span> <span class="toc-text">補充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java-sdk也有自行提供Observer方法"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">java sdk也有自行提供Observer方法</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#以氣象監測系統的概況來當做例子"><span class="toc-number">1.</span> <span class="toc-text">以氣象監測系統的概況來當做例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沒使用觀察者模式-Observer-Pattern的情況"><span class="toc-number">2.</span> <span class="toc-text">沒使用觀察者模式 Observer Pattern的情況</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#佈告欄"><span class="toc-number">2.1.</span> <span class="toc-text">佈告欄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WeatherData-class"><span class="toc-number">2.2.</span> <span class="toc-text">WeatherData.class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#觀察者模式解析"><span class="toc-number">2.3.</span> <span class="toc-text">觀察者模式解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以觀察者模式來重寫氣象監測系統"><span class="toc-number">2.4.</span> <span class="toc-text">以觀察者模式來重寫氣象監測系統</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#補充"><span class="toc-number">3.</span> <span class="toc-text">補充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java-sdk也有自行提供Observer方法"><span class="toc-number">3.1.</span> <span class="toc-text">java sdk也有自行提供Observer方法</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="觀察者模式-Observer-Pattern"><a href="#觀察者模式-Observer-Pattern" class="headerlink" title="觀察者模式 Observer Pattern"></a>觀察者模式 Observer Pattern</h1><p>觀察者模式可以讓物件了解資料變化的情況。<br>物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。<br>在此模式中也會了解一對多，以及物件鬆綁的意義是如何。</p>
+    	<p>觀察者模式可以讓物件了解資料變化的情況。<br>物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。<br>在此模式中也會了解一對多，以及物件鬆綁的意義是如何。</p>
 <a id="more"></a>
 <h3 id="以氣象監測系統的概況來當做例子"><a href="#以氣象監測系統的概況來當做例子" class="headerlink" title="以氣象監測系統的概況來當做例子"></a>以氣象監測系統的概況來當做例子</h3><p>假設系統中有三個組成要件：<br>(1) 氣象站: 獲取實際氣象的物理裝置，假設有三個:溫度,濕度,壓力感應<br>(2) Weather Data物件: 追蹤來自氣象站的資料，並且顯示在佈告版上<br>(3) 佈告版: 將Weather Data物件給予的資料呈現出來</p>
 <p>整個例子會有，一個氣象站(產出假的氣象資料)，Weather Data物件(獲取氣象資料並通知佈告版)，佈告版將拿到的資料給呈現出來</p>
@@ -183,6 +184,12 @@
 
   	</div>
 	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
 		
 	
 		<div class="art-item-footer">
@@ -292,7 +299,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 

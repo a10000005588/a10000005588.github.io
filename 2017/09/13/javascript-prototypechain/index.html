@@ -12,19 +12,19 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
+  <meta name="description" content="先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
 <meta name="keywords" content="Javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果">
 <meta property="og:url" content="http://a10000005588.github.io/2017/09/13/javascript-prototypechain/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
+<meta property="og:description" content="先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://farm5.staticflickr.com/4426/36361682884_afa196bbd2_o.jpg">
-<meta property="og:updated_time" content="2020-07-26T09:06:08.860Z">
+<meta property="og:updated_time" content="2020-07-26T09:17:34.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果">
-<meta name="twitter:description" content="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
+<meta name="twitter:description" content="先知道個keyword：  __proto__： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list node的概念，連結其他的 prototype">
 <meta name="twitter:image" content="https://farm5.staticflickr.com/4426/36361682884_afa196bbd2_o.jpg">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -144,11 +144,11 @@
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Javascript筆記-使用prototype-chain-原型鍊-來達成繼承效果"><span class="toc-number">1.</span> <span class="toc-text">Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript-類別、prototype以及reference中的proto所指向的關係示意圖："><span class="toc-number">1.1.</span> <span class="toc-text">javascript 類別、prototype以及reference中的proto所指向的關係示意圖：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prototype-inheritance-的好處"><span class="toc-number">1.2.</span> <span class="toc-text">Prototype inheritance 的好處</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prototype-inheritance的壞處"><span class="toc-number">1.3.</span> <span class="toc-text">Prototype inheritance的壞處</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#補充ㄧ：Function-prototype-apply"><span class="toc-number">1.3.1.</span> <span class="toc-text">補充ㄧ：Function.prototype.apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#補充二：用Closure實作Singleton模式"><span class="toc-number">1.3.2.</span> <span class="toc-text">補充二：用Closure實作Singleton模式</span></a></li></ol></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#javascript-類別、prototype以及reference中的proto所指向的關係示意圖："><span class="toc-number">1.</span> <span class="toc-text">javascript 類別、prototype以及reference中的proto所指向的關係示意圖：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prototype-inheritance-的好處"><span class="toc-number">2.</span> <span class="toc-text">Prototype inheritance 的好處</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prototype-inheritance的壞處"><span class="toc-number">3.</span> <span class="toc-text">Prototype inheritance的壞處</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#補充ㄧ：Function-prototype-apply"><span class="toc-number">3.1.</span> <span class="toc-text">補充ㄧ：Function.prototype.apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#補充二：用Closure實作Singleton模式"><span class="toc-number">3.2.</span> <span class="toc-text">補充二：用Closure實作Singleton模式</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="Javascript筆記-使用prototype-chain-原型鍊-來達成繼承效果"><a href="#Javascript筆記-使用prototype-chain-原型鍊-來達成繼承效果" class="headerlink" title="Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果"></a>Javascript筆記:使用prototype chain(原型鍊)來達成繼承效果</h1><p>先知道個keyword：</p>
+    	<p>先知道個keyword：</p>
 <ul>
 <li><code>__proto__</code>： javascript自己定義的變數，用來實現inheritance效果，有點類似像link list <code>node</code>的概念，連結其他的 prototype</li>
 </ul>
@@ -313,7 +313,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 18.5px; color: #202020">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 
