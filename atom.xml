@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>William&#39;s Blog</title>
+  <title>William&#39;s 隨手札記</title>
   
   <subtitle>Blog of William</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://a10000005588.github.io/</id>
   
   <author>
-    <name>William</name>
+    <name>William L.K.</name>
     
   </author>
   
@@ -144,9 +144,9 @@
       <category term="Ethereum" scheme="http://a10000005588.github.io/categories/Ethereum/"/>
     
     
-      <category term="Ethereum" scheme="http://a10000005588.github.io/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://a10000005588.github.io/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://a10000005588.github.io/tags/Ethereum/"/>
     
   </entry>
   
@@ -352,9 +352,9 @@
       <category term="Solidity" scheme="http://a10000005588.github.io/categories/Solidity/"/>
     
     
-      <category term="Ethereum" scheme="http://a10000005588.github.io/tags/Ethereum/"/>
-    
       <category term="Blockchain" scheme="http://a10000005588.github.io/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="http://a10000005588.github.io/tags/Ethereum/"/>
     
       <category term="Solidity" scheme="http://a10000005588.github.io/tags/Solidity/"/>
     
