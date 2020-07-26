@@ -12,20 +12,20 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
+  <meta name="description" content="使用OpenZeppelin搭配Truffle來打造智能合約本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
 <meta name="keywords" content="Solidity,Truffle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用OpenZeppelin搭配Truffle來打造智能合約">
 <meta property="og:url" content="http://a10000005588.github.io/2017/09/13/openzepplin/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
+<meta property="og:description" content="使用OpenZeppelin搭配Truffle來打造智能合約本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://farm5.staticflickr.com/4416/37056160091_c5c1ff268c_o.png">
 <meta property="og:image" content="https://farm5.staticflickr.com/4350/37198399085_78990fa582_o.png">
-<meta property="og:updated_time" content="2019-02-05T13:07:05.276Z">
+<meta property="og:updated_time" content="2020-07-26T09:06:18.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用OpenZeppelin搭配Truffle來打造智能合約">
-<meta name="twitter:description" content="本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
+<meta name="twitter:description" content="使用OpenZeppelin搭配Truffle來打造智能合約本篇是參考truffle官網所做的筆記：ROBUST SMART CONTRACTS WITH OPENZEPPELIN">
 <meta name="twitter:image" content="https://farm5.staticflickr.com/4416/37056160091_c5c1ff268c_o.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -145,11 +145,11 @@
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenZeppelin介紹"><span class="toc-number">1.</span> <span class="toc-text">OpenZeppelin介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用OpenZeppelin預備知識"><span class="toc-number">2.</span> <span class="toc-text">使用OpenZeppelin預備知識</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#環境設定"><span class="toc-number">3.</span> <span class="toc-text">環境設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#為tutorialtoken專案撰寫-TutorialToken合約"><span class="toc-number">4.</span> <span class="toc-text">為tutorialtoken專案撰寫 TutorialToken合約</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TutorialToken-sol"><span class="toc-number">4.1.</span> <span class="toc-text">TutorialToken.sol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#編譯-Compile-以及部署-Deploy"><span class="toc-number">5.</span> <span class="toc-text">編譯(Compile)以及部署(Deploy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-deploy-contracts-js"><span class="toc-number">5.1.</span> <span class="toc-text">2_deploy_contracts.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#和TutorialToken-Dapp互動"><span class="toc-number">6.</span> <span class="toc-text">和TutorialToken Dapp互動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#總結-Truffle-OpenZeppelin-A-Superb-Development-Experience"><span class="toc-number">7.</span> <span class="toc-text">總結: Truffle+OpenZeppelin = A Superb Development Experience</span></a></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用OpenZeppelin搭配Truffle來打造智能合約"><span class="toc-number">1.</span> <span class="toc-text">使用OpenZeppelin搭配Truffle來打造智能合約</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenZeppelin介紹"><span class="toc-number">1.1.</span> <span class="toc-text">OpenZeppelin介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用OpenZeppelin預備知識"><span class="toc-number">1.2.</span> <span class="toc-text">使用OpenZeppelin預備知識</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#環境設定"><span class="toc-number">1.3.</span> <span class="toc-text">環境設定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#為tutorialtoken專案撰寫-TutorialToken合約"><span class="toc-number">1.4.</span> <span class="toc-text">為tutorialtoken專案撰寫 TutorialToken合約</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TutorialToken-sol"><span class="toc-number">1.4.1.</span> <span class="toc-text">TutorialToken.sol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#編譯-Compile-以及部署-Deploy"><span class="toc-number">1.5.</span> <span class="toc-text">編譯(Compile)以及部署(Deploy)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-deploy-contracts-js"><span class="toc-number">1.5.1.</span> <span class="toc-text">2_deploy_contracts.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#和TutorialToken-Dapp互動"><span class="toc-number">1.6.</span> <span class="toc-text">和TutorialToken Dapp互動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#總結-Truffle-OpenZeppelin-A-Superb-Development-Experience"><span class="toc-number">1.7.</span> <span class="toc-text">總結: Truffle+OpenZeppelin = A Superb Development Experience</span></a></li></ol></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>本篇是參考truffle官網所做的筆記：<a href="http://truffleframework.com/tutorials/robust-smart-contracts-with-openzeppelin" target="_blank" rel="noopener">ROBUST SMART CONTRACTS WITH OPENZEPPELIN</a></p>
+    	<h1 id="使用OpenZeppelin搭配Truffle來打造智能合約"><a href="#使用OpenZeppelin搭配Truffle來打造智能合約" class="headerlink" title="使用OpenZeppelin搭配Truffle來打造智能合約"></a>使用OpenZeppelin搭配Truffle來打造智能合約</h1><p>本篇是參考truffle官網所做的筆記：<a href="http://truffleframework.com/tutorials/robust-smart-contracts-with-openzeppelin" target="_blank" rel="noopener">ROBUST SMART CONTRACTS WITH OPENZEPPELIN</a></p>
 <a id="more"></a>
 <h2 id="OpenZeppelin介紹"><a href="#OpenZeppelin介紹" class="headerlink" title="OpenZeppelin介紹"></a>OpenZeppelin介紹</h2><p>可以把OpenZeppelin當成強化Solidity資訊安全的Framework，為智能合約附上Ethereum所認可的ERC-20標準，畢竟合約要處理的可是真正的錢！</p>
 <p>ERC-20標準介紹：<a href="http://www.investopedia.com/news/what-erc20-and-what-does-it-mean-ethereum/" target="_blank" rel="noopener">What is ERC-20 and What Does it Mean for Ethereum?</a></p>
@@ -211,8 +211,8 @@
 					</a></span>
 				
 				
-					<span class="art-item-right">next：<a href="/2017/09/12/solidity/" rel="next" title="菜鳥William的Solidity學習紀錄">
-						菜鳥William的Solidity學習紀錄
+					<span class="art-item-right">next：<a href="/2017/09/12/solidity/" rel="next" title="Solidity學習紀錄">
+						Solidity學習紀錄
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -298,8 +298,6 @@
     
         <li><a class="flat-box" href="/categories/Ethereum/"><div class="name">Ethereum</div><div class="badget">1</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Golang/"><div class="name">Golang</div><div class="badget">4</div></a></li>
-    
         <li><a class="flat-box" href="/categories/Hexo/"><div class="name">Hexo</div><div class="badget">1</div></a></li>
     
         <li><a class="flat-box" href="/categories/Javascript/"><div class="name">Javascript</div><div class="badget">2</div></a></li>
@@ -317,7 +315,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Golang/" style="font-size: 18.5px; color: #202020">Golang</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
     </div>
 </div>
 
