@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>[Design Pattern(Java)] Singleton Pattern 獨體模式 | William&#39;s 隨手札記</title>
+  <meta name="description" content="Just record it.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/shiba.ico">
+  <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Design Pattern(Java)] Singleton Pattern 獨體模式">
+<meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/index.html">
+<meta property="og:site_name" content="William&#39;s 隨手札記">
+<meta property="og:description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/OjAKXpb.png">
+<meta property="og:updated_time" content="2020-07-26T08:56:50.736Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Design Pattern(Java)] Singleton Pattern 獨體模式">
+<meta name="twitter:description" content="獨體模式  Singleton每次引用類別都只會產出相同的物件 適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。">
+<meta name="twitter:image" content="https://i.imgur.com/OjAKXpb.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="//cdn.bootcss.com/node-waves/0.7.5/waves.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+</head>
+</html>
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href="/">
+				William's 隨手札記
+			</a>
+			<div class="menu">
+				<ul class="h-list">
+					
+						<li>
+							<a class="flat-box nav-home" href="/">
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-archives" href="/archives">
+								History Path
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-about" href="/about">
+								About Me
+							</a>
+						</li>
+					
+				</ul>
+				<div class="underline"></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a href="javascript:void(0)"><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class="s-menu"><a href="javascript:void(0)"><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class="nav-sub container container--flex">
+			<a class="logo" href="javascript:void(0)">
+				Word of Forks
+			</a>
+
+			<ul class="switcher h-list">
+				<li class="s-comment"><a href="javascript:void(0)"><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class="s-top"><a href="javascript:void(0)"><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class="s-toc"><a href="javascript:void(0)"><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				History Path
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About Me
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Design-Pattern-Java-Singleton-Pattern-獨體模式" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/">
+    	[Design Pattern(Java)] Singleton Pattern 獨體模式
+    </a>
+  </h2>
+	<time>
+	  Jul 26, 2020
+	</time>
+	
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#獨體模式-Singleton"><span class="toc-number">1.</span> <span class="toc-text">獨體模式  Singleton</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作法"><span class="toc-number">1.1.</span> <span class="toc-text">作法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多執行緒下獨體模式會遇到的狀況"><span class="toc-number">1.2.</span> <span class="toc-text">多執行緒下獨體模式會遇到的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解法一：只要把getInstance-給同步化-會有效能不佳的狀況，可能造成效率下降100倍"><span class="toc-number">1.2.1.</span> <span class="toc-text">解法一：只要把getInstance()給同步化 (會有效能不佳的狀況，可能造成效率下降100倍)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體"><span class="toc-number">1.2.2.</span> <span class="toc-text">解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解法三：利用-“雙重檢查上鎖”-在getInstance-中減少使用同步化"><span class="toc-number">1.2.3.</span> <span class="toc-text">解法三：利用 “雙重檢查上鎖” 在getInstance()中減少使用同步化</span></a></li></ol></li></ol></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h1 id="獨體模式-Singleton"><a href="#獨體模式-Singleton" class="headerlink" title="獨體模式  Singleton"></a>獨體模式  Singleton</h1><p>每次引用類別都只會產出相同的物件</p>
+<p>適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。</p>
+<a id="more"></a>
+<h2 id="作法"><a href="#作法" class="headerlink" title="作法"></a>作法</h2><p>假如有一個類別叫做MyClass，現在要讓MyClass變成獨體模式，讓外面的類別只能透過 MyClass.getInstance() 取得MyClass物件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 設定成private與static，不能給外面類別存取</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MyClass uniqueInstance;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 將建構式設定成 private，這樣就可以避免直接被類別 new出來</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">MyClass</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 設置成static，使外面類別可以直接存取MyClass.getInstance方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 若第一次取得MyClass， new 出MyClass();</span></span><br><span class="line">        <span class="keyword">if</span>(uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            uniqueInstance = <span class="keyword">new</span> MyClass();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他類別要取用MyClass</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[]) &#123;</span><br><span class="line">    // 1. 第一次取用getInstance</span><br><span class="line">    Myclass instance = MyClass.getInstance();</span><br><span class="line">    // 2. 第二次取用getInstance時，MyClass的uniqueInstance已經有值了，得到與上面instance一樣的object</span><br><span class="line">    Myclass instance1 = MyClass.getInstance();</span><br><span class="line">    </span><br><span class="line">    if(instance == instance1) &#123;</span><br><span class="line">        System.out.println(&quot;instance and instance1 are the same&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多執行緒下獨體模式會遇到的狀況"><a href="#多執行緒下獨體模式會遇到的狀況" class="headerlink" title="多執行緒下獨體模式會遇到的狀況"></a>多執行緒下獨體模式會遇到的狀況</h2><p>假如有兩個thread(thread 1和thread 2)，同時要跟MyClass取得物件，但會面臨thread1和thread2會取得不同的MyClass物件，情況如下：</p>
+<p><img src="https://i.imgur.com/OjAKXpb.png" alt=""></p>
+<h3 id="解法一：只要把getInstance-給同步化-會有效能不佳的狀況，可能造成效率下降100倍"><a href="#解法一：只要把getInstance-給同步化-會有效能不佳的狀況，可能造成效率下降100倍" class="headerlink" title="解法一：只要把getInstance()給同步化 (會有效能不佳的狀況，可能造成效率下降100倍)"></a>解法一：只要把getInstance()給同步化 (會有效能不佳的狀況，可能造成效率下降100倍)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MyClass uniqueInstance;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">MyClass</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 設定成synchronized，就可以讓執行緒依序進入getInstance內</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> MyClass <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(uniqueInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            uniqueInstance = <span class="keyword">new</span> MyClass();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但我們只需要第一次進入getInstance才進行同步化就好，不然其他次要取得uniqueInstnace都得變成同步的方式，造成取用Instance的緩慢</p>
+<h3 id="解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體"><a href="#解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體" class="headerlink" title="解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體"></a>解法二：率先建立實體，不要等到有人呼叫getInstance才new出MyClass實體</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 直接初始話MyClass()，並設成private</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MyClass uniqueInstnace = <span class="keyword">new</span> MyClass();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">MyClass</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyClass <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uniqueInstance;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此作法依賴JVM載入此類別時，馬上建立此唯一的獨體物件，JVM保證在任何執行緒存取uniqueInstnace靜態變數之前，一定先建立此實體</p>
+<h3 id="解法三：利用-“雙重檢查上鎖”-在getInstance-中減少使用同步化"><a href="#解法三：利用-“雙重檢查上鎖”-在getInstance-中減少使用同步化" class="headerlink" title="解法三：利用 “雙重檢查上鎖” 在getInstance()中減少使用同步化"></a>解法三：利用 “雙重檢查上鎖” 在getInstance()中減少使用同步化</h3><p>利用雙重檢查上鎖，首先檢查是否實體已經建立了，<br>若沒有，“才”進行同步化，如此一來只有第一次進入getInstance才同步化，才是我們所想要的。</p>
+<p><code>`</code>java=<br>public class MyClass {<br>    // volatile為Java 6之後才有的關鍵字，能夠使執行緒們取得相同的uniqueInstance<br>    private volatile static MyClass uniqueInstance;</p>
+<pre><code>private MyClass() {}
+
+public static MyClass getInstance() {
+    // 只有第一次才徹底執行以下程式碼 
+    // 當執行緒遇到被宣告成volatile的uniqueInstnace，會變得謹慎
+    if(uniqueInstance == null) {
+        synchronized(MyClass.class) {
+            // 再檢查一次，若為null則new MyClass();
+            if(uniqueInstance == null) {
+                uniqueInstance = new MyClass();
+            }
+        }
+    }
+    return uniqueInstance;
+}
+</code></pre><p>}</p>
+
+  	</div>
+	  
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/07/26/Design-Pattern-Java-Factory-Pattern-工廠模式/" rel="prev" title="[Design Pattern(Java)] Factory Pattern 工廠模式">
+						[Design Pattern(Java)] Factory Pattern 工廠模式 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/16/下班自修的經驗分享/" rel="next" title="下班自修的經驗分享">
+						下班自修的經驗分享
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Design Pattern(Java)] Singleton Pattern 獨體模式',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class="m_widget about">
+
+<img class="avatar waves-image" src="/images/william.png">
+
+<div class="header">William L.K.</div>
+<div class="content">
+<div class="desc">
+  <span>這裡為整理我網站開發學習記錄的Blog，偶爾紀錄一些讀書心得之類的事</span><br><br>
+  <span>下方Links有我在HackMD上面隨手紀錄的筆記，請多多指教</span>
+</div>
+</div>
+</section>
+
+  <section class="m_widget links">
+<div class="header">Links</div>
+<div class="content">
+    <ul class="entry">
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/B1GA9gI_TGK_PRIS5sniyQ?both">
+            <div class="name">工作學習記錄</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/aM_7XTXfSa2eo5uaiOHBrw">
+            <div class="name">Git筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/Lln8jajXSQGRwc1Csey7rA">
+            <div class="name">Linux筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/TqzyDhnRQXaoXktvgiyMwQ">
+            <div class="name">OS筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/tfFCQKFOS3eAuoYaclAcwg">
+            <div class="name">後端工程師面試錦囊</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://github.com/a10000005588/Leetcode-Java-2020">
+            <div class="name">Leetcode刷題紀錄(使用Java)</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/P7WDzlCrRGCKbO_Y_t3wWw">
+            <div class="name">Solidity以太坊智能合約開發筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/imaqKW5_S7icDtMAcvDk9Q">
+            <div class="name">Docker筆記</div>
+        </a></li>
+    
+    </ul>
+</div>
+</section>
+
+  <section class="m_widget categories">
+<div class="header">Categories</div>
+<div class="content">
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Consensus/"><div class="name">Consensus</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class="name">Ethereum</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class="name">Golang</div><div class="badget">4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hexo/"><div class="name">Hexo</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Javascript/"><div class="name">Javascript</div><div class="badget">2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Life/"><div class="name">Life</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Solidity/"><div class="name">Solidity</div><div class="badget">5</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class="content">
+        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Golang/" style="font-size: 18.5px; color: #202020">Golang</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+        <a href="https://twitter.com/" class="social twitter" target="_blank" rel="external">
+          <span class="icon icon-twitter"></span>
+        </a>
+      
+        <a href="/atom.xml" class="social rss" target="_blank" rel="external">
+          <span class="icon icon-rss"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href="https://github.com/stkevintan/hexo-theme-material-flow" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'William';
+  
+  var disqus_url = 'http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/node-waves/0.7.5/waves.min.js"></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<script src="/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
