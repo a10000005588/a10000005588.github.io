@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Design Pattern Java Adaptor Pattern 轉接器模式 | William&#39;s 隨手札記</title>
+  <title>Adaptor Pattern 轉接器模式 [Design Pattern in Java] | William&#39;s 隨手札記</title>
   <meta name="description" content="Just record it.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
@@ -15,15 +15,15 @@
   <meta name="description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Design Pattern Java Adaptor Pattern 轉接器模式">
+<meta property="og:title" content="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
 <meta property="og:description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/pwtgvua.png">
-<meta property="og:updated_time" content="2020-07-29T00:16:06.597Z">
+<meta property="og:updated_time" content="2020-07-29T11:49:41.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Design Pattern Java Adaptor Pattern 轉接器模式">
+<meta name="twitter:title" content="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
 <meta name="twitter:description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta name="twitter:image" content="https://i.imgur.com/pwtgvua.png">
     
@@ -130,7 +130,7 @@
 	<section class="meta">
 	<h2 class="title">
   	<a href="/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/">
-    	Design Pattern Java Adaptor Pattern 轉接器模式
+    	Adaptor Pattern 轉接器模式 [Design Pattern in Java]
     </a>
   </h2>
 	<time>
@@ -169,7 +169,7 @@
 <p>但現在新的專案中，是使用Iterator方式去迭代Collection</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewLoopService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用Java 5版本之後支援的Iterator</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loopCollection</span><span class="params">(Collection col, Iterator itr)</span> </span>&#123;</span><br><span class="line">        itr = col.iterator();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(itr.hasNext()) &#123;</span><br><span class="line">            System.out.println(itr.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用NewLoopService<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">main</span>() </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">"apple"</span>);</span><br><span class="line">        list.add(<span class="string">"banana"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 宣告Iterator的變數</span></span><br><span class="line">        Iterator itr;</span><br><span class="line">        </span><br><span class="line">        NewLoopService loopService = <span class="keyword">new</span> NewLoopService();</span><br><span class="line">        loopService.loopCollection(list, itr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>但現在若只能用舊版的 <code>Enumeration</code> 方式去迭代, 這時</p>
+<p>但現在若只能用舊版的 <code>Enumeration</code> 方式去迭代</p>
 <p>這時就可以寫一個 <code>EnumeratorAdaptor</code> 來實作可兼容<code>Iterator</code>的類別, 並可呼叫 <code>Enumeration</code>的方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 實作Iterator的方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumeratorAdaptor</span>&lt;<span class="title">E</span>&gt; <span class="title">implement</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">    Enumeration&lt;E&gt; enumeration;</span><br><span class="line">    </span><br><span class="line">    EnumeratorAdaptor(Enumeration&lt;E&gt; enumeration) &#123;</span><br><span class="line">        <span class="keyword">this</span>.enumeration = enumeration;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 實作Iterator 介面所需的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 但實際上是使用Enumeration的方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.enumeration.hasMoreElements();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.enumeration.nextElement();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 但這時候會遇到Enumeration沒有的方法, 但又必須要實作 滿足Iterator的介面規範, 這時可以throw Exception來處理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>這時我們可以在<code>main()</code>中改用轉接器, 來間接使用Enumeration了！</p>
@@ -189,8 +189,8 @@
 		<div class="art-item-footer">
 				
 				
-					<span class="art-item-right">next：<a href="/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/" rel="next" title="[Design Pattern(Java)] Observer Pattern 觀察者模式">
-						[Design Pattern(Java)] Observer Pattern 觀察者模式
+					<span class="art-item-right">next：<a href="/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/" rel="next" title="Observer Pattern 觀察者模式 [Design Pattern in Java]">
+						Observer Pattern 觀察者模式 [Design Pattern in Java]
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -204,7 +204,7 @@
 </article>
 <script>
 	window.subData = {
-		title: 'Design Pattern Java Adaptor Pattern 轉接器模式',
+		title: 'Adaptor Pattern 轉接器模式 [Design Pattern in Java]',
 		tools: true
 	}
 </script>
@@ -293,7 +293,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class="content">
-        <a href="/tags/Blockchain/" style="font-size: 17px; color: #404040">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 20px; color: #000">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 20px; color: #000">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.5px; color: #606060">Javascript</a> <a href="/tags/Life/" style="font-size: 15.5px; color: #606060">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 18.5px; color: #202020">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.5px; color: #606060">Truffle</a>
+        <a href="/tags/Blockchain/" style="font-size: 16.4px; color: #4d4d4d">Blockchain</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 20px; color: #000">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 18.8px; color: #1a1a1a">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Javascript/" style="font-size: 15.2px; color: #666">Javascript</a> <a href="/tags/Life/" style="font-size: 15.2px; color: #666">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 17.6px; color: #333">Solidity</a> <a href="/tags/Truffle/" style="font-size: 15.2px; color: #666">Truffle</a>
     </div>
 </div>
 
