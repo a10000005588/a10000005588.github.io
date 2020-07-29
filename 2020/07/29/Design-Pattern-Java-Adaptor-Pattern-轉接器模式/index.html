@@ -12,19 +12,19 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
+  <meta name="description" content="假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
 <meta property="og:url" content="http://a10000005588.github.io/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
+<meta property="og:description" content="假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/pwtgvua.png">
-<meta property="og:updated_time" content="2020-07-29T11:49:41.812Z">
+<meta property="og:updated_time" content="2020-07-29T11:52:08.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
-<meta name="twitter:description" content="轉接器模式 Adaptor Pattern假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
+<meta name="twitter:description" content="假如要使用A, 但無法直接使用, 只能使用B介面 所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果">
 <meta name="twitter:image" content="https://i.imgur.com/pwtgvua.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -139,11 +139,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#轉接器模式-Adaptor-Pattern"><span class="toc-number">1.</span> <span class="toc-text">轉接器模式 Adaptor Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用螢幕轉接器的例子直接解釋"><span class="toc-number">1.1.</span> <span class="toc-text">用螢幕轉接器的例子直接解釋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#實際應用場景"><span class="toc-number">1.2.</span> <span class="toc-text">實際應用場景</span></a></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用螢幕轉接器的例子直接解釋"><span class="toc-number">1.</span> <span class="toc-text">用螢幕轉接器的例子直接解釋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#實際應用場景"><span class="toc-number">2.</span> <span class="toc-text">實際應用場景</span></a></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="轉接器模式-Adaptor-Pattern"><a href="#轉接器模式-Adaptor-Pattern" class="headerlink" title="轉接器模式 Adaptor Pattern"></a>轉接器模式 Adaptor Pattern</h1><p>假如要使用A, 但無法直接使用, 只能使用B介面</p>
+    	<p>假如要使用A, 但無法直接使用, 只能使用B介面</p>
 <p>所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果</p>
 <a id="more"></a>
 <h2 id="用螢幕轉接器的例子直接解釋"><a href="#用螢幕轉接器的例子直接解釋" class="headerlink" title="用螢幕轉接器的例子直接解釋"></a>用螢幕轉接器的例子直接解釋</h2><p>例如我們有個 HDMI的線, 叫做 HDMI interface</p>
