@@ -22,7 +22,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/1PXbn6b.png">
 <meta property="og:image" content="https://i.imgur.com/lT9g7lA.png">
-<meta property="og:updated_time" content="2020-07-29T15:34:43.454Z">
+<meta property="og:updated_time" content="2020-07-29T15:39:08.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="樣板模式 Template Pattern [Design Pattern in Java]">
 <meta name="twitter:description" content="樣板, 顧名思義就是把同樣的邏輯定義成一個樣板, 可讓其他類別共同使用 樣板也會開放可客製化的方法 (抽象方法), 供其他類別實作">
@@ -140,7 +140,7 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#透過泡茶與泡咖啡來瞭解樣板模式吧"><span class="toc-number">1.</span> <span class="toc-text">透過泡茶與泡咖啡來瞭解樣板模式吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-number">2.</span> <span class="toc-text">小結</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#透過hook方法將封裝的演算法邏輯部分做控制使用"><span class="toc-number">3.</span> <span class="toc-text">透過hook方法將封裝的演算法邏輯部分做控制使用</span></a></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#透過泡茶與泡咖啡來瞭解樣板模式吧"><span class="toc-number">1.</span> <span class="toc-text">透過泡茶與泡咖啡來瞭解樣板模式吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#套用Template-Pattern吧"><span class="toc-number">2.</span> <span class="toc-text">套用Template Pattern吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-number">3.</span> <span class="toc-text">小結</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#透過hook方法將封裝的演算法邏輯部分做控制使用"><span class="toc-number">4.</span> <span class="toc-text">透過hook方法將封裝的演算法邏輯部分做控制使用</span></a></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
@@ -157,7 +157,7 @@
 <p>使用以上定義的方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Tea tea = <span class="keyword">new</span> Tea();</span><br><span class="line">        tea.prepare();</span><br><span class="line"></span><br><span class="line">        Coffee coffee = <span class="keyword">new</span> Coffee();</span><br><span class="line">        coffee.prepare();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/1PXbn6b.png" alt=""></p>
-<p>仔細比較泡茶和泡咖啡, 都會有著以下類似的動作</p>
+<h2 id="套用Template-Pattern吧"><a href="#套用Template-Pattern吧" class="headerlink" title="套用Template Pattern吧"></a>套用Template Pattern吧</h2><p>仔細比較泡茶和泡咖啡, 都會有著以下類似的動作</p>
 <ol>
 <li>煮沸開水</li>
 <li>將(茶的茶包/咖啡藥磨成粉)泡開  &lt;– 這個動作一樣, 但茶是用茶包, 咖啡是需要先磨成粉</li>
