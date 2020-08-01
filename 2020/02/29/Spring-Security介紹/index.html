@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>William&#39;s 隨手札記</title>
+  <title>Spring Security 功能介紹 | William&#39;s 隨手札記</title>
   <meta name="description" content="Just record it.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
@@ -12,16 +12,20 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Just record it.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="William&#39;s 隨手札記">
-<meta property="og:url" content="http://a10000005588.github.io/index.html">
+  <meta name="description" content="Spring Security 功能介紹先介紹以下常用認證功能 User name / password 基本認證使用使用者名稱/密碼做驗證 SSO / Okta / LDAPSSO (Single Sign On)為OAuth的近一步實現，若已經透過Google取得token, 就可以在其他服務的小網站，都使用Google提供的身份驗證服務 Okta協助非營利組織的方式。從基本的單一登入（sin">
+<meta name="keywords" content="Java,Spring,Authentication">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Security 功能介紹">
+<meta property="og:url" content="http://a10000005588.github.io/2020/02/29/Spring-Security介紹/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="Just record it.">
+<meta property="og:description" content="Spring Security 功能介紹先介紹以下常用認證功能 User name / password 基本認證使用使用者名稱/密碼做驗證 SSO / Okta / LDAPSSO (Single Sign On)為OAuth的近一步實現，若已經透過Google取得token, 就可以在其他服務的小網站，都使用Google提供的身份驗證服務 Okta協助非營利組織的方式。從基本的單一登入（sin">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/wGqdCkr.png">
+<meta property="og:updated_time" content="2020-08-01T01:49:21.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="William&#39;s 隨手札記">
-<meta name="twitter:description" content="Just record it.">
+<meta name="twitter:title" content="Spring Security 功能介紹">
+<meta name="twitter:description" content="Spring Security 功能介紹先介紹以下常用認證功能 User name / password 基本認證使用使用者名稱/密碼做驗證 SSO / Okta / LDAPSSO (Single Sign On)為OAuth的近一步實現，若已經透過Google取得token, 就可以在其他服務的小網站，都使用Google提供的身份驗證服務 Okta協助非營利組織的方式。從基本的單一登入（sin">
+<meta name="twitter:image" content="https://i.imgur.com/wGqdCkr.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -122,354 +126,29 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-<section class="post-list">
+        <article id="post-Spring-Security介紹" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2020/02/29/Spring-Security介紹/">
+    	Spring Security 功能介紹
+    </a>
+  </h2>
+	<time>
+	  Feb 29, 2020
+	</time>
 	
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/29/Design-Pattern-Java-Template-Pattern-樣板模式/">
-        樣板模式 Template Pattern [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 29, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>樣板, 顧名思義就是把同樣的邏輯定義成一個樣板, 可讓其他類別共同使用</p>
-<p>樣板也會開放可客製化的方法 (抽象方法), 供其他類別實作</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/29/Design-Pattern-Java-Template-Pattern-樣板模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/29/Design-Pattern-Java-Facade-Pattern-表象模式/">
-        Facade Pattern 表象模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 29, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>將複雜的類別關係, 用一個類別包裝起來, 供呼叫</p>
-<p>不會讓使用者直接看到背後複雜的邏輯, 只會看到 “表面的現象”, 故叫做表象模式</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/29/Design-Pattern-Java-Facade-Pattern-表象模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/">
-        Adaptor Pattern 轉接器模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 29, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>假如要使用A, 但無法直接使用, 只能使用B介面</p>
-<p>所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/">
-        Observer Pattern 觀察者模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>觀察者模式可以讓物件了解資料變化的情況。<br>物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。<br>在此模式中也會了解一對多，以及物件鬆綁的意義是如何。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/26/Design-Pattern-Java-Strategy-Pattern-策略模式/">
-        Strategy Pattern 策略模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>可以在執行期動態更換物件的行為</p>
-<p>『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/26/Design-Pattern-Java-Strategy-Pattern-策略模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/26/Design-Pattern-Java-Factory-Pattern-工廠模式/">
-        Factory Pattern 工廠模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>工廠模式提供了可創建(new)各種不同類別(class)的實例(instance)</p>
-<p>工廠模式主要又涵蓋了 (1) 簡單工廠模式 Simple Factory Pattern (2) 工廠方法模式 (3) 抽象方法模式</p>
-<p>簡單工廠方法是最初階的用法，會違反OOP的Open-close principle(OCP)<br>然而工廠方法和抽象方法則比較能讓模組間耦合度降低。</p>
-<p>以下會依序做介紹</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/26/Design-Pattern-Java-Factory-Pattern-工廠模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/">
-        Singleton Pattern 獨體模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>每次引用類別都只會產出相同的物件</p>
-<p>適合用在: 執行緒池(thread pool)，快取區(cache)，對話盒、處理對話設定和登錄的物件，和驅動程式溝通的物件。</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/07/26/Design-Pattern-Command-Pattern-命令模式/">
-        Command Pattern 命令模式 [Design Pattern in Java]
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>命令模式主要將執行的命令, 與執行者做鬆綁的動作</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/07/26/Design-Pattern-Command-Pattern-命令模式/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Design-Pattern/">Design Pattern</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/16/下班自修的經驗分享/">
-        下班自修的經驗分享
-      </a>
-    </h2>
-    
-    <time>
-      May 16, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>最近剛好在Backend版上看到有人Po文問說: “下班後要如何精進自修”, 意外看到許多大大們在下面留言, 正好最近我也在思考要如何精進自己, 所以趁這機會來統整一下大大們提出來的想法並且與自己目前的進修方式做結合, 主要會以Full-Stack engineer的精進方式來做個紀錄分享.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/05/16/下班自修的經驗分享/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Life/">Life</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/02/29/Spring-Security介紹/">
-        Spring Security 功能介紹
-      </a>
-    </h2>
-    
-    <time>
-      Feb 29, 2020
-    </time>
-		
     
     <div class="cats">
         <a href="/categories/Spring/">Spring</a>
     </div>
 
-  </section>
-  <section class="article typo">
-	  <h1 id="Spring-Security-功能介紹"><a href="#Spring-Security-功能介紹" class="headerlink" title="Spring Security 功能介紹"></a>Spring Security 功能介紹</h1><p>先介紹以下常用認證功能</p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Security-功能介紹"><span class="toc-number">1.</span> <span class="toc-text">Spring Security 功能介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#User-name-password-基本認證"><span class="toc-number">1.1.</span> <span class="toc-text">User name / password 基本認證</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSO-Okta-LDAP"><span class="toc-number">1.2.</span> <span class="toc-text">SSO / Okta / LDAP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSO-Single-Sign-On"><span class="toc-number">1.2.1.</span> <span class="toc-text">SSO (Single Sign On)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Okta"><span class="toc-number">1.2.2.</span> <span class="toc-text">Okta</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LDAP-Lightweight-Directory-Access-Protocol"><span class="toc-number">1.2.3.</span> <span class="toc-text">LDAP (Lightweight Directory Access Protocol)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OAuth-Intra-App-Authorization"><span class="toc-number">1.3.</span> <span class="toc-text">OAuth (Intra App Authorization)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#為什麼有OAuth出現？"><span class="toc-number">1.3.1.</span> <span class="toc-text">為什麼有OAuth出現？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能"><span class="toc-number">1.3.2.</span> <span class="toc-text">功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實際情況"><span class="toc-number">1.3.3.</span> <span class="toc-text">實際情況</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Microservice-security-using-tokens-JWT"><span class="toc-number">1.3.4.</span> <span class="toc-text">Microservice security (using tokens, JWT)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT-與-Session差別："><span class="toc-number">1.3.4.1.</span> <span class="toc-text">JWT 與 Session差別：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">Session:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">JWT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT-前後端互動示意圖"><span class="toc-number">1.3.5.</span> <span class="toc-text">JWT 前後端互動示意圖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT優點"><span class="toc-number">1.3.6.</span> <span class="toc-text">JWT優點</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Security-教學視頻"><span class="toc-number">1.4.</span> <span class="toc-text">Spring Security 教學視頻</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資源："><span class="toc-number">1.5.</span> <span class="toc-text">參考資源：</span></a></li></ol></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h1 id="Spring-Security-功能介紹"><a href="#Spring-Security-功能介紹" class="headerlink" title="Spring Security 功能介紹"></a>Spring Security 功能介紹</h1><p>先介紹以下常用認證功能</p>
 <h2 id="User-name-password-基本認證"><a href="#User-name-password-基本認證" class="headerlink" title="User name / password 基本認證"></a>User name / password 基本認證</h2><p>使用使用者名稱/密碼做驗證</p>
 <h2 id="SSO-Okta-LDAP"><a href="#SSO-Okta-LDAP" class="headerlink" title="SSO / Okta / LDAP"></a>SSO / Okta / LDAP</h2><h3 id="SSO-Single-Sign-On"><a href="#SSO-Single-Sign-On" class="headerlink" title="SSO (Single Sign On)"></a>SSO (Single Sign On)</h3><p>為OAuth的近一步實現，若已經透過Google取得token, 就可以在其他服務的小網站，都使用Google提供的身份驗證服務</p>
 <h3 id="Okta"><a href="#Okta" class="headerlink" title="Okta"></a>Okta</h3><p>協助非營利組織的方式。從基本的單一登入（single sign-on，簡稱為 SSO）到進階的身份認證和存取權限的管理方案</p>
@@ -550,11 +229,9 @@
 <p>What is Spring Security really all about? Java Brains Brain Bytes</p>
 <p><a href="https://www.youtube.com/watch?v=sm-8qfMWEV8&amp;list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE" target="_blank" rel="noopener">https://www.youtube.com/watch?v=sm-8qfMWEV8&amp;list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE</a></p>
 
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/Java/">Java</a>
       
@@ -564,23 +241,34 @@
       
 	  </div>
     
-  </section>
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/05/16/下班自修的經驗分享/" rel="prev" title="下班自修的經驗分享">
+						下班自修的經驗分享 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/01/01/2020年的想法與自修規劃/" rel="next" title="2020年的想法">
+						2020年的想法
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
-    </div>
-  
-</section>
-
-
-  <nav id="page-nav">
-    
-    
-    <a class="next" rel="next" href="/page/2/">
-      <span class="text">Next</span>
-      <span class="icon icon-chevron-right"></span>
-    </a>
-    
-  </nav>
-  
+<script>
+	window.subData = {
+		title: 'Spring Security 功能介紹',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
@@ -708,11 +396,13 @@
 <script>
   var disqus_shortname = 'William';
   
+  var disqus_url = 'http://a10000005588.github.io/2020/02/29/Spring-Security介紹/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
