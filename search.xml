@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>樣板模式 Template Pattern [Design Pattern in Java]</title>
+      <title>Template Pattern 樣板模式  [Design Pattern in Java]</title>
       <link href="/2020/07/29/Design-Pattern-Java-Template-Pattern-%E6%A8%A3%E6%9D%BF%E6%A8%A1%E5%BC%8F/"/>
       <url>/2020/07/29/Design-Pattern-Java-Template-Pattern-%E6%A8%A3%E6%9D%BF%E6%A8%A1%E5%BC%8F/</url>
       
@@ -268,9 +268,9 @@
             
             <tag> Ethereum </tag>
             
-            <tag> Solidity </tag>
-            
             <tag> Smart Contract </tag>
+            
+            <tag> Solidity </tag>
             
         </tags>
       
