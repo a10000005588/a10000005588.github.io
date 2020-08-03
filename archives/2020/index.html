@@ -475,87 +475,11 @@
   </section>
   <section class="article typo">
 	  <h1 id="Spring-Security-功能介紹"><a href="#Spring-Security-功能介紹" class="headerlink" title="Spring Security 功能介紹"></a>Spring Security 功能介紹</h1><p>先介紹以下常用認證功能</p>
-<h2 id="User-name-password-基本認證"><a href="#User-name-password-基本認證" class="headerlink" title="User name / password 基本認證"></a>User name / password 基本認證</h2><p>使用使用者名稱/密碼做驗證</p>
-<h2 id="SSO-Okta-LDAP"><a href="#SSO-Okta-LDAP" class="headerlink" title="SSO / Okta / LDAP"></a>SSO / Okta / LDAP</h2><h3 id="SSO-Single-Sign-On"><a href="#SSO-Single-Sign-On" class="headerlink" title="SSO (Single Sign On)"></a>SSO (Single Sign On)</h3><p>為OAuth的近一步實現，若已經透過Google取得token, 就可以在其他服務的小網站，都使用Google提供的身份驗證服務</p>
-<h3 id="Okta"><a href="#Okta" class="headerlink" title="Okta"></a>Okta</h3><p>協助非營利組織的方式。從基本的單一登入（single sign-on，簡稱為 SSO）到進階的身份認證和存取權限的管理方案</p>
-<h3 id="LDAP-Lightweight-Directory-Access-Protocol"><a href="#LDAP-Lightweight-Directory-Access-Protocol" class="headerlink" title="LDAP (Lightweight Directory Access Protocol)"></a>LDAP (Lightweight Directory Access Protocol)</h3><p>為一種輕量的目錄服務協定，像是通訊錄一樣紀錄人員資訊，可以拿來做帳號整合,驗證。</p>
-<p>LDAP目錄服務通常有層級結構，像是公司組織階層</p>
-<h2 id="OAuth-Intra-App-Authorization"><a href="#OAuth-Intra-App-Authorization" class="headerlink" title="OAuth (Intra App Authorization)"></a>OAuth (Intra App Authorization)</h2><p>OAuth讓用戶可以授權第三方網站存取他們在另外服務提供者(ex: Facebook, Line)的某些特定資訊，而非所有內容。</p>
-<h3 id="為什麼有OAuth出現？"><a href="#為什麼有OAuth出現？" class="headerlink" title="為什麼有OAuth出現？"></a>為什麼有OAuth出現？</h3><p>因為各個網站都做會員機制很麻煩，且小網站可能有資安風險。</p>
-<p>故大網站像是Facebook, Line早已經做好超級安全的會員管理機制，大網站幫你管理個資，提供登入的服務。</p>
-<p>但提供這樣服務的大廠越來越多，若小網站同時要提供用戶連結到多個有提供身分服務的大網站會變得很複雜，於是就訂定的工業標準：OAuth.</p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ul>
-<li>進入小網站 -&gt;   </li>
-<li>跳轉到大網站登入畫面 -&gt;  </li>
-<li>登入成功大網站給予一個有時效的token 給小網站 -&gt; </li>
-<li>小網站透過token跟大網站索取用戶的資訊 (這也是為什麼每次登入第三方都會詢問你是否要揭露以下資訊給小網站)</li>
-</ul>
-<p>不過一般小網站”無法”直接取得token, 而是取得一個code, 再用這個code向大網站換得一個token<br>(多這道手續的原因是因為，Internet可能會被路上經手的router或其他設備擷取,偽造,變更)</p>
-<h3 id="實際情況"><a href="#實際情況" class="headerlink" title="實際情況"></a>實際情況</h3><p>在 Line Login時, Line Notify中，組出一個URL，取得Authorization Code, 這一段取得的Code為明碼, 走的是http get，透過瀏覽器網址列來傳遞 (若沒有用SSL傳遞的話，會被任何人擷取看到). </p>
-<p>接下來小網站取得Authorization Code後，在透過http post，從後端跟大網站換得token (因為走後端 大網站就知道小網站的身份和所拿的code)</p>
-<p>:::warning<br>OAuth主要功能是授權，不是認證，所以後來才延伸出OpenID Connect (OIDC)來提供認證用。<br>:::<br>:::info<br>Authentication 檢查發送檢查人的身份是誰、是否合格;<br>Authorization 則是規範使用者權限的規則，規定哪些能做、哪些不能</p>
-<p>因此如果該 Request 未帶 token 或是 token 過期、不合法皆算是 Authentication Error ，跟 http status code 的 401 意思一樣 ; </p>
-<p>如果 Request 的 token 認證成功但是該使用者的權限不足以執行該 Request 則是 Forbidden Error (即 因 Authorization 發生的錯誤) ，如 http status code 的 403 意思相同。</p>
-<p>:::</p>
-<p>:::success<br>單純用大網站的OAuth當自己的會員系統還是有很大的問題<br>最明顯的是當使用者同時有Google 與 Facebook的帳號時<br>兩個帳號上面的Email可能不是一樣的<br>自己的網站很可能無法辨認這是同一個人的帳戶<br>所以一般還是會需要自己的會員系統做整合<br>:::</p>
-<h3 id="Microservice-security-using-tokens-JWT"><a href="#Microservice-security-using-tokens-JWT" class="headerlink" title="Microservice security (using tokens, JWT)"></a>Microservice security (using tokens, JWT)</h3><p>JWT (JSON web token):</p>
-<ul>
-<li>JWT基於JSON的開放標準 (RFC 7519)</li>
-<li>被用在身份提供者和服務提供者間傳遞，被認證的用戶身份訊息</li>
-<li>可額外增加聲明訊息，該JWT token可以直接被用於認證(Authorization)，也可被加密</li>
-<li>特別適用於SSO</li>
-</ul>
-<h4 id="JWT-與-Session差別："><a href="#JWT-與-Session差別：" class="headerlink" title="JWT 與 Session差別："></a>JWT 與 Session差別：</h4><h4 id="Session"><a href="#Session" class="headerlink" title="Session:"></a>Session:</h4><p>由於http協議為stateless,無法知道每次request是誰，但每次request若都要帳號密碼很麻煩</p>
-<p>故用戶第一次發Request時，就產生一組token紀錄在db與session, 並將token給用戶，告訴用戶將token存在cookie，當下次發送request時，透過token證明自己身份。</p>
-<h4 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h4><p>組成內容有三個部分(Header, Paylaod,Signature)並由<code>.</code> 做區隔，最後透過這三個部分，串成一個 Jwt 字串</p>
-<p>Header: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &apos;typ&apos;: &apos;JWT&apos;, # 聲明類型</span><br><span class="line">  &apos;alg&apos;: &apos;HS256&apos; # 加密的方法: HMAC、SHA256、RSA 進行 Base64 編碼</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Payload: 放聲明內容，可以說就是存放溝通訊息的地方</p>
-<p>在定義上有 3 種聲明 (Claims)</p>
-<ul>
-<li>Reserved (註冊聲明)</li>
-<li>Public (公開聲明)</li>
-<li>Private (私有聲明)</li>
-</ul>
-<p>註冊聲明參數 (建議但不強制使用)</p>
-<ul>
-<li>iss (Issuer) - jwt簽發者</li>
-<li>sub (Subject) - jwt所面向的用戶</li>
-<li>aud (Audience) - 接收jwt的一方</li>
-<li>exp (Expiration Time) - jwt的過期時間，這個過期時間必須要大於簽發時間</li>
-<li>nbf (Not Before) - 定義在什麼時間之前，該jwt都是不可用的</li>
-<li>iat (Issued At) - jwt的簽發時間</li>
-<li>jti (JWT ID) - jwt的唯一身份標識，主要用來作為一次性token,從而迴避重放攻擊</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;iat&quot;: 1516239022</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Signature: 由三個部分組成</p>
-<ul>
-<li>header (base64後的)</li>
-<li>payload (base64後的)</li>
-<li>secret </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload), &apos;secret&apos;)</span><br></pre></td></tr></table></figure>
-<p>:::warning<br>secret 要保存在 server 端，jwt 的 簽發驗證都必須使用這個 secret，當其他人得知這個 secret，那就意味著客戶端是可以自我簽發 jwt ，因此在任何場景都不應該外流<br>:::</p>
-<p>最後將 Header, Payload, Signature做base64編碼，組成</p>
-<p>使用的時候，在reqeust的header加上 <code>Authorization: Bearer &lt;token&gt;</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">post(&apos;api/user/1&apos;, &#123;</span><br><span class="line">  headers: &#123;</span><br><span class="line">    &apos;Authorization&apos;: &apos;Bearer &apos; + token</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="JWT-前後端互動示意圖"><a href="#JWT-前後端互動示意圖" class="headerlink" title="JWT 前後端互動示意圖"></a>JWT 前後端互動示意圖</h3><p><img src="https://i.imgur.com/wGqdCkr.png" alt=""></p>
-<h3 id="JWT優點"><a href="#JWT優點" class="headerlink" title="JWT優點"></a>JWT優點</h3><ul>
-<li>跨語言，因為 json 格式大部分語言都可使用</li>
-<li>可儲存一些簡單但非敏感的商業邏輯 - role ..</li>
-<li>構成內容簡單，佔用 Size 小方便傳輸</li>
-<li>!!! 不需在 server 保存 session，所以它易於應用的擴展</li>
-</ul>
-<h2 id="Spring-Security-教學視頻"><a href="#Spring-Security-教學視頻" class="headerlink" title="Spring Security 教學視頻"></a>Spring Security 教學視頻</h2><p>Spring Boot + Spring Security + JWT from scratch - Java Brains<br><a href="https://www.youtube.com/watch?v=X80nJ5T7YpE" target="_blank" rel="noopener">https://www.youtube.com/watch?v=X80nJ5T7YpE</a></p>
-<h2 id="參考資源："><a href="#參考資源：" class="headerlink" title="參考資源："></a>參考資源：</h2><p>Okta 如何協助非營利組織-從 25 個免費的授權開始<br><a href="https://www.techsoup-taiwan.org.tw/okta" target="_blank" rel="noopener">https://www.techsoup-taiwan.org.tw/okta</a></p>
-<p>LDAP 簡介<br><a href="https://poychang.github.io/ldap-introduction/" target="_blank" rel="noopener">https://poychang.github.io/ldap-introduction/</a></p>
-<p>一次搞懂OAuth與SSO在幹什麼?<br><a href="http://studyhost.blogspot.com/2017/01/oauthsso.html" target="_blank" rel="noopener">http://studyhost.blogspot.com/2017/01/oauthsso.html</a></p>
-<p>GraphQL 設計： Autentication 與 Authorization 大全<br><a href="https://ithelp.ithome.com.tw/articles/10208278" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10208278</a></p>
-<p>JSON Web Token(JWT) 簡單介紹<br><a href="https://mgleon08.github.io/blog/2018/07/16/jwt/" target="_blank" rel="noopener">https://mgleon08.github.io/blog/2018/07/16/jwt/</a></p>
-<p>What is Spring Security really all about? Java Brains Brain Bytes</p>
-<p><a href="https://www.youtube.com/watch?v=sm-8qfMWEV8&amp;list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE" target="_blank" rel="noopener">https://www.youtube.com/watch?v=sm-8qfMWEV8&amp;list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE</a></p>
 
-
+    
+	  <div class="readmore">
+      <a href="/2020/04/11/Spring-Security介紹/">Read More</a>
+    </div>
     
     
     
