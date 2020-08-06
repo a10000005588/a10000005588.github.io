@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="William&#39;s 隨手札記">
 <meta property="og:description" content="可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-29T11:50:37.834Z">
+<meta property="og:updated_time" content="2020-08-06T11:47:03.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Strategy Pattern 策略模式 [Design Pattern in Java]">
 <meta name="twitter:description" content="可以在執行期動態更換物件的行為 『策略模式』定義了演算法家族，將他們個別封裝起來，可以讓他們之間互相替換，此模式不會影響到使用此演算法的程式。">
@@ -178,12 +178,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 定義getAnimal為回傳Dog();</span><br><span class="line">x = getAnimal(); // 得到 Dog型態</span><br><span class="line">x.makeSound(); // 發出狗叫聲</span><br><span class="line"></span><br><span class="line">// 將getAnimal() 中改成傳回Cat();</span><br><span class="line">x = getAnimal(); // 得到 Cat型態</span><br><span class="line">x.makeSound(); // 發出貓叫聲</span><br></pre></td></tr></table></figure>
 <p>:::</p>
 <h2 id="實踐鴨子的行為"><a href="#實踐鴨子的行為" class="headerlink" title="實踐鴨子的行為"></a>實踐鴨子的行為</h2><ul>
-<li><p>FlyBehavior介面，用FlyWithWings(實踐所有有翅膀的丫子會飛的行為)與FlyNoWay(實踐所有不會飛的鴨子的動作)這兩個類別來實作</p>
+<li><p>FlyBehavior介面，用FlyWithWings(實踐所有有翅膀的鴨子會飛的行為)與FlyNoWay(實踐所有不會飛的鴨子的動作)這兩個類別來實作</p>
 </li>
 <li><p>QuackBehavior介面，用Quack(真的呱呱叫)、Squeak(橡皮吱吱叫)與MuteQuack(叫不出聲音)這三個類別來實作</p>
 </li>
 </ul>
-<p>:::info<br>以上設計將飛行與呱呱叫的行為可以被其他物件再三利用，將鴨子的行為抽離出來<br>:::</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">以上設計將飛行與呱呱叫的行為可以被其他物件再三利用，將鴨子的行為抽離出來</span><br></pre></td></tr></table></figure>
 <h3 id="問題與思考"><a href="#問題與思考" class="headerlink" title="問題與思考"></a>問題與思考</h3><ol>
 <li>是否該先把系統做出來，在看看哪些地方需要更動，再回頭將需更動的邏輯獨立出來？<ul>
 <li>答：不儘然，設計系統中可以預先考慮到未來哪些地方可能需要變動</li>
