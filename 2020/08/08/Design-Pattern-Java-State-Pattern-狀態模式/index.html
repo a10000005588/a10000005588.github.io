@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Design-Pattern-Java-State-Pattern-狀態模式 | William&#39;s 隨手札記</title>
+  <title>State Pattern 狀態模式 [Design Pattern in Java] | William&#39;s 隨手札記</title>
   <meta name="description" content="Just record it.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
@@ -12,20 +12,20 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="狀態模式 State Pattern透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+  <meta name="description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
 <meta name="keywords" content="Design Pattern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Design-Pattern-Java-State-Pattern-狀態模式">
+<meta property="og:title" content="State Pattern 狀態模式 [Design Pattern in Java]">
 <meta property="og:url" content="http://a10000005588.github.io/2020/08/08/Design-Pattern-Java-State-Pattern-狀態模式/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="狀態模式 State Pattern透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+<meta property="og:description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/ulduLlN.png">
 <meta property="og:image" content="https://i.imgur.com/VyXQgrn.png">
-<meta property="og:updated_time" content="2020-08-08T14:11:09.615Z">
+<meta property="og:updated_time" content="2020-08-08T14:12:37.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Design-Pattern-Java-State-Pattern-狀態模式">
-<meta name="twitter:description" content="狀態模式 State Pattern透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+<meta name="twitter:title" content="State Pattern 狀態模式 [Design Pattern in Java]">
+<meta name="twitter:description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
 <meta name="twitter:image" content="https://i.imgur.com/ulduLlN.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -131,7 +131,7 @@
 	<section class="meta">
 	<h2 class="title">
   	<a href="/2020/08/08/Design-Pattern-Java-State-Pattern-狀態模式/">
-    	Design-Pattern-Java-State-Pattern-狀態模式
+    	State Pattern 狀態模式 [Design Pattern in Java]
     </a>
   </h2>
 	<time>
@@ -140,11 +140,11 @@
 	
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#狀態模式-State-Pattern"><span class="toc-number">1.</span> <span class="toc-text">狀態模式 State Pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#以糖果機為例子，沒有使用State-Pattern的狀況"><span class="toc-number">1.1.</span> <span class="toc-text">以糖果機為例子，沒有使用State Pattern的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#假如有新需求：轉動時會有機率可以再多送一顆！"><span class="toc-number">1.1.1.</span> <span class="toc-text">假如有新需求：轉動時會有機率可以再多送一顆！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用狀態模式改善目前糖果機的設計"><span class="toc-number">1.2.</span> <span class="toc-text">使用狀態模式改善目前糖果機的設計</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#狀態模式的類別圖"><span class="toc-number">1.2.1.</span> <span class="toc-text">狀態模式的類別圖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定義糖果機的雛形"><span class="toc-number">1.2.2.</span> <span class="toc-text">定義糖果機的雛形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實作各個狀態"><span class="toc-number">1.2.3.</span> <span class="toc-text">實作各個狀態</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作糖果機"><span class="toc-number">1.2.4.</span> <span class="toc-text">操作糖果機</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-number">1.3.</span> <span class="toc-text">小結</span></a></li></ol></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#以糖果機為例子，沒有使用State-Pattern的狀況"><span class="toc-number">1.</span> <span class="toc-text">以糖果機為例子，沒有使用State Pattern的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#假如有新需求：轉動時會有機率可以再多送一顆！"><span class="toc-number">1.1.</span> <span class="toc-text">假如有新需求：轉動時會有機率可以再多送一顆！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用狀態模式改善目前糖果機的設計"><span class="toc-number">2.</span> <span class="toc-text">使用狀態模式改善目前糖果機的設計</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#狀態模式的類別圖"><span class="toc-number">2.1.</span> <span class="toc-text">狀態模式的類別圖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定義糖果機的雛形"><span class="toc-number">2.2.</span> <span class="toc-text">定義糖果機的雛形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實作各個狀態"><span class="toc-number">2.3.</span> <span class="toc-text">實作各個狀態</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作糖果機"><span class="toc-number">2.4.</span> <span class="toc-text">操作糖果機</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-number">3.</span> <span class="toc-text">小結</span></a></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="狀態模式-State-Pattern"><a href="#狀態模式-State-Pattern" class="headerlink" title="狀態模式 State Pattern"></a>狀態模式 State Pattern</h1><p>透過統一的”狀態類別”，來定義物件的內部狀態是如何</p>
+    	<p>透過統一的”狀態類別”，來定義物件的內部狀態是如何</p>
 <a id="more"></a>
 <h2 id="以糖果機為例子，沒有使用State-Pattern的狀況"><a href="#以糖果機為例子，沒有使用State-Pattern的狀況" class="headerlink" title="以糖果機為例子，沒有使用State Pattern的狀況"></a>以糖果機為例子，沒有使用State Pattern的狀況</h2><p>我們現在有個糖果機，通常一台糖果機可以進行投幣，轉動手把，並吐出一顆糖果</p>
 <p>所以該糖果機共有四種狀態 (NoCoinState目前沒有錢幣, HasCoinState目前有錢幣, SoldCandyState售出糖果中, NoCandyState沒有糖果中)，如附圖所示：</p>
@@ -202,7 +202,7 @@
 </article>
 <script>
 	window.subData = {
-		title: 'Design-Pattern-Java-State-Pattern-狀態模式',
+		title: 'State Pattern 狀態模式 [Design Pattern in Java]',
 		tools: true
 	}
 </script>
