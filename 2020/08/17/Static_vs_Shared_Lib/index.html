@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="William&#39;s 隨手札記">
 <meta property="og:description" content="剛好在複習Golang的時候看到Go有支援載入C Language的Static Library與Shared Libraries，於是來複習一下他們之間的差異">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-17T13:53:25.781Z">
+<meta property="og:updated_time" content="2020-08-17T13:59:07.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Static 與 Shared Libraries的介紹與差異">
 <meta name="twitter:description" content="剛好在複習Golang的時候看到Go有支援載入C Language的Static Library與Shared Libraries，於是來複習一下他們之間的差異">
@@ -143,9 +143,8 @@
   	<div class="article-entry" itemprop="articleBody">
     	<p>剛好在複習Golang的時候看到Go有支援載入C Language的Static Library與Shared Libraries，於是來複習一下他們之間的差異</p>
 <a id="more"></a>
-<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>首先要先了解，Libraires的意義，單純為一個檔案</p>
-<p>將會共用的程式碼打包再一起的class檔案們就稱為Libraries</p>
-<p>假設現在若要使用print這個方法來印出東西在螢幕，<br>故可以將print編譯成Libraires，供各個開發者直接使用，不用讓開發者自己定義print方法，要煩惱如何與OS溝通並印出畫面的邏輯程式碼</p>
+<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>首先要先了解，Library的意義，就單純為一個檔案<br>將會共用的程式碼打包再一起的檔案就稱為Library</p>
+<p>假設現在若要使用print這個方法來印出東西在螢幕，<br>故可以將print編譯成Library，供各個開發者直接使用，不用讓開發者自己定義print方法，要煩惱如何與OS溝通並印出畫面的邏輯程式碼</p>
 <h3 id="Static-Library"><a href="#Static-Library" class="headerlink" title="Static Library"></a>Static Library</h3><p>Static Libarary通常為我們自己寫好的程式碼，經過Compile之後，所得到的就是 Static Library</p>
 <p>Shared則是我們也是將程式碼經過Compile，也是得到 Shared Library</p>
 <p>聽起來過程都很像，那到底差異在哪？</p>
