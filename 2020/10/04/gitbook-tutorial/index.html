@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: Computer Science | William&#39;s 隨手札記</title>
+  <title>Gitbook的使用紀錄 | William&#39;s 隨手札記</title>
   <meta name="description" content="Just record it.">
   <meta name="keywords" content="">
   <meta name="HandheldFriendly" content="True">
@@ -12,16 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Just record it.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="William&#39;s 隨手札記">
-<meta property="og:url" content="http://a10000005588.github.io/tags/Computer-Science/index.html">
+  <meta name="description" content="Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子">
+<meta name="keywords" content="Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitbook的使用紀錄">
+<meta property="og:url" content="http://a10000005588.github.io/2020/10/04/gitbook-tutorial/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="Just record it.">
+<meta property="og:description" content="Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-03T22:54:29.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="William&#39;s 隨手札記">
-<meta name="twitter:description" content="Just record it.">
+<meta name="twitter:title" content="Gitbook的使用紀錄">
+<meta name="twitter:description" content="Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -122,50 +124,86 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-  <script>
-    window.subData= { title:'Tag : Computer Science'}
-  </script>
-
-<section class="post-list">
+        <article id="post-gitbook-tutorial" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2020/10/04/gitbook-tutorial/">
+    	Gitbook的使用紀錄
+    </a>
+  </h2>
+	<time>
+	  Oct 4, 2020
+	</time>
 	
-    <div class="post-wrapper">
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/08/17/Static_vs_Shared_Lib/">
-        Static 與 Shared Libraries的介紹與差異
-      </a>
-    </h2>
-    
-    <time>
-      Aug 17, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>剛好在複習Golang的時候看到Go有支援載入C Language的Static Library與Shared Libraries，於是來複習一下他們之間的差異</p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地端執行"><span class="toc-number">1.</span> <span class="toc-text">本地端執行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-number">2.</span> <span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#summary-md-結構"><span class="toc-number">2.0.1.</span> <span class="toc-text">summary.md 結構</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#運行gitbook"><span class="toc-number">3.</span> <span class="toc-text">運行gitbook</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝Plugin"><span class="toc-number">3.1.</span> <span class="toc-text">安裝Plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例如安裝一個Disqus留言板"><span class="toc-number">3.2.</span> <span class="toc-text">例如安裝一個Disqus留言板</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考"><span class="toc-number">4.</span> <span class="toc-text">參考</span></a></li></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子</p>
+<a id="more"></a>
+<h2 id="本地端執行"><a href="#本地端執行" class="headerlink" title="本地端執行"></a>本地端執行</h2><p>安裝方式，用 <a href="https://www.npmjs.com/package/gitbook" target="_blank" rel="noopener">npm</a> 安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>找一個資料夾，執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure></p>
+<p>會產生 </p>
+<ul>
+<li>reamdme.md<ul>
+<li>介紹本書內容</li>
+</ul>
+</li>
+<li>summary.md<ul>
+<li>用來定義gitbook目錄</li>
+</ul>
+</li>
+</ul>
+<h4 id="summary-md-結構"><a href="#summary-md-結構" class="headerlink" title="summary.md 結構"></a>summary.md 結構</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* ch1</span><br><span class="line">  * ch1-1</span><br><span class="line">  * ch1-2</span><br></pre></td></tr></table></figure>
+<p>檔案結構的話就長這樣<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- ch1</span><br><span class="line">|- ch1-1</span><br><span class="line">|- ch1-2</span><br><span class="line">-readme.md</span><br><span class="line">-summary.md</span><br></pre></td></tr></table></figure></p>
+<h2 id="運行gitbook"><a href="#運行gitbook" class="headerlink" title="運行gitbook"></a>運行gitbook</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
+<p>預設會運行在 <a href="http://localhost:4000" target="_blank" rel="noopener">localhost:4000</a></p>
+<h3 id="安裝Plugin"><a href="#安裝Plugin" class="headerlink" title="安裝Plugin"></a>安裝Plugin</h3><p>事先安裝gitbook-plugin套件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gitbook-plugin</span><br></pre></td></tr></table></figure></p>
+<p>若要安裝留言板等套件，需要先定義 book.json ，可以定義使用的plugin</p>
+<p>book.json<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;disqus&quot;],</span><br><span class="line">  &quot;pluginsConfig&quot;: &#123;</span><br><span class="line">    &quot;disqus&quot;: &#123;</span><br><span class="line">      &quot;shortName&quot;: &quot;你的留言板名稱&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例如可使用 Google Analytics ( Google 分析 )、Disqus ( 社群&amp;留言板 ) 和 youtube …等外掛，也可以在Gitbook npm網站中找到自己要的plugin</p>
+<p>定義玩使用的plungin外掛，請執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook install</span><br></pre></td></tr></table></figure></p>
+<h3 id="例如安裝一個Disqus留言板"><a href="#例如安裝一個Disqus留言板" class="headerlink" title="例如安裝一個Disqus留言板"></a>例如安裝一個Disqus留言板</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i gitbook-plugin-disqus</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;disqus&quot;],</span><br><span class="line">  &quot;pluginsConfig&quot;: &#123;</span><br><span class="line">    &quot;disqus&quot;: &#123;</span><br><span class="line">      &quot;shortName&quot;: &quot;你的留言板名稱&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://github.com/GitbookIO/gitbook" target="_blank" rel="noopener">Gitbook Github Docs</a></p>
+<p><a href="https://docs.gitbook.com/getting-started/quick-start" target="_blank" rel="noopener">Gitbook Online Platform Docs</a></p>
+<p><a href="https://www.oxxostudio.tw/articles/201502/gitbook.html" target="_blank" rel="noopener">用 GitBook 來寫本書吧</a></p>
 
-    
-	  <div class="readmore">
-      <a href="/2020/08/17/Static_vs_Shared_Lib/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
-        <a href="/tags/Computer-Science/">Computer Science</a>
+        <a href="/tags/Tool/">Tool</a>
       
 	  </div>
     
-  </section>
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2020/08/17/Static_vs_Shared_Lib/" rel="next" title="Static 與 Shared Libraries的介紹與差異">
+						Static 與 Shared Libraries的介紹與差異
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
-    </div>
-  
-</section>
-
+<script>
+	window.subData = {
+		title: 'Gitbook的使用紀錄',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
@@ -291,11 +329,13 @@
 <script>
   var disqus_shortname = 'William';
   
+  var disqus_url = 'http://a10000005588.github.io/2020/10/04/gitbook-tutorial/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

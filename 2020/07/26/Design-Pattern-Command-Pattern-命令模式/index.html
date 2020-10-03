@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Command Pattern 命令模式 [Design Pattern in Java] | William&#39;s 隨手札記</title>
+  <meta name="description" content="Just record it.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/shiba.ico">
+  <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="命令模式主要將執行的命令, 與執行者做鬆綁的動作">
+<meta name="keywords" content="Design Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Command Pattern 命令模式 [Design Pattern in Java]">
+<meta property="og:url" content="http://a10000005588.github.io/2020/07/26/Design-Pattern-Command-Pattern-命令模式/index.html">
+<meta property="og:site_name" content="William&#39;s 隨手札記">
+<meta property="og:description" content="命令模式主要將執行的命令, 與執行者做鬆綁的動作">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/AvxerGU.png">
+<meta property="og:image" content="https://i.imgur.com/t1zF1vQ.jpg">
+<meta property="og:image" content="https://i.imgur.com/q9PTG18.png">
+<meta property="og:updated_time" content="2020-07-29T11:50:00.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Command Pattern 命令模式 [Design Pattern in Java]">
+<meta name="twitter:description" content="命令模式主要將執行的命令, 與執行者做鬆綁的動作">
+<meta name="twitter:image" content="https://i.imgur.com/AvxerGU.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="//cdn.bootcss.com/node-waves/0.7.5/waves.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+</head>
+</html>
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href="/">
+				William's 隨手札記
+			</a>
+			<div class="menu">
+				<ul class="h-list">
+					
+						<li>
+							<a class="flat-box nav-home" href="/">
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-archives" href="/archives">
+								History Path
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-about" href="/about">
+								About Me
+							</a>
+						</li>
+					
+				</ul>
+				<div class="underline"></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a href="javascript:void(0)"><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class="s-menu"><a href="javascript:void(0)"><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class="nav-sub container container--flex">
+			<a class="logo" href="javascript:void(0)">
+				Word of Forks
+			</a>
+
+			<ul class="switcher h-list">
+				<li class="s-comment"><a href="javascript:void(0)"><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class="s-top"><a href="javascript:void(0)"><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class="s-toc"><a href="javascript:void(0)"><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				History Path
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About Me
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Design-Pattern-Command-Pattern-命令模式" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2020/07/26/Design-Pattern-Command-Pattern-命令模式/">
+    	Command Pattern 命令模式 [Design Pattern in Java]
+    </a>
+  </h2>
+	<time>
+	  Jul 26, 2020
+	</time>
+	
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#沒有命令模式會是怎樣的寫法？？"><span class="toc-number">1.</span> <span class="toc-text">沒有命令模式會是怎樣的寫法？？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#問題"><span class="toc-number">1.1.</span> <span class="toc-text">問題</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-命令模式的優勢"><span class="toc-number">2.</span> <span class="toc-text">Command 命令模式的優勢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#進階的Command-Pattern技巧"><span class="toc-number">3.</span> <span class="toc-text">進階的Command Pattern技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#應用場景"><span class="toc-number">4.</span> <span class="toc-text">應用場景</span></a></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>命令模式主要將執行的命令, 與執行者做鬆綁的動作</p>
+<a id="more"></a>
+<h2 id="沒有命令模式會是怎樣的寫法？？"><a href="#沒有命令模式會是怎樣的寫法？？" class="headerlink" title="沒有命令模式會是怎樣的寫法？？"></a>沒有命令模式會是怎樣的寫法？？</h2><p>假如我們現在要寫一個 遙控器 RemoteControl (執行者), 上面會有很多按鈕功能 (命令)</p>
+<p>每個按鈕可能都對應各個功能, 例如 打開, 關閉某些房間的燈</p>
+<p>於是我們定義了 <code>Light</code> 抽象類別, 有著 <code>on()</code>與<code>off()</code>開關燈的方法, 並且實作了 <code>LivingRoomLight</code>, <code>KitchenLight</code>這兩個房間並繼承 <code>Light</code>抽象類別的方法, 使他們都有開關的功能！</p>
+<p>接著在遙控器 <code>RemoteControl</code>類別內定義了 <code>Light[]</code> 陣列, 儲存欲執行的功能 (實作Light的類別們)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定義出一個遙控器instance</span></span><br><span class="line">        RemoteControl remoteControl =</span><br><span class="line">                <span class="keyword">new</span> RemoteControl(</span><br><span class="line">                <span class="keyword">new</span> Light[]&#123;</span><br><span class="line">                        <span class="keyword">new</span> LivingRoomLight(),</span><br><span class="line">                        <span class="keyword">new</span> KitchenLight()</span><br><span class="line">                &#125;);</span><br><span class="line">        <span class="comment">// 0: 打開LivingRoom Light</span></span><br><span class="line">        <span class="comment">// 1: 打開Kitchen Light</span></span><br><span class="line">        remoteControl.turnOnLight(<span class="number">0</span>);</span><br><span class="line">        remoteControl.turnOnLight(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 0: 關閉LivingRoom Light</span></span><br><span class="line">        <span class="comment">// 1: 關閉Kitchen Light</span></span><br><span class="line">        remoteControl.turnOffLight(<span class="number">0</span>);</span><br><span class="line">        remoteControl.turnOffLight(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RemoteControl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Light[] lights = <span class="keyword">new</span> Light[<span class="number">10</span>];</span><br><span class="line">    RemoteControl(Light[] lights) &#123;</span><br><span class="line">        <span class="comment">// 將傳進來的lights放入到lights內</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;lights.length; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.lights[i] = lights[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOnLight</span><span class="params">(<span class="keyword">int</span> buttonNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lights[buttonNumber].on();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOffLight</span><span class="params">(<span class="keyword">int</span> buttonNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lights[buttonNumber].off();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Light</span> </span>&#123;</span><br><span class="line">    Light() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">on</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">off</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LivingRoomLight</span> <span class="keyword">extends</span> <span class="title">Light</span> </span>&#123;</span><br><span class="line">    LivingRoomLight() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">on</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn on the living room light"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">off</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn off the living room light"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KitchenLight</span> <span class="keyword">extends</span> <span class="title">Light</span> </span>&#123;</span><br><span class="line">    KitchenLight() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">on</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn on the kitchen light"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">off</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn off the kitchem light"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>執行結果如下</p>
+<p><img src="https://i.imgur.com/AvxerGU.png" alt=""></p>
+<h3 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h3><p>假如現在又想要添加電視與冷氣開關的功能 <code>TV</code>, <code>AirConditioner</code>, 那不就又要在<code>RemoteControl</code>類別內進行修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RemoteControl</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 又新增了HomeDevice陣列...定義家具集合的類別</span></span><br><span class="line">    HomeDevice[] homeDevices = <span class="keyword">new</span> HomeDevice[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">    Light[] lights = <span class="keyword">new</span> Light[<span class="number">10</span>];</span><br><span class="line">    RemoteControl(Light[] lights) &#123;</span><br><span class="line">        <span class="comment">// 將傳進來的lights放入到lights內</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;lights.length; i++) &#123;</span><br><span class="line">            <span class="keyword">this</span>.lights[i] = lights[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOnLight</span><span class="params">(<span class="keyword">int</span> buttonNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lights[buttonNumber].on();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnOffLight</span><span class="params">(<span class="keyword">int</span> buttonNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lights[buttonNumber].off();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 又在定義HomeDevice的開關功能...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可看到每次若要為遙控器類別新增功能, 都要對<code>RemoteControl</code>進行修改的動作, 如此一來可能會造成其他已經內嵌好的功能可能被改壞的狀況發生, 這時我們可以使用 <code>Command 模式</code> 來避免這種狀況發生</p>
+<h2 id="Command-命令模式的優勢"><a href="#Command-命令模式的優勢" class="headerlink" title="Command 命令模式的優勢"></a>Command 命令模式的優勢</h2><p>命令模式可以幫我們把要賦予<code>RemoteControl</code>的這些功能給封裝起來, 成為一個獨立的個體, 不會跟<code>RemoteControl</code>給耦合再一起 (像上面turnOnLight, turnOffLight等功能)</p>
+<p>我們可以把 <code>Light</code> 的開關功能都視作為 <code>Command (命令)</code>抽象介面, 該介面包含了一個 <code>execute()</code>功能, </p>
+<p>接著由Command (命令)衍伸出 <code>LightOnCommand</code>與<code>LightOffCommand</code>這兩個實作類別, 負責定義<code>Light</code>的開與關的動作</p>
+<p><img src="https://i.imgur.com/t1zF1vQ.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 定義一個命令, 包含的執行execute的動作</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 實作燈的開關命令</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Light</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">on</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn on the light"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">off</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Turn off the light"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LightOnCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    Light light;</span><br><span class="line"></span><br><span class="line">    LightOnCommand() &#123;</span><br><span class="line">        <span class="keyword">this</span>.light = <span class="keyword">new</span> Light();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        light.on();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LightOffCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    Light light;</span><br><span class="line"></span><br><span class="line">    LightOffCommand() &#123;</span><br><span class="line">        <span class="keyword">this</span>.light = <span class="keyword">new</span> Light();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        light.off();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NoCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    NoCommand() &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Not yet defined"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著我們需要在遙控器類別 <code>RemoteControl</code> 定義可放置Command的動作 <code>setXXXCommand()</code>, 以及呼叫Command的 <code>pressOnButton()</code>與<code>pressOffButton()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 定義遙控器類別</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RemoteControl</span> </span>&#123;</span><br><span class="line">    Command[] onCommands = <span class="keyword">new</span> Command[<span class="number">7</span>];</span><br><span class="line">    Command[] offCommands = <span class="keyword">new</span> Command[<span class="number">7</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化一開始的插槽, 若沒功能就定義一個沒作用的command供呼叫 (可避免用 if (command != null) 這種判斷方式</span></span><br><span class="line">    RemoteControl() &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">7</span>; i++) &#123;</span><br><span class="line">            onCommands[i] = <span class="keyword">new</span> NoCommand();</span><br><span class="line">            offCommands[i] = <span class="keyword">new</span> NoCommand();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnCommand</span><span class="params">(<span class="keyword">int</span> slot, Command onCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.onCommands[slot] = onCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOffCommand</span><span class="params">(<span class="keyword">int</span> slot, Command offCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.offCommands[slot] = offCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pressOnButton</span><span class="params">(<span class="keyword">int</span> slot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.onCommands[slot].execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pressOffButton</span><span class="params">(<span class="keyword">int</span> slot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.offCommands[slot].execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 顯示我們塞了哪些功能到slot內</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuffer stringBuff = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"></span><br><span class="line">        stringBuff.append(<span class="string">"\n ------- Remote Control-------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; onCommands.length; i++) &#123;</span><br><span class="line">            stringBuff.append(<span class="string">"[slot "</span> + i + <span class="string">"] "</span> + onCommands[i].getClass().getName() + <span class="string">"    "</span> + offCommands[i].getClass().getName() + <span class="string">"\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> stringBuff.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>透過這樣的做法, 我們可以看到原本<code>RemoteControl</code>內的與Light操作有關的動作, 都被我們透過 <code>Command</code> 抽象介面以及其 <code>LightOnCommand</code>與<code>LightOffCommand</code>實作類別給抽離出來了</p>
+<p>於是我們可以來執行看看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        RemoteControl remoteControl = <span class="keyword">new</span> RemoteControl();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 定義出兩種房間的燈</span></span><br><span class="line">        Light LivingRoomLight = <span class="keyword">new</span> Light(<span class="string">"Living Room"</span>);</span><br><span class="line">        Light KitchenLight = <span class="keyword">new</span> Light(<span class="string">"Kitchen"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 設置Command按鈕</span></span><br><span class="line">        remoteControl.setOnCommand(<span class="number">0</span>, <span class="keyword">new</span> LightOnCommand(LivingRoomLight));</span><br><span class="line">        remoteControl.setOffCommand(<span class="number">0</span>, <span class="keyword">new</span> LightOffCommand(LivingRoomLight));</span><br><span class="line"></span><br><span class="line">        remoteControl.setOnCommand(<span class="number">1</span>, <span class="keyword">new</span> LightOnCommand(KitchenLight));</span><br><span class="line">        remoteControl.setOffCommand(<span class="number">1</span>, <span class="keyword">new</span> LightOffCommand(KitchenLight));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 顯示有哪些功能</span></span><br><span class="line">        System.out.println(remoteControl.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 執行命令</span></span><br><span class="line">        <span class="comment">//// 客廳的</span></span><br><span class="line">        remoteControl.pressOnButton(<span class="number">0</span>);</span><br><span class="line">        remoteControl.pressOffButton(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//// 廚房的</span></span><br><span class="line">        remoteControl.pressOnButton(<span class="number">1</span>);</span><br><span class="line">        remoteControl.pressOffButton(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/q9PTG18.png" alt=""></p>
+<p>若接下來需要新增如浴室開關, 電視開關, 只要透過<code>RemoteConrol</code>的<code>setCommand()</code>方法, 即可以動態做設置, 不需更動到遙控器類別原本的程式碼！ (除非要改變遙控器的slot大小了)</p>
+<h2 id="進階的Command-Pattern技巧"><a href="#進階的Command-Pattern技巧" class="headerlink" title="進階的Command Pattern技巧"></a>進階的Command Pattern技巧</h2><p>等待補充 (為Command介面新增 undo()方法, 使動作復原)</p>
+<h2 id="應用場景"><a href="#應用場景" class="headerlink" title="應用場景"></a>應用場景</h2><p>運用在任務序列中, 多執行緒只要拿到Command物件, 並且執行<code>execute</code>方法負責執行完就好</p>
+<p>或是用在日誌管理, 將執行過的動作給記錄起來, 並且若後續伺服器當機, 可將命令給復原</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/" rel="prev" title="Singleton Pattern 獨體模式 [Design Pattern in Java]">
+						Singleton Pattern 獨體模式 [Design Pattern in Java] 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/16/下班自修的經驗分享/" rel="next" title="下班自修的經驗分享">
+						下班自修的經驗分享
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: 'Command Pattern 命令模式 [Design Pattern in Java]',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class="m_widget about">
+
+<img class="avatar waves-image" src="/images/william.png">
+
+<div class="header">William L.K.</div>
+<div class="content">
+<div class="desc">
+  <span>這裡為整理我網站開發學習記錄的Blog，偶爾紀錄一些讀書心得之類的事</span><br><br>
+  <span>下方Links有我在HackMD上面隨手紀錄的筆記，請多多指教</span>
+</div>
+</div>
+</section>
+
+  <section class="m_widget links">
+<div class="header">Links</div>
+<div class="content">
+    <ul class="entry">
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/aM_7XTXfSa2eo5uaiOHBrw">
+            <div class="name">Git筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/Lln8jajXSQGRwc1Csey7rA">
+            <div class="name">Linux筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/TqzyDhnRQXaoXktvgiyMwQ">
+            <div class="name">OS筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/tfFCQKFOS3eAuoYaclAcwg">
+            <div class="name">後端工程師面試錦囊</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://github.com/a10000005588/Leetcode-Java-2020">
+            <div class="name">Leetcode刷題紀錄(使用Java)</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/P7WDzlCrRGCKbO_Y_t3wWw">
+            <div class="name">Solidity以太坊智能合約開發筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/imaqKW5_S7icDtMAcvDk9Q">
+            <div class="name">Docker筆記</div>
+        </a></li>
+    
+    </ul>
+</div>
+</section>
+
+  <section class="m_widget categories">
+<div class="header">Categories</div>
+<div class="content">
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Consensus/"><div class="name">Consensus</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class="name">Ethereum</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class="name">Golang</div><div class="badget">4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hexo/"><div class="name">Hexo</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Javascript/"><div class="name">Javascript</div><div class="badget">2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Life/"><div class="name">Life</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Solidity/"><div class="name">Solidity</div><div class="badget">5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Spring/"><div class="name">Spring</div><div class="badget">2</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class="content">
+        <a href="/tags/Authentication/" style="font-size: 14px; color: #808080">Authentication</a> <a href="/tags/Blockchain/" style="font-size: 16.4px; color: #4d4d4d">Blockchain</a> <a href="/tags/Computer-Science/" style="font-size: 14px; color: #808080">Computer Science</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 20px; color: #000">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 18.8px; color: #1a1a1a">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Golang/" style="font-size: 17.6px; color: #333">Golang</a> <a href="/tags/Java/" style="font-size: 15.2px; color: #666">Java</a> <a href="/tags/Javascript/" style="font-size: 15.2px; color: #666">Javascript</a> <a href="/tags/Life/" style="font-size: 15.2px; color: #666">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 17.6px; color: #333">Solidity</a> <a href="/tags/Spring/" style="font-size: 15.2px; color: #666">Spring</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Truffle/" style="font-size: 15.2px; color: #666">Truffle</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+        <a href="https://twitter.com/" class="social twitter" target="_blank" rel="external">
+          <span class="icon icon-twitter"></span>
+        </a>
+      
+        <a href="/atom.xml" class="social rss" target="_blank" rel="external">
+          <span class="icon icon-rss"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href="https://github.com/stkevintan/hexo-theme-material-flow" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'William';
+  
+  var disqus_url = 'http://a10000005588.github.io/2020/07/26/Design-Pattern-Command-Pattern-命令模式/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/node-waves/0.7.5/waves.min.js"></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<script src="/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
