@@ -12,18 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用 Go Modules的出現解決了以下幾點爭議：  依賴問題 淘汰GOPATH的機制 統一社群中其他依賴管理工具  為何 GOPATH 不在被推薦使用簡單介紹GOPATH原先是透過定義好的目錄結構如下： script1234567go">
+  <meta name="description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用">
 <meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go Module 入門與使用介紹介紹 ">
 <meta property="og:url" content="http://a10000005588.github.io/2020/11/07/Go-Module-入門與使用介紹介紹/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用 Go Modules的出現解決了以下幾點爭議：  依賴問題 淘汰GOPATH的機制 統一社群中其他依賴管理工具  為何 GOPATH 不在被推薦使用簡單介紹GOPATH原先是透過定義好的目錄結構如下： script1234567go">
+<meta property="og:description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-11-07T14:47:25.907Z">
+<meta property="og:updated_time" content="2020-11-07T14:49:51.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go Module 入門與使用介紹介紹 ">
-<meta name="twitter:description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用 Go Modules的出現解決了以下幾點爭議：  依賴問題 淘汰GOPATH的機制 統一社群中其他依賴管理工具  為何 GOPATH 不在被推薦使用簡單介紹GOPATH原先是透過定義好的目錄結構如下： script1234567go">
+<meta name="twitter:description" content="Go Modules 入門與使用紀錄Go Modules 為目前最主流的依賴解決的方案 發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -143,6 +143,7 @@
   	<div class="article-entry" itemprop="articleBody">
     	<h1 id="Go-Modules-入門與使用紀錄"><a href="#Go-Modules-入門與使用紀錄" class="headerlink" title="Go Modules 入門與使用紀錄"></a>Go Modules 入門與使用紀錄</h1><p>Go Modules 為目前最主流的依賴解決的方案</p>
 <p>發佈於 Go 11.1版，於Go 1.14推薦在Production環境上使用</p>
+<a id="more"></a>
 <p>Go Modules的出現解決了以下幾點爭議：</p>
 <ul>
 <li>依賴問題</li>
