@@ -23,7 +23,7 @@
     
     
     <entry>
-      <title>Go Module 入門與使用介紹介紹</title>
+      <title>Go Module 入門與使用介紹</title>
       <link href="/2020/11/07/Go-Module-%E5%85%A5%E9%96%80%E8%88%87%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9%E4%BB%8B%E7%B4%B9/"/>
       <url>/2020/11/07/Go-Module-%E5%85%A5%E9%96%80%E8%88%87%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9%E4%BB%8B%E7%B4%B9/</url>
       
@@ -399,11 +399,11 @@
       
         <tags>
             
+            <tag> Smart Contract </tag>
+            
             <tag> Ethereum </tag>
             
             <tag> Solidity </tag>
-            
-            <tag> Smart Contract </tag>
             
         </tags>
       
@@ -472,9 +472,9 @@
       
         <tags>
             
-            <tag> Blockchain </tag>
-            
             <tag> Ethereum </tag>
+            
+            <tag> Blockchain </tag>
             
         </tags>
       
@@ -703,11 +703,11 @@
       
         <tags>
             
-            <tag> Blockchain </tag>
-            
             <tag> Ethereum </tag>
             
             <tag> Solidity </tag>
+            
+            <tag> Blockchain </tag>
             
         </tags>
       
