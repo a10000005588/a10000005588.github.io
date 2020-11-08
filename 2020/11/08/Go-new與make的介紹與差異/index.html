@@ -12,18 +12,18 @@
   <link rel="shortcut icon" href="/images/shiba.ico">
   <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Golang中，make與new都是建構變數來使用 new的介紹new(T)會建構一個T型別的 “沒有名字” 的變數，以T的zeroed value來初始化T，且new(T) 回傳 “指向T的指標”  若T是 string，那zeroed值為 &amp;quot;&amp;quot; 若T是 int，那zeroed值為 0 若T是 channel, func, map, slice，那zeroed值為 nil">
+  <meta name="description" content="Golang中，make與new都是建構變數來使用">
 <meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang new與make的介紹與差異">
 <meta property="og:url" content="http://a10000005588.github.io/2020/11/08/Go-new與make的介紹與差異/index.html">
 <meta property="og:site_name" content="William&#39;s 隨手札記">
-<meta property="og:description" content="Golang中，make與new都是建構變數來使用 new的介紹new(T)會建構一個T型別的 “沒有名字” 的變數，以T的zeroed value來初始化T，且new(T) 回傳 “指向T的指標”  若T是 string，那zeroed值為 &amp;quot;&amp;quot; 若T是 int，那zeroed值為 0 若T是 channel, func, map, slice，那zeroed值為 nil">
+<meta property="og:description" content="Golang中，make與new都是建構變數來使用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-11-08T03:32:31.500Z">
+<meta property="og:updated_time" content="2020-11-08T04:58:45.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Golang new與make的介紹與差異">
-<meta name="twitter:description" content="Golang中，make與new都是建構變數來使用 new的介紹new(T)會建構一個T型別的 “沒有名字” 的變數，以T的zeroed value來初始化T，且new(T) 回傳 “指向T的指標”  若T是 string，那zeroed值為 &amp;quot;&amp;quot; 若T是 int，那zeroed值為 0 若T是 channel, func, map, slice，那zeroed值為 nil">
+<meta name="twitter:description" content="Golang中，make與new都是建構變數來使用">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -142,6 +142,7 @@
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
     	<p>Golang中，<code>make</code>與<code>new</code>都是建構變數來使用</p>
+<a id="more"></a>
 <h2 id="new的介紹"><a href="#new的介紹" class="headerlink" title="new的介紹"></a>new的介紹</h2><p>new(T)會建構一個T型別的 “沒有名字” 的變數，以T的zeroed value來初始化T，且new(T) 回傳 “指向T的指標”</p>
 <ul>
 <li>若T是 string，那zeroed值為 <code>&quot;&quot;</code></li>
