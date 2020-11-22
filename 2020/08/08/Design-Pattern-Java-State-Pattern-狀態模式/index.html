@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>State Pattern 狀態模式 [Design Pattern in Java] | William&#39;s 隨手札記</title>
+  <meta name="description" content="Just record it.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/shiba.ico">
+  <link rel="alternate" href="/atom.xml" title="William's 隨手札記">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+<meta name="keywords" content="Design Pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State Pattern 狀態模式 [Design Pattern in Java]">
+<meta property="og:url" content="http://a10000005588.github.io/2020/08/08/Design-Pattern-Java-State-Pattern-狀態模式/index.html">
+<meta property="og:site_name" content="William&#39;s 隨手札記">
+<meta property="og:description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/ulduLlN.png">
+<meta property="og:image" content="https://i.imgur.com/umZlxP3.png">
+<meta property="og:image" content="https://i.imgur.com/MjhyGVD.png">
+<meta property="og:updated_time" content="2020-08-30T13:30:11.170Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="State Pattern 狀態模式 [Design Pattern in Java]">
+<meta name="twitter:description" content="透過統一的”狀態類別”，來定義物件的內部狀態是如何">
+<meta name="twitter:image" content="https://i.imgur.com/ulduLlN.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="//cdn.bootcss.com/node-waves/0.7.5/waves.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+</head>
+</html>
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href="/">
+				William's 隨手札記
+			</a>
+			<div class="menu">
+				<ul class="h-list">
+					
+						<li>
+							<a class="flat-box nav-home" href="/">
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-archives" href="/archives">
+								History Path
+							</a>
+						</li>
+					
+						<li>
+							<a class="flat-box nav-about" href="/about">
+								About Me
+							</a>
+						</li>
+					
+				</ul>
+				<div class="underline"></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search">
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a href="javascript:void(0)"><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class="s-menu"><a href="javascript:void(0)"><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class="nav-sub container container--flex">
+			<a class="logo" href="javascript:void(0)">
+				Word of Forks
+			</a>
+
+			<ul class="switcher h-list">
+				<li class="s-comment"><a href="javascript:void(0)"><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class="s-top"><a href="javascript:void(0)"><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class="s-toc"><a href="javascript:void(0)"><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				History Path
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About Me
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Design-Pattern-Java-State-Pattern-狀態模式" class="post white-box article-type-post" itemscope="" itemprop="blogPost">
+	<section class="meta">
+	<h2 class="title">
+  	<a href="/2020/08/08/Design-Pattern-Java-State-Pattern-狀態模式/">
+    	State Pattern 狀態模式 [Design Pattern in Java]
+    </a>
+  </h2>
+	<time>
+	  Aug 8, 2020
+	</time>
+	
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#以糖果機為例子，沒有使用State-Pattern的狀況"><span class="toc-number">1.</span> <span class="toc-text">以糖果機為例子，沒有使用State Pattern的狀況</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#假如有新需求：轉動時會有機率可以再多送一顆！"><span class="toc-number">1.1.</span> <span class="toc-text">假如有新需求：轉動時會有機率可以再多送一顆！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用狀態模式改善目前糖果機的設計"><span class="toc-number">2.</span> <span class="toc-text">使用狀態模式改善目前糖果機的設計</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#狀態模式的類別圖"><span class="toc-number">2.1.</span> <span class="toc-text">狀態模式的類別圖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定義糖果機的雛形"><span class="toc-number">2.2.</span> <span class="toc-text">定義糖果機的雛形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#實作各個狀態"><span class="toc-number">2.3.</span> <span class="toc-text">實作各個狀態</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作糖果機"><span class="toc-number">2.4.</span> <span class="toc-text">操作糖果機</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-number">3.</span> <span class="toc-text">小結</span></a></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>透過統一的”狀態類別”，來定義物件的內部狀態是如何</p>
+<a id="more"></a>
+<h2 id="以糖果機為例子，沒有使用State-Pattern的狀況"><a href="#以糖果機為例子，沒有使用State-Pattern的狀況" class="headerlink" title="以糖果機為例子，沒有使用State Pattern的狀況"></a>以糖果機為例子，沒有使用State Pattern的狀況</h2><p>我們現在有個糖果機，通常一台糖果機可以進行投幣，轉動手把，並吐出一顆糖果</p>
+<p>所以該糖果機共有四種狀態 (NoCoinState目前沒有錢幣, HasCoinState目前有錢幣, SoldCandyState售出糖果中, NoCandyState沒有糖果中)，如附圖所示：</p>
+<p><img src="https://i.imgur.com/ulduLlN.png" alt=""></p>
+<p>我們會很直覺的定義糖果機類別與這四個狀態為全域變數，並且實作一下糖果機具備的動作方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CandyMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> NoCandyState = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> NoCoinState = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> HasCoinState = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> SoldCandyState = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> state = NoCandyState; <span class="comment">// 一開始糖果機是沒有糖果的</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>; <span class="comment">// 糖果數目</span></span><br><span class="line"></span><br><span class="line">    CandyMachine(<span class="keyword">int</span> count) &#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.state = NoCoinState; <span class="comment">// 有了糖果，等待被投錢</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"投入錢幣"</span>);</span><br><span class="line">        <span class="keyword">this</span>.state = HasCoinState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"轉動把手中......"</span>);</span><br><span class="line">        <span class="comment">// 判斷目前是否有錢</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.state == HasCoinState) &#123;</span><br><span class="line">            <span class="keyword">this</span>.state = SoldCandyState;</span><br><span class="line">           <span class="keyword">this</span>.dispense();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"目前沒有錢幣"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispense</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 有錢的話就吐一顆糖果出來</span></span><br><span class="line">        System.out.println(<span class="string">"糖果機吐了一顆糖果"</span>);</span><br><span class="line">        <span class="keyword">this</span>.count--;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 沒有糖果了，回歸到沒糖果狀態</span></span><br><span class="line">            <span class="keyword">this</span>.state = NoCandyState;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 還有糖果的話，顯示目前沒有錢幣</span></span><br><span class="line">            <span class="keyword">this</span>.state = NoCoinState;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那我們現在可以來跟糖果機互動一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        CandyMachine candyMachine = <span class="keyword">new</span> CandyMachine(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先投錢，在轉動</span></span><br><span class="line">        System.out.println(<span class="string">"====先投錢，在轉動===="</span>);</span><br><span class="line">        candyMachine.insertCoin();</span><br><span class="line">        candyMachine.turnCrank();</span><br><span class="line">        <span class="comment">// 不投錢，直接轉動</span></span><br><span class="line">        System.out.println(<span class="string">"====不投錢，直接轉動===="</span>);</span><br><span class="line">        candyMachine.turnCrank();</span><br><span class="line">        <span class="comment">// 投錢，但糖果機目前沒糖果了</span></span><br><span class="line">        System.out.println(<span class="string">"=====投錢，但糖果機目前沒糖果了===="</span>);</span><br><span class="line">        candyMachine.insertCoin();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">====先投錢，在轉動====</span><br><span class="line">投入錢幣</span><br><span class="line">轉動把手中......</span><br><span class="line">糖果機吐了一顆糖果</span><br><span class="line">====不投錢，直接轉動====</span><br><span class="line">轉動把手中......</span><br><span class="line">目前沒有錢幣</span><br><span class="line">=====投錢，但糖果機目前沒糖果了====</span><br><span class="line">投入錢幣</span><br><span class="line">目前沒有糖果，錢退還給您</span><br></pre></td></tr></table></figure>
+<p>目前看起來運作的很正常</p>
+<h3 id="假如有新需求：轉動時會有機率可以再多送一顆！"><a href="#假如有新需求：轉動時會有機率可以再多送一顆！" class="headerlink" title="假如有新需求：轉動時會有機率可以再多送一顆！"></a>假如有新需求：轉動時會有機率可以再多送一顆！</h3><p>那這時候…我們得對CandyMachine的<code>dispense()</code>做個調整：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispense</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定義機率，如果機率小於10%就吐出兩顆糖果</span></span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">if</span> (rand.nextInt(<span class="number">10</span>) &lt;= <span class="number">5</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"恭喜中獎，糖果機吐了二顆糖果"</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.count &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="comment">// 吐出兩顆糖果</span></span><br><span class="line">                <span class="keyword">this</span>.count--;</span><br><span class="line">                <span class="keyword">this</span>.count--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 沒中獎，只吐一顆</span></span><br><span class="line">            <span class="keyword">this</span>.count--;</span><br><span class="line">            <span class="comment">// 有錢的話就吐一顆糖果出來</span></span><br><span class="line">            System.out.println(<span class="string">"糖果機吐了一顆糖果"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 沒有糖果了，回歸到沒糖果狀態</span></span><br><span class="line">            <span class="keyword">this</span>.state = NoCandyState;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 還有糖果的話，顯示目前沒有錢幣</span></span><br><span class="line">            <span class="keyword">this</span>.state = NoCoinState;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這時可以看到，每次若有新需求，就需要一直對CandyMachine類別一直做修正，其未來若有更多狀態時，程式碼會變得不好維護</p>
+<h2 id="使用狀態模式改善目前糖果機的設計"><a href="#使用狀態模式改善目前糖果機的設計" class="headerlink" title="使用狀態模式改善目前糖果機的設計"></a>使用狀態模式改善目前糖果機的設計</h2><p>先來看看該設計模式的圖表是長怎樣</p>
+<h3 id="狀態模式的類別圖"><a href="#狀態模式的類別圖" class="headerlink" title="狀態模式的類別圖"></a>狀態模式的類別圖</h3><p><img src="https://i.imgur.com/umZlxP3.png" alt=""></p>
+<p>這時我們可以看到，將原本糖果機內的static全域變數狀態，都統一變成一個state變數 (為StateComponent介面型態)。</p>
+<p>這時我們就想把每個狀態 (NoCoinState目前沒有錢幣, HasCoinState目前有錢幣, SoldCandyState售出糖果中, NoCandyState沒有糖果中) 都統一變成 <code>ConcreteState</code>類別，來實作<code>State抽象介面</code>，以利<code>Client類別</code>可以抽換狀態</p>
+<p>接著直接來改造糖果機，先定義每個狀態都會有對應的方法</p>
+<p>因為當糖果機為某種狀態時，若呼叫其動作，就會印出對應的資訊</p>
+<p>這裡我們先為每個動作都先拋出例外，因為有些方法有的狀態可能不需要使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dispense</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="定義糖果機的雛形"><a href="#定義糖果機的雛形" class="headerlink" title="定義糖果機的雛形"></a>定義糖果機的雛形</h3><p>糖果機擁有了各個狀態的類別，並且提供<code>getXXX()</code>方法，供其他狀態可以抽換自己的狀態</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CandyMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> State state;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    State noCoinState;</span><br><span class="line">    State hasCoinState;</span><br><span class="line">    State soldCandyState;</span><br><span class="line">    State noCandyState;</span><br><span class="line"></span><br><span class="line">    CandyMachine(<span class="keyword">int</span> count) &#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        noCoinState = <span class="keyword">new</span> NoCoinState(<span class="keyword">this</span>);</span><br><span class="line">        hasCoinState = <span class="keyword">new</span> HasCoinState(<span class="keyword">this</span>);</span><br><span class="line">        soldCandyState = <span class="keyword">new</span> SoldCandyState(<span class="keyword">this</span>);</span><br><span class="line">        noCandyState = <span class="keyword">new</span> NoCandyState(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(State state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.state = state;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getNoCoinState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.noCoinState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getHasCoinState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.hasCoinState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getSoldCandyState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.soldCandyState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> State <span class="title">getNoCandyState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.noCandyState;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="實作各個狀態"><a href="#實作各個狀態" class="headerlink" title="實作各個狀態"></a>實作各個狀態</h3><p>每個狀態都會引入<code>CandyMachin</code>類別，以便能夠幫助糖果機進行狀態變化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NoCoinState</span> <span class="keyword">extends</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    CandyMachine candyMachine;</span><br><span class="line">    NoCoinState(CandyMachine candyMachine) &#123;</span><br><span class="line">        <span class="keyword">this</span>.candyMachine = candyMachine;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"投入錢幣"</span>);</span><br><span class="line">        <span class="keyword">this</span>.candyMachine.setState(<span class="keyword">this</span>.candyMachine.getHasCoinState());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前沒有錢幣"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HasCoinState</span> <span class="keyword">extends</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    CandyMachine candyMachine;</span><br><span class="line">    HasCoinState(CandyMachine candyMachine) &#123;</span><br><span class="line">        <span class="keyword">this</span>.candyMachine = candyMachine;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前已經有錢幣了！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"轉動手把中"</span>);</span><br><span class="line">        <span class="comment">// 切換到下一個狀態</span></span><br><span class="line">        candyMachine.setState(<span class="keyword">this</span>.candyMachine.getSoldCandyState());</span><br><span class="line">        <span class="keyword">this</span>.candyMachine.state.dispense();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispense</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前沒有錢幣"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SoldCandyState</span> <span class="keyword">extends</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    CandyMachine candyMachine;</span><br><span class="line">    SoldCandyState(CandyMachine candyMachine) &#123;</span><br><span class="line">        <span class="keyword">this</span>.candyMachine = candyMachine;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前正在吐糖果中，請勿投幣！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前正在吐糖果中，請勿轉動！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispense</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"開始吐糖果"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 定義機率，如果機率小於10%就吐出兩顆糖果</span></span><br><span class="line">        Random rand = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">if</span> (rand.nextInt(<span class="number">10</span>) &lt;= <span class="number">5</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"恭喜中獎，糖果機吐了二顆糖果"</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.candyMachine.count &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="comment">// 吐出兩顆糖果</span></span><br><span class="line">                <span class="keyword">this</span>.candyMachine.count--;</span><br><span class="line">                <span class="keyword">this</span>.candyMachine.count--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 沒中獎，只吐一顆</span></span><br><span class="line">            <span class="keyword">this</span>.candyMachine.count--;</span><br><span class="line">            <span class="comment">// 有錢的話就吐一顆糖果出來</span></span><br><span class="line">            System.out.println(<span class="string">"糖果機吐了一顆糖果"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.candyMachine.count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.candyMachine.setState(<span class="keyword">this</span>.candyMachine.getNoCandyState());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.candyMachine.setState(<span class="keyword">this</span>.candyMachine.getNoCoinState());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NoCandyState</span> <span class="keyword">extends</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">    CandyMachine candyMachine;</span><br><span class="line">    NoCandyState(CandyMachine candyMachine) &#123;</span><br><span class="line">        <span class="keyword">this</span>.candyMachine = candyMachine;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertCoin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前沒有糖果，請勿投幣！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">turnCrank</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"目前沒有糖果，請勿投幣"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="操作糖果機"><a href="#操作糖果機" class="headerlink" title="操作糖果機"></a>操作糖果機</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        CandyMachine candyMachine = <span class="keyword">new</span> CandyMachine(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先投錢，在轉動</span></span><br><span class="line">        System.out.println(<span class="string">"====先投錢，在轉動===="</span>);</span><br><span class="line">        candyMachine.state.insertCoin();</span><br><span class="line">        candyMachine.state.turnCrank();</span><br><span class="line">        <span class="comment">// 不投錢，直接轉動</span></span><br><span class="line">        System.out.println(<span class="string">"====不投錢，直接轉動===="</span>);</span><br><span class="line">        candyMachine.state.turnCrank();</span><br><span class="line">        <span class="comment">// 投錢，但糖果機目前沒糖果了</span></span><br><span class="line">        System.out.println(<span class="string">"=====投錢，但糖果機可能目前沒糖果了===="</span>);</span><br><span class="line">        candyMachine.state.insertCoin();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">====先投錢，在轉動====</span><br><span class="line">投入錢幣</span><br><span class="line">轉動手把中</span><br><span class="line">開始吐糖果</span><br><span class="line">恭喜中獎，糖果機吐了二顆糖果</span><br><span class="line">====不投錢，直接轉動====</span><br><span class="line">目前沒有糖果，請勿投幣</span><br><span class="line">=====投錢，但糖果機目前沒糖果了====</span><br><span class="line">目前沒有糖果，請勿投幣！</span><br></pre></td></tr></table></figure>
+<p>用這張圖可以更了解糖果機是如何與狀態們做互動</p>
+<p><img src="https://i.imgur.com/MjhyGVD.png" alt=""></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>我們可以看到套用狀態模式後，若未來要新增狀態時，直接實作<code>State</code>抽象類別，並且只會需要更動到跟新增狀態類別的相關連狀態，使得我們程式更好維護</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Design-Pattern/">Design Pattern</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/08/17/Static_vs_Shared_Lib/" rel="prev" title="Static 與 Shared Libraries的介紹與差異">
+						Static 與 Shared Libraries的介紹與差異 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/08/06/Design-Pattern-Java-Composite-Pattern-合成模式/" rel="next" title="Composite Pattern 合成模式 [Design Pattern in Java]">
+						Composite Pattern 合成模式 [Design Pattern in Java]
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: 'State Pattern 狀態模式 [Design Pattern in Java]',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class="m_widget about">
+
+<img class="avatar waves-image" src="/images/icon.png">
+
+<div class="header">William L.K.</div>
+<div class="content">
+<div class="desc">
+  <span>這裡為整理我網站開發學習記錄的Blog，偶爾紀錄一些讀書心得之類的事</span><br><br>
+  <span>下方Links有我在HackMD上面隨手紀錄的筆記，請多多指教</span>
+</div>
+</div>
+</section>
+
+  <section class="m_widget links">
+<div class="header">Links</div>
+<div class="content">
+    <ul class="entry">
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/aM_7XTXfSa2eo5uaiOHBrw">
+            <div class="name">Git筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/Lln8jajXSQGRwc1Csey7rA">
+            <div class="name">Linux筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/TqzyDhnRQXaoXktvgiyMwQ">
+            <div class="name">OS筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://github.com/a10000005588/Leetcode-Java-2020">
+            <div class="name">Leetcode刷題紀錄(使用Java)</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/P7WDzlCrRGCKbO_Y_t3wWw">
+            <div class="name">Solidity以太坊智能合約開發筆記整理</div>
+        </a></li>
+    
+        <li><a class="flat-box" target="_blank" href="https://hackmd.io/imaqKW5_S7icDtMAcvDk9Q">
+            <div class="name">Docker筆記</div>
+        </a></li>
+    
+    </ul>
+</div>
+</section>
+
+  <section class="m_widget categories">
+<div class="header">Categories</div>
+<div class="content">
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Consensus/"><div class="name">Consensus</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class="name">Ethereum</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class="name">Golang</div><div class="badget">4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hexo/"><div class="name">Hexo</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Javascript/"><div class="name">Javascript</div><div class="badget">2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Life/"><div class="name">Life</div><div class="badget">1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Solidity/"><div class="name">Solidity</div><div class="badget">5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Spring/"><div class="name">Spring</div><div class="badget">2</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class="content">
+        <a href="/tags/Authentication/" style="font-size: 14px; color: #808080">Authentication</a> <a href="/tags/Blockchain/" style="font-size: 16px; color: #555">Blockchain</a> <a href="/tags/Computer-Science/" style="font-size: 14px; color: #808080">Computer Science</a> <a href="/tags/Consensus/" style="font-size: 14px; color: #808080">Consensus</a> <a href="/tags/Design-Pattern/" style="font-size: 20px; color: #000">Design Pattern</a> <a href="/tags/Ethereum/" style="font-size: 18px; color: #2b2b2b">Ethereum</a> <a href="/tags/Frontend/" style="font-size: 14px; color: #808080">Frontend</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/Java/" style="font-size: 15px; color: #6b6b6b">Java</a> <a href="/tags/Javascript/" style="font-size: 15px; color: #6b6b6b">Javascript</a> <a href="/tags/Life/" style="font-size: 15px; color: #6b6b6b">Life</a> <a href="/tags/Smart-Contract/" style="font-size: 14px; color: #808080">Smart Contract</a> <a href="/tags/Solidity/" style="font-size: 17px; color: #404040">Solidity</a> <a href="/tags/Spring/" style="font-size: 15px; color: #6b6b6b">Spring</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Truffle/" style="font-size: 15px; color: #6b6b6b">Truffle</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+        <a href="https://twitter.com/" class="social twitter" target="_blank" rel="external">
+          <span class="icon icon-twitter"></span>
+        </a>
+      
+        <a href="/atom.xml" class="social rss" target="_blank" rel="external">
+          <span class="icon icon-rss"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href="https://github.com/stkevintan/hexo-theme-material-flow" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'William';
+  
+  var disqus_url = 'http://a10000005588.github.io/2020/08/08/Design-Pattern-Java-State-Pattern-狀態模式/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/node-waves/0.7.5/waves.min.js"></script>
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.2/scrollreveal.min.js"></script>
+<script src="/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+<script src="/js/search.js"></script>
+<script src="/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
