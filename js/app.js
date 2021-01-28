@@ -1,257 +1,116 @@
-/* eslint-disable */
-var customSearch;
-(function ($) {
+/*!========================================================================
+ *  hexo-theme-snippet: app.js v1.0.0
+ * ======================================================================== */
+window.onload = function() {
+    var $body = document.body,
+        $mnav = document.getElementById("mnav"), //获取导航三角图标
+        $mainMenu = document.getElementById("main-menu"), //手机导航
+        $process = document.getElementById('process'), //进度条
+        $ajaxImgs = document.querySelectorAll('.img-ajax'), //图片懒加载
+        $commentsCounter = document.getElementById('comments-count'),
+        $gitcomment = document.getElementById("gitcomment"),
+        $backToTop = document.getElementById("back-to-top"),
+        $toc = document.getElementById("article-toc"),
+        timer = null;
 
-	"use strict";
-	const scrollCorrection = 70; // (header height = 50px) + (gap = 20px)
-	function scrolltoElement(elem, correction) {
-		correction = correction || scrollCorrection;
-		const $elem = elem.href ? $(elem.getAttribute('href')) : $(elem);
-		$('html, body').animate({ 'scrollTop': $elem.offset().top - correction }, 400);
-	};
+    //设备判断
+    var isPC = true;
+    (function(designPercent) {
+        function params(u, p) {
+            var m = new RegExp("(?:&|/?)" + p + "=([^&$]+)").exec(u);
+            return m ? m[1] : '';
+        }
+        if (/iphone|ios|android|ipod/i.test(navigator.userAgent.toLowerCase()) == true && params(location.search, "from") != "mobile") {
+            isPC = false;
+        }
+    })();
 
-	function setHeader() {
-		if (!window.subData) return;
-		const $wrapper = $('header .wrapper');
-		const $comment = $('.s-comment', $wrapper);
-		const $toc = $('.s-toc', $wrapper);
-		const $top = $('.s-top',$wrapper);
+    //手机菜单导航
+    $mnav.onclick = function() {
+        var navOpen = $mainMenu.getAttribute("class");
+        if (navOpen.indexOf("in") != '-1') {
+            $mainMenu.setAttribute("class", "collapse navbar-collapse");
+        } else {
+            $mainMenu.setAttribute("class", "collapse navbar-collapse in");
+        }
+    };
 
-		$wrapper.find('.nav-sub .logo').text(window.subData.title);
-		let pos = document.body.scrollTop;
-		$(document, window).scroll(() => {
-			const scrollTop = $(window).scrollTop();
-			const del = scrollTop - pos;
-			if (del >= 20) {
-				pos = scrollTop;
-				$wrapper.addClass('sub');
-			} else if (del <= -20) {
-				pos = scrollTop;
-				$wrapper.removeClass('sub');
-			}
-		});
-		// bind events to every btn
-		const $commentTarget = $('#comments');
-		if ($commentTarget.length) {
-			$comment.click(e => { e.preventDefault(); e.stopPropagation(); scrolltoElement($commentTarget); });
-		} else $comment.remove();
+    //首页文章图片懒加载
+    function imgsAjax($targetEles) {
+        if (!$targetEles) return;
+        var _length = $targetEles.length;
+        if (_length > 0) {
+            var scrollBottom = getScrollTop() + window.innerHeight;
+            for (var i = 0; i < _length; i++) {
+                (function(index) {
+                    var $this = $targetEles[index];
+                    var $this_offsetZero = $this.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+                    if (scrollBottom >= $this_offsetZero && $this.getAttribute('data-src') && $this.getAttribute('data-src').length > 0) {
+                        if ($this.nodeName.toLowerCase() === 'img') {
+                            $this.src = $this.getAttribute('data-src');
+                            $this.style.display = 'block';
+                        } else {
+                            var imgObj = new Image();
+                            imgObj.onload = function() {
+                                $this.innerHTML = "";
+                            };
+                            imgObj.src = $this.getAttribute('data-src');
+                            $this.style.backgroundImage = "url(" + $this.getAttribute('data-src') + ")";
+                        }
+                        $this.removeAttribute('data-src'); //为了优化，移除
+                    }
+                })(i);
+            }
+        }
+    }
 
-		const $tocTarget = $('.toc-wrapper');
-		if ($tocTarget.length && $tocTarget.children().length) {
-			$toc.click((e) => { e.stopPropagation(); $tocTarget.toggleClass('active'); });
-		} else $toc.remove();
+    //获取滚动高度
+    function getScrollTop() {
+        return ($body.scrollTop || document.documentElement.scrollTop);
+    }
+    //滚动回调
+    var scrollCallback = function() {
+        if ($process) {
+            $process.style.width = (getScrollTop() / ($body.scrollHeight - window.innerHeight)) * 100 + "%";
+        }
+        (isPC && getScrollTop() >= 300) ? $backToTop.removeAttribute("class", "hide"): $backToTop.setAttribute("class", "hide");
+        imgsAjax($ajaxImgs);
+    };
+    scrollCallback();
 
-		$top.click(()=>scrolltoElement(document.body));
+    //监听滚动事件
+    window.addEventListener('scroll', function() {
+        if ($toc) {
+            var top = $toc.offsetTop;
+            var left = $toc.offsetLeft;
+            var width = $toc.offsetWidth;
+            if (getScrollTop() <= top) {
+                $toc.style = "";
+            } else {
+                $toc.style.position = "fixed";
+                $toc.style.top = "5px";
+                $toc.style.left = left + "px";
+                $toc.style.width = width + "px"
+            }
+        }
+        clearTimeout(timer);
+        timer = setTimeout(function fn() {
+            scrollCallback();
+        }, 200);
+    });
 
-	}
-	function setHeaderMenu() {
-		var $headerMenu = $('header .menu');
-		var $underline = $headerMenu.find('.underline');
-		function setUnderline($item, transition) {
-			$item = $item || $headerMenu.find('li a.active');//get instant
-			transition = transition === undefined ? true : !!transition;
-			if (!transition) $underline.addClass('disable-trans');
-			if ($item && $item.length) {
-				$item.addClass('active').siblings().removeClass('active');
-				$underline.css({
-					left: $item.position().left,
-					width: $item.innerWidth()
-				});
-			} else {
-				$underline.css({
-					left: 0,
-					width: 0
-				});
-			}
-			if (!transition) {
-				setTimeout(function () { $underline.removeClass('disable-trans') }, 0);//get into the queue.
-			}
-		}
-		$headerMenu.on('mouseenter', 'li', function (e) {
-			setUnderline($(e.currentTarget));
-		});
-		$headerMenu.on('mouseout', function () {
-			setUnderline();
-		});
-		//set current active nav
-		var $active_link = null;
-		if (location.pathname === '/' || location.pathname.startsWith('/page/')) {
-			$active_link = $('.nav-home', $headerMenu);
-		} else {
-			var name = location.pathname.match(/\/(.*?)\//);
-			if (name.length > 1) {
-				$active_link = $('.nav-' + name[1], $headerMenu);
-			}
-		}
-		setUnderline($active_link, false);
-	}
-	function setHeaderMenuPhone() {
-		var $switcher = $('.l_header .switcher .s-menu');
-		$switcher.click(function (e) {
-			e.stopPropagation();
-			$('body').toggleClass('z_menu-open');
-			$switcher.toggleClass('active');
-		});
-		$(document).click(function (e) {
-			$('body').removeClass('z_menu-open');
-			$switcher.removeClass('active');
-		});
-	}
-	function setHeaderSearch() {
-		var $switcher = $('.l_header .switcher .s-search');
-		var $header = $('.l_header');
-		var $search = $('.l_header .m_search');
-		if ($switcher.length === 0) return;
-		$switcher.click(function (e) {
-			e.stopPropagation();
-			$header.toggleClass('z_search-open');
-			$search.find('input').focus();
-		});
-		$(document).click(function (e) {
-			$header.removeClass('z_search-open');
-		});
-		$search.click(function (e) {
-			e.stopPropagation();
-		})
-	}
-	function setWaves() {
-		Waves.attach('.flat-btn', ['waves-button']);
-		Waves.attach('.float-btn', ['waves-button', 'waves-float']);
-		Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
-		Waves.attach('.flat-box', ['waves-block']);
-		Waves.attach('.float-box', ['waves-block', 'waves-float']);
-		Waves.attach('.waves-image');
-		Waves.init();
-	}
-	function setScrollReveal() {
-		const $reveal = $('.reveal');
-		if ($reveal.length === 0) return;
-		const sr = ScrollReveal({ distance: 0 });
-		sr.reveal('.reveal');
-	}
-	function setTocToggle() {
-		const $toc = $('.toc-wrapper');
-		if ($toc.length === 0) return;
-		$toc.click((e) => { e.stopPropagation(); $toc.addClass('active'); });
-		$(document).click(() => $toc.removeClass('active'));
+    //返回顶部
+    $backToTop.onclick = function() {
+        cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function fn() {
+            var sTop = getScrollTop();
+            if (sTop > 0) {
+                $body.scrollTop = document.documentElement.scrollTop = sTop - 50;
+                timer = requestAnimationFrame(fn);
+            } else {
+                cancelAnimationFrame(timer);
+            }
+        });
+    };
 
-		$toc.on('click', 'a', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			scrolltoElement(e.target.tagName.toLowerCase === 'a' ? e.target : e.target.parentElement);
-		});
-
-		const liElements = Array.from($toc.find('li a'));
-		//function animate above will convert float to int.
-		const getAnchor = () => liElements.map(elem => Math.floor($(elem.getAttribute('href')).offset().top - scrollCorrection));
-
-		let anchor = getAnchor();
-		const scrollListener = () => {
-			const scrollTop = $('html').scrollTop() || $('body').scrollTop();
-			if (!anchor) return;
-			//binary search.
-			let l = 0, r = anchor.length - 1, mid;
-			while (l < r) {
-				mid = (l + r + 1) >> 1;
-				if (anchor[mid] === scrollTop) l = r = mid;
-				else if (anchor[mid] < scrollTop) l = mid;
-				else r = mid - 1;
-			}
-			$(liElements).removeClass('active').eq(l).addClass('active');
-		}
-		$(window)
-			.resize(() => {
-				anchor = getAnchor();
-				scrollListener();
-			})
-			.scroll(() => {
-				scrollListener()
-			});
-		scrollListener();
-	}
-
-	// function getPicture() {
-	// 	const $banner = $('.banner');
-	// 	if ($banner.length === 0) return;
-	// 	const url = ROOT + 'js/lovewallpaper.json';
-	// 	$.get(url).done(res => {
-	// 		if (res.data.length > 0) {
-	// 			const index = Math.floor(Math.random() * res.data.length);
-	// 			$banner.css('background-image', 'url(' + res.data[index].big + ')');
-	// 		}
-	// 	})
-	// }
-
-	// function getHitokoto() {
-	// 	const $hitokoto = $('#hitokoto');
-	// 	if($hitokoto.length === 0) return;
-	// 	const url = 'http://api.hitokoto.us/rand?length=80&encode=jsc&fun=handlerHitokoto';
-	// 	$('body').append('<script	src="%s"></script>'.replace('%s',url));
-	// 	window.handlerHitokoto = (data) => {
-	// 		$hitokoto
-	// 			.css('color','transparent')
-	// 			.text(data.hitokoto)
-	// 		if(data.source) $hitokoto.append('<cite> ——  %s</cite>'.replace('%s',data.source));
-	// 		else if(data.author) $hitokoto.append('<cite> ——  %s</cite>'.replace('%s',data.author));
-	// 		$hitokoto.css('color','white');
-	// 	}
-	// }
-
-
-	$(function () {
-		//set header
-		setHeader();
-		setHeaderMenu();
-		setHeaderMenuPhone();
-		setHeaderSearch();
-		setWaves();
-		setScrollReveal();
-		setTocToggle();
-		// getHitokoto();
-		// getPicture();
-
-
-		$(".article .video-container").fitVids();
-
-		setTimeout(function () {
-			$('#loading-bar-wrapper').fadeOut(500);
-		}, 300);
-
-		if (SEARCH_SERVICE === 'google') {
-			customSearch = new GoogleCustomSearch({
-				apiKey: GOOGLE_CUSTOM_SEARCH_API_KEY,
-				engineId: GOOGLE_CUSTOM_SEARCH_ENGINE_ID,
-				imagePath: "/images/"
-			});
-		}
-		else if (SEARCH_SERVICE === 'algolia') {
-			customSearch = new AlgoliaSearch({
-				apiKey: ALGOLIA_API_KEY,
-				appId: ALGOLIA_APP_ID,
-				indexName: ALGOLIA_INDEX_NAME,
-				imagePath: "/images/"
-			});
-		}
-		else if (SEARCH_SERVICE === 'hexo') {
-			customSearch = new HexoSearch({
-				imagePath: "/images/"
-			});
-		}
-		else if (SEARCH_SERVICE === 'azure') {
-			customSearch = new AzureSearch({
-				serviceName: AZURE_SERVICE_NAME,
-				indexName: AZURE_INDEX_NAME,
-				queryKey: AZURE_QUERY_KEY,
-				imagePath: "/images/"
-			});
-		}
-		else if (SEARCH_SERVICE === 'baidu') {
-			customSearch = new BaiduSearch({
-				apiId: BAIDU_API_ID,
-				imagePath: "/images/"
-			});
-		}
-
-	});
-
-})(jQuery);
+};
