@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Consensus,Blockchain">
+
+
+<meta name="description" content="Paxos介紹分布式系統中，只有出現故障節點(fault node),但不存在惡意節點(corrupt node)下達成共識的問題。
+
+問題起源故事背景為古希臘的Paxon島上有諸位法官要對某一...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    分散式系統共識算法筆記：Paxos和Raft |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="分散式系統共識算法筆記：Paxos和Raft">
+            
+            分散式系統共識算法筆記：Paxos和Raft
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Consensus/">Consensus</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Blockchain/">Blockchain</a> <a class="tag-link" href="/tags/Consensus/">Consensus</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2018/03/11</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文於<strong>
+                1064</strong>
+            天之前發表，文章中的內容可能過期了，請謹慎食用。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="Paxos介紹"><a href="#Paxos介紹" class="headerlink" title="Paxos介紹"></a>Paxos介紹</h2><p>分布式系統中，只有出現故障節點(fault node),但不存在惡意節點(corrupt node)下達成共識的問題。</p>
+<a id="more"></a>
+<h3 id="問題起源"><a href="#問題起源" class="headerlink" title="問題起源"></a>問題起源</h3><p>故事背景為古希臘的Paxon島上有諸位法官要對某一件法案進行裁決並如何達成共識的結果。</p>
+<p>過程中法官會透過傳訊關傳遞訊息，但法官可能中途離席，而服務員可能偷懶睡覺。</p>
+<p>故Paxos算法基於<span style="color:red">“兩階段提交”</span>來確保法官們可以得到共識結果的一致性。</p>
+<h3 id="Paxos特性"><a href="#Paxos特性" class="headerlink" title="Paxos特性"></a>Paxos特性</h3><p>Paxos將參與節點中分為三類：</p>
+<ul>
+<li>Proposer(客戶端): 提出一個案子，等待大家批准並得到答案。</li>
+<li>Acceptor(服務端): 接受提案，並進行投票。</li>
+<li>Learner(客戶端or服務端): 被告知提案結果，並將自己的狀態與結果更新。</li>
+</ul>
+<p>過程中必須滿足分散式系統共識所必須的兩特性：</p>
+<ol>
+<li>Safty：保證決議結果是對的，無異議，並不會出現錯誤情況。</li>
+<li>Liveness：保證在”有限”時間內完成共識結果。</li>
+</ol>
+<h3 id="Paxos過程"><a href="#Paxos過程" class="headerlink" title="Paxos過程"></a>Paxos過程</h3><ol>
+<li>由Proposer提出提案，爭取Acceptors的支持。</li>
+<li>超過一半的Acceptors支持，則發送該提案結果給所有人進行確認。</li>
+</ol>
+<h3 id="兩階段提繳"><a href="#兩階段提繳" class="headerlink" title="兩階段提繳"></a>兩階段提繳</h3><h4 id="Step-1-Prepare階段"><a href="#Step-1-Prepare階段" class="headerlink" title="Step 1: Prepare階段"></a>Step 1: Prepare階段</h4><ul>
+<li>Proposer發送自己的計畫給多個Acceptors.</li>
+<li>Acceptor根據該計畫的編號，若是最新的編號則保留，反之則退回。</li>
+</ul>
+<h4 id="Step-2-Commit階段"><a href="#Step-2-Commit階段" class="headerlink" title="Step 2: Commit階段"></a>Step 2: Commit階段</h4><ul>
+<li>Proposer收到Accpetor的確認回覆。若收到的回覆中不帶有新的提案請求，表示鎖定成功。</li>
+<li>若沒有收到超過1/2個Accpetor的回覆。</li>
+</ul>
+<h4 id="特殊情況"><a href="#特殊情況" class="headerlink" title="特殊情況"></a>特殊情況</h4><ul>
+<li>若Proposer在提案過程中發生故障，可以透過超時機制票選下一位Proposer。</li>
+<li>Paxos算法保證在正常節點有 1/2個以上時，可滿足共識的Safety和Liveness.</li>
+</ul>
+<h2 id="Raft介紹"><a href="#Raft介紹" class="headerlink" title="Raft介紹"></a>Raft介紹</h2><p>為Paxos的簡化版本。</p>
+<h3 id="參與者"><a href="#參與者" class="headerlink" title="參與者"></a>參與者</h3><p>包括三種角色： 1.Leader 2.Candidate 3.Follower</p>
+<h3 id="共識流程"><a href="#共識流程" class="headerlink" title="共識流程"></a>共識流程</h3><ul>
+<li>Leader選舉：每個Candidate在一定時間內會提出選舉方案，而選舉結果的那位成為Leader.</li>
+<li>同步每個Replication的Log: Leader會找到系統中的Log檔案上最新的紀錄，並要求所有Follower根據該最新紀錄同步到他們自己的Log檔案上。</li>
+</ul>
+<p>log檔可能為系統上發生的動作紀錄。</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/26868753548/in/dateposted-public/" title="Raft_consense" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4774/26868753548_176bc63750_o.png" width="2240" alt="Raft_consense"></a></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>Paxos和Raft為目前分散式系統的帶來不錯的共識結果，其他共識演算法像是PBFT (practical byzantine fault tolerant protocal)以及目前由Amis團隊所於etherum上所實現的BFT算法- Istanbul BFT，都算是本次筆記提到的再進階的共識算法，有興趣的讀者可以在到以下連結去深入瞭解。</p>
+<p><a href="https://www.slideshare.net/YuTeLin1/istanbul-bft" target="_blank" rel="noopener">Istanbul BFT - AMIS</a></p>
+<p><a href="https://www.slideshare.net/WilliamLin23/pbft-90300607" target="_blank" rel="noopener">PBFT Introduction</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2018/03/18/go-array-slice-map/" class="pre-post btn btn-default" title="Go使用Array、Slice與Map的介紹">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Go使用Array、Slice與Map的介紹</span>
+    </a>
+    
+    
+    <a href="/2017/09/13/javascript-closure/" class="next-post btn btn-default" title="Javascript筆記:Closure(閉包)概念">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Javascript筆記:Closure(閉包)概念</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2018/03/11/consensusAlgo/';
+    this.page.identifier = '2018/03/11/consensusAlgo/';
+    this.page.title = '分散式系統共識算法筆記：Paxos和Raft';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Paxos介紹"><span class="toc-text">Paxos介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#問題起源"><span class="toc-text">問題起源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos特性"><span class="toc-text">Paxos特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos過程"><span class="toc-text">Paxos過程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兩階段提繳"><span class="toc-text">兩階段提繳</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-Prepare階段"><span class="toc-text">Step 1: Prepare階段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-Commit階段"><span class="toc-text">Step 2: Commit階段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊情況"><span class="toc-text">特殊情況</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Raft介紹"><span class="toc-text">Raft介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#參與者"><span class="toc-text">參與者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共識流程"><span class="toc-text">共識流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小結"><span class="toc-text">小結</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

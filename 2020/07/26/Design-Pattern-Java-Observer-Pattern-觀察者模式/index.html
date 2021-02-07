@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Design Pattern,Java">
+
+
+<meta name="description" content="觀察者模式可以讓物件了解資料變化的情況。物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。在此模式中也會了解一對多，以及物件鬆綁的意義是如何。
+
+以氣象監測系統的概況...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    Observer Pattern 觀察者模式 [Design Pattern in Java] |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Observer Pattern 觀察者模式 [Design Pattern in Java]">
+            
+            Observer Pattern 觀察者模式 [Design Pattern in Java]
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Design-Pattern/">Design Pattern</a> <a class="tag-link" href="/tags/Java/">Java</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2020/07/26</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>觀察者模式可以讓物件了解資料變化的情況。<br>物件甚至可以在執行期間決定是否要繼續被通知，又或者是可以主動去詢問資料的狀態。<br>在此模式中也會了解一對多，以及物件鬆綁的意義是如何。</p>
+<a id="more"></a>
+<h3 id="以氣象監測系統的概況來當做例子"><a href="#以氣象監測系統的概況來當做例子" class="headerlink" title="以氣象監測系統的概況來當做例子"></a>以氣象監測系統的概況來當做例子</h3><p>假設系統中有三個組成要件：<br>(1) 氣象站: 獲取實際氣象的物理裝置，假設有三個:溫度,濕度,壓力感應<br>(2) Weather Data物件: 追蹤來自氣象站的資料，並且顯示在佈告版上<br>(3) 佈告版: 將Weather Data物件給予的資料呈現出來</p>
+<p>整個例子會有，一個氣象站(產出假的氣象資料)，Weather Data物件(獲取氣象資料並通知佈告版)，佈告版將拿到的資料給呈現出來</p>
+<h3 id="沒使用觀察者模式-Observer-Pattern的情況"><a href="#沒使用觀察者模式-Observer-Pattern的情況" class="headerlink" title="沒使用觀察者模式 Observer Pattern的情況"></a>沒使用觀察者模式 Observer Pattern的情況</h3><p>初學者會很直覺的寫出這樣的程式架構：</p>
+<h4 id="佈告欄"><a href="#佈告欄" class="headerlink" title="佈告欄"></a>佈告欄</h4><p>CurrentConditionsDisplay.class<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditionsDisplay</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pressure;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.temp = temp;</span><br><span class="line">       <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">       <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 顯示資料</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(temp);</span><br><span class="line">        System.out.println(humidity);</span><br><span class="line">        System.out.println(pressure);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="WeatherData-class"><a href="#WeatherData-class" class="headerlink" title="WeatherData.class"></a>WeatherData.class</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> </span>&#123;</span><br><span class="line">    <span class="comment">// instance variable declarations</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 宣告佈告欄</span></span><br><span class="line">    CurrentConditionsDisplay currentConditionsDisplay;</span><br><span class="line">    StatisticsDisplay statisticsDisplay;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">// 建構子</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeatherData</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        CurrentConditionsDisplay currentConditionsDisplay,</span></span></span><br><span class="line"><span class="function"><span class="params">        StatisticsDisplay statisticsDisplay</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.currentConditionsDisplay = currentConditionsDisplay;</span><br><span class="line">        <span class="keyword">this</span>.statisticsDisplay = statisticsDisplay;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTemperature</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getHumidity</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPressure</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementsChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> temp = getTemperature();</span><br><span class="line">        <span class="keyword">float</span> humidity = getHumidity();</span><br><span class="line">        <span class="keyword">float</span> pressure = getPressure();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 對佈告欄類別進行更新他們的顯示內容</span></span><br><span class="line">        currentConditionsDisplay.update(temp, humidity, pressure);</span><br><span class="line">        statisticsDisplay.update(temp, humidity, pressure);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 其他WeatherData function...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是以上程式結構會有耦合性的狀況：</p>
+<p><img src="https://i.imgur.com/gpIs58H.png" alt=""></p>
+<p>所以接下來來了解觀察者模式的內涵</p>
+<h4 id="觀察者模式解析"><a href="#觀察者模式解析" class="headerlink" title="觀察者模式解析"></a>觀察者模式解析</h4><p>定義了物件之間一對多關係，如此一來，當一個物件改變狀態時，其他相依者都會收到通知並自動做改變</p>
+<p>其示意圖如下：</p>
+<p><img src="https://i.imgur.com/d1zWR3x.png" alt=""></p>
+<p>主題與觀察者們定義了一對多的關係</p>
+<p>若要實踐出可以隔離主題和觀察者們的方式，以 <code>Subject</code>介面和<code>Observer</code>介面最為常見</p>
+<p><img src="https://i.imgur.com/C155cCF.png" alt=""></p>
+<p>在這張圖要注意一個重點是，由於現在已經針對介面實作，現在的Subject中的註冊Observer都是以註冊”<span style="color:red">介面</span>“為主！而非是像上面一開始的新手例子是直接針對實踐而寫</p>
+<p>如此一來如果要在新增一個佈告欄叫做ForecastDisplay，直接實踐Observer就好，這樣就不用動到實踐Subject介面的WeatherData之程式碼</p>
+<p><img src="https://i.imgur.com/GJTGp80.png" alt=""></p>
+<h4 id="以觀察者模式來重寫氣象監測系統"><a href="#以觀察者模式來重寫氣象監測系統" class="headerlink" title="以觀察者模式來重寫氣象監測系統"></a>以觀察者模式來重寫氣象監測系統</h4><p>Subject.interface</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ObserverInterface</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> humidity, <span class="keyword">float</span> pressure)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>WeatherData.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList observers;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeatherData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        observers = <span class="keyword">new</span> ArrayList();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = observers.indexOf(o);</span><br><span class="line">        observers.add(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = observers.indexOf(o);</span><br><span class="line">        <span class="keyword">if</span>(i&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">            observers.remove(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向觀察者們送以改動的資料</span></span><br><span class="line">    <span class="comment">// 可以看到現在我們是直接註冊Observer介面，如此一來觀察者類別的實作就不用去在意</span></span><br><span class="line">    <span class="comment">// 只要知道要註冊的對象必須要有實作Observer介面就好</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;observers.size(); i++) &#123;</span><br><span class="line">            Observer observer = (Observer)observers.get(i);</span><br><span class="line">            observer.update(temperature, humidity, pressure);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 執行向觀察者們通知資料</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementsChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        notifyObservers();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 讀取假資料，可以改動這地方，改為向氣象局網站爬資料</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMeasurements</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">float</span> temperature,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">float</span> humidity,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">float</span> pressure)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temperature;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        measurementsChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這裡我們只實踐一個佈告欄 CurrentConditionDisplay</p>
+<p>CurrentConditionDisplay.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditionDisplay</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">    <span class="keyword">private</span> Subject weatherData;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CurrentConditionDisplay</span><span class="params">(Subject weatherData)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.weatherData = weatherData;</span><br><span class="line">        weatherData.registerObserver(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> humidity, <span class="keyword">float</span> pressure)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temperature;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        display();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Current condition: "</span>+temperature + <span class="string">"F degrees and "</span> + humidity + <span class="string">"% humidity and "</span>+ pressure + <span class="string">" pressure"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>執行程式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeatherData weatherData = <span class="keyword">new</span> WeatherData();</span><br><span class="line"></span><br><span class="line">        CurrentConditionDisplay currentDisplay = <span class="keyword">new</span> CurrentConditionDisplay(weatherData);</span><br><span class="line"></span><br><span class="line">        weatherData.setMeasurements(<span class="number">80</span>, <span class="number">64</span>, <span class="number">30.4f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到以下結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Current condition: 80.0F degrees and 64.0% humidity and 30.4 pressure</span><br></pre></td></tr></table></figure>
+<p>之後只要透過主題呼叫觀察者的update()的方法，就可以通知新的資料給觀察者</p>
+<p>並且透過註冊的方式+只加入針對實踐Observer介面的觀察者，如此一來可以達到分離主題物件與觀察者物件的邏輯，之後新增新的佈告欄就不用動到主題的程式邏輯。</p>
+<h3 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h3><h4 id="java-sdk也有自行提供Observer方法"><a href="#java-sdk也有自行提供Observer方法" class="headerlink" title="java sdk也有自行提供Observer方法"></a>java sdk也有自行提供Observer方法</h4><p>其中會有<code>setChange()</code>的方法，主要讓呼叫者定義什麼時候才要通知新的資料給觀察者，避免每次資料一改變就一直通知觀察者。Ex: 如果沒有setChanged的方法，WeahterData物件就會持續不斷的通知觀察者，所以若我們希望溫度差距半度才更新，溫度差距插到半度以上，主題才會呼叫觀察者的update()的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">setChanged() &#123;</span><br><span class="line">    changed = ture;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">notifyObservers(Object arg) &#123;</span><br><span class="line">    if(changed) &#123;</span><br><span class="line">        for every observer on the list &#123;</span><br><span class="line">            call update(this. org)</span><br><span class="line">        &#125;</span><br><span class="line">        changed = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">notifyObsergers() &#123;</span><br><span class="line">    notifyObservers(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/" class="pre-post btn btn-default" title="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Adaptor Pattern 轉接器模式 [Design Pattern in Java]</span>
+    </a>
+    
+    
+    <a href="/2020/07/26/Design-Pattern-Java-Strategy-Pattern-策略模式/" class="next-post btn btn-default" title="Strategy Pattern 策略模式 [Design Pattern in Java]">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Strategy Pattern 策略模式 [Design Pattern in Java]</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/';
+    this.page.identifier = '2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/';
+    this.page.title = 'Observer Pattern 觀察者模式 [Design Pattern in Java]';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#以氣象監測系統的概況來當做例子"><span class="toc-text">以氣象監測系統的概況來當做例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#沒使用觀察者模式-Observer-Pattern的情況"><span class="toc-text">沒使用觀察者模式 Observer Pattern的情況</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#佈告欄"><span class="toc-text">佈告欄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WeatherData-class"><span class="toc-text">WeatherData.class</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#觀察者模式解析"><span class="toc-text">觀察者模式解析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以觀察者模式來重寫氣象監測系統"><span class="toc-text">以觀察者模式來重寫氣象監測系統</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#補充"><span class="toc-text">補充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#java-sdk也有自行提供Observer方法"><span class="toc-text">java sdk也有自行提供Observer方法</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

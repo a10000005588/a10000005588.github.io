@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Note">
+
+
+<meta name="description" content="如果要打造自己風格的Blog，那就不能錯過HexoHexo是一套開源的架個人部落格的框架，
+
+其優點如下：
+
+文章以markdown格式為主。
+並且能一鍵部署在Github，公開給大家看。
+有很...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    利用Hexo來記錄自己的學習並使用Material-flow主題 |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="利用Hexo來記錄自己的學習並使用Material-flow主題">
+            
+            利用Hexo來記錄自己的學習並使用Material-flow主題
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Note/">Note</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Note/">Note</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2017/09/05</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文於<strong>
+                1250</strong>
+            天之前發表，文章中的內容可能過期了，請謹慎食用。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>如果要打造自己風格的Blog，那就不能錯過Hexo<br>Hexo是一套開源的架個人部落格的框架，</p>
+<a id="more"></a>
+<p>其優點如下：</p>
+<ul>
+<li>文章以markdown格式為主。</li>
+<li>並且能一鍵部署在Github，公開給大家看。</li>
+<li>有很多第三方的template theme來裝飾自己的Blog</li>
+</ul>
+<p>我目前這個Blog的主題是使用NextT囉</p>
+<p>以下會詳細介紹怎麼用Hexo快速架站</p>
+<h2 id="Hexo架設流程"><a href="#Hexo架設流程" class="headerlink" title="Hexo架設流程"></a>Hexo架設流程</h2><h3 id="安裝Hexo"><a href="#安裝Hexo" class="headerlink" title="安裝Hexo"></a>安裝Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<h3 id="初始化一個Hexo專案，並且運行之"><a href="#初始化一個Hexo專案，並且運行之" class="headerlink" title="初始化一個Hexo專案，並且運行之"></a>初始化一個Hexo專案，並且運行之</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm install</span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以用 hexo s -p 8080 </span></span><br><span class="line"><span class="comment">// 指定欲開啟的port number為多少</span></span><br></pre></td></tr></table></figure>
+<p>可以看到新建立好的Blog長這樣</p>
+<p>(X)</p>
+<h3 id="新增一篇文章"><a href="#新增一篇文章" class="headerlink" title="新增一篇文章"></a>新增一篇文章</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<p>[layout]有以下幾種(default為 <code>post</code>)：</p>
+<ul>
+<li>post：就po一篇文章，文章都放置在 <code>source/_posts</code>中</li>
+<li>page：建立獨立的頁面，例如建立<code>about</code>頁面</li>
+<li>draft：發佈一篇草稿，如果要公開則下 <code>hexo publish [layout] &lt;title&gt;</code>，將草稿移動到 <code>source/_posts</code></li>
+</ul>
+<h3 id="佈署到自己的github"><a href="#佈署到自己的github" class="headerlink" title="佈署到自己的github"></a>佈署到自己的github</h3><p>安裝 hexo-deployer-git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>修改 <code>_config.yml</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git   </span><br><span class="line">  repo: &lt;repository url&gt; // 儲存庫（Repository）網址</span><br><span class="line">  branch: [branch] // 分支名稱</span><br><span class="line">  message: [message] // 自定提交訊息</span><br></pre></td></tr></table></figure></p>
+<p>新增好文章後需要產生部署用靜態檔案<br>執行：<code>hexo generate</code></p>
+<p>會產生<code>public</code>目錄</p>
+<p>執行 <code>hexo deploy</code> 即可一鍵部署<code>public</code>目錄內容到github.io網站上</p>
+<p><span style="color:red">注意：github上的repo命名要與你的帳號一樣，否則還得處理路徑問題</span></p>
+<p>若要直接新增好文章後部署：<code>hexo generate --deploy</code></p>
+<p>之後若要重新執行<code>hexo deploy</code>，請先用 <code>hexo clean</code>清除靜態頁面，然後在執行deploy.</p>
+<hr>
+<h2 id="使用Material-flow-來改造自己的Blog"><a href="#使用Material-flow-來改造自己的Blog" class="headerlink" title="使用Material-flow 來改造自己的Blog"></a>使用Material-flow 來改造自己的Blog</h2><p>詳情請看Material-flow 的Github上文件</p>
+<p><a href="https://github.com/stkevintan/hexo-theme-material-flow" target="_blank" rel="noopener">https://github.com/stkevintan/hexo-theme-material-flow</a></p>
+<h3 id="修改自己的Description"><a href="#修改自己的Description" class="headerlink" title="修改自己的Description"></a>修改自己的Description</h3><p>在大頭貼下方的描述，<br>若要修改的話得到： <code>./theme/material-flow/layout/_widget/about.ejs</code>中修改！</p>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><p>若要對自己Blog做擴充都可以再參考Hexo以及NextT的官方文檔</p>
+<p>Hexo官方連結：<a href="https://hexo.io/zh-tw/" target="_blank" rel="noopener">https://hexo.io/zh-tw/</a></p>
+<p>如果對其他theme有興趣也可以參考這網站</p>
+<p>Hexo官方主題：<a href="https://hexo.io/zh-tw/docs/writing.html" target="_blank" rel="noopener">https://hexo.io/zh-tw/docs/writing.html</a><br>Hexo主題排名：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">https://www.zhihu.com/question/24422335</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2017/09/07/truffle-petshop/" class="pre-post btn btn-default" title="使用truffle來練習撰寫認養寵物的智能合約">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            使用truffle來練習撰寫認養寵物的智能合約</span>
+    </a>
+    
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2017/09/05/How_To_Use_Hexo/';
+    this.page.identifier = '2017/09/05/How_To_Use_Hexo/';
+    this.page.title = '利用Hexo來記錄自己的學習並使用Material-flow主題';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo架設流程"><span class="toc-text">Hexo架設流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝Hexo"><span class="toc-text">安裝Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化一個Hexo專案，並且運行之"><span class="toc-text">初始化一個Hexo專案，並且運行之</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增一篇文章"><span class="toc-text">新增一篇文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#佈署到自己的github"><span class="toc-text">佈署到自己的github</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Material-flow-來改造自己的Blog"><span class="toc-text">使用Material-flow 來改造自己的Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改自己的Description"><span class="toc-text">修改自己的Description</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#延伸"><span class="toc-text">延伸</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

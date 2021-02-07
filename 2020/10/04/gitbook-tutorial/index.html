@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Note">
+
+
+<meta name="description" content="Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子
+
+本地端執行安裝方式，用 npm 安裝
+1npm install -g gitbook-cli
+使用方式找一個資料夾，執行1...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    Gitbook的使用紀錄 |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Gitbook的使用紀錄">
+            
+            Gitbook的使用紀錄
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Tools/">Tools</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Note/">Note</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2020/10/04</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>Gitbook提供了能夠將markdown格式轉寫成一本電子書的樣子</p>
+<a id="more"></a>
+<h2 id="本地端執行"><a href="#本地端執行" class="headerlink" title="本地端執行"></a>本地端執行</h2><p>安裝方式，用 <a href="https://www.npmjs.com/package/gitbook" target="_blank" rel="noopener">npm</a> 安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g gitbook-cli</span><br></pre></td></tr></table></figure>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><p>找一個資料夾，執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook init</span><br></pre></td></tr></table></figure></p>
+<p>會產生 </p>
+<ul>
+<li>reamdme.md<ul>
+<li>介紹本書內容</li>
+</ul>
+</li>
+<li>summary.md<ul>
+<li>用來定義gitbook目錄</li>
+</ul>
+</li>
+</ul>
+<h4 id="summary-md-結構"><a href="#summary-md-結構" class="headerlink" title="summary.md 結構"></a>summary.md 結構</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* ch1</span><br><span class="line">  * ch1-1</span><br><span class="line">  * ch1-2</span><br></pre></td></tr></table></figure>
+<p>檔案結構的話就長這樣<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- ch1</span><br><span class="line">|- ch1-1</span><br><span class="line">|- ch1-2</span><br><span class="line">-readme.md</span><br><span class="line">-summary.md</span><br></pre></td></tr></table></figure></p>
+<h2 id="運行gitbook"><a href="#運行gitbook" class="headerlink" title="運行gitbook"></a>運行gitbook</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure>
+<p>預設會運行在 <a href="http://localhost:4000" target="_blank" rel="noopener">localhost:4000</a></p>
+<h3 id="安裝Plugin"><a href="#安裝Plugin" class="headerlink" title="安裝Plugin"></a>安裝Plugin</h3><p>事先安裝gitbook-plugin套件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gitbook-plugin</span><br></pre></td></tr></table></figure></p>
+<p>若要安裝留言板等套件，需要先定義 book.json ，可以定義使用的plugin</p>
+<p>book.json<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;disqus&quot;],</span><br><span class="line">  &quot;pluginsConfig&quot;: &#123;</span><br><span class="line">    &quot;disqus&quot;: &#123;</span><br><span class="line">      &quot;shortName&quot;: &quot;你的留言板名稱&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例如可使用 Google Analytics ( Google 分析 )、Disqus ( 社群&amp;留言板 ) 和 youtube …等外掛，也可以在Gitbook npm網站中找到自己要的plugin</p>
+<p>定義玩使用的plungin外掛，請執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook install</span><br></pre></td></tr></table></figure></p>
+<h3 id="Disqus留言板"><a href="#Disqus留言板" class="headerlink" title="Disqus留言板"></a>Disqus留言板</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i gitbook-plugin-disqus</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;disqus&quot;],</span><br><span class="line">  &quot;pluginsConfig&quot;: &#123;</span><br><span class="line">    &quot;disqus&quot;: &#123;</span><br><span class="line">      &quot;shortName&quot;: &quot;你的留言板名稱&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="內容綱要-InTopic-TOC"><a href="#內容綱要-InTopic-TOC" class="headerlink" title="內容綱要 InTopic TOC"></a>內容綱要 InTopic TOC</h3><p>如果要實現右邊側邊欄本頁md檔案的階層式，可安裝 InTopic TOC</p>
+<p><a href="https://github.com/fzankl/gitbook-plugin-intopic-toc" target="_blank" rel="noopener">GitBook plugin: InTopic TOC</a></p>
+<p>於book.json中定義<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [</span><br><span class="line">    &quot;intopic-toc&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;pluginsConfig&quot;: &#123;</span><br><span class="line">    &quot;intopic-toc&quot;: &#123;</span><br><span class="line">      &quot;label&quot;: &quot;In this article&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接著執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook install</span><br></pre></td></tr></table></figure></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://github.com/GitbookIO/gitbook" target="_blank" rel="noopener">Gitbook Github Docs</a></p>
+<p><a href="https://docs.gitbook.com/getting-started/quick-start" target="_blank" rel="noopener">Gitbook Online Platform Docs</a></p>
+<p><a href="https://www.oxxostudio.tw/articles/201502/gitbook.html" target="_blank" rel="noopener">用 GitBook 來寫本書吧</a></p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2020/11/07/Go-Module-入門與使用介紹介紹/" class="pre-post btn btn-default" title="Go Module 入門與使用介紹">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Go Module 入門與使用介紹</span>
+    </a>
+    
+    
+    <a href="/2020/08/17/Static_vs_Shared_Lib/" class="next-post btn btn-default" title="靜態與動態函式庫的介紹與差異(Static 與 Shared Libraries)">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            靜態與動態函式庫的介紹與差異(Static 與 Shared Libraries)</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2020/10/04/gitbook-tutorial/';
+    this.page.identifier = '2020/10/04/gitbook-tutorial/';
+    this.page.title = 'Gitbook的使用紀錄';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地端執行"><span class="toc-text">本地端執行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方式"><span class="toc-text">使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#summary-md-結構"><span class="toc-text">summary.md 結構</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#運行gitbook"><span class="toc-text">運行gitbook</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安裝Plugin"><span class="toc-text">安裝Plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disqus留言板"><span class="toc-text">Disqus留言板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#內容綱要-InTopic-TOC"><span class="toc-text">內容綱要 InTopic TOC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考"><span class="toc-text">參考</span></a></li>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

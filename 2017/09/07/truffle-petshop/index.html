@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Ethereum,Solidity,Truffle">
+
+
+<meta name="description" content="本篇是翻譯自Truffle官方所釋出的Dapp教學文檔Pet-Shophttp://truffleframework.com/tutorials/pet-shop
+執行環境開發前準備首先要安裝t...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    使用truffle來練習撰寫認養寵物的智能合約 |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="使用truffle來練習撰寫認養寵物的智能合約">
+            
+            使用truffle來練習撰寫認養寵物的智能合約
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Solidity/">Solidity</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Ethereum/">Ethereum</a> <a class="tag-link" href="/tags/Solidity/">Solidity</a> <a class="tag-link" href="/tags/Truffle/">Truffle</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2017/09/07</span>
+    </span>
+    
+    
+</div>
+        
+        
+        <p class="fa fa-exclamation-triangle warning">
+            本文於<strong>
+                1248</strong>
+            天之前發表，文章中的內容可能過期了，請謹慎食用。
+        </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>本篇是翻譯自Truffle官方所釋出的Dapp教學文檔Pet-Shop<br><a href="http://truffleframework.com/tutorials/pet-shop" target="_blank" rel="noopener">http://truffleframework.com/tutorials/pet-shop</a></p>
+<h2 id="執行環境"><a href="#執行環境" class="headerlink" title="執行環境"></a>執行環境</h2><h3 id="開發前準備"><a href="#開發前準備" class="headerlink" title="開發前準備"></a>開發前準備</h3><p>首先要安裝testrpc、truffle :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g ethereumjs-testrpc</span><br><span class="line">// 安裝測試用ethereum私有鍊</span><br><span class="line"></span><br><span class="line">npm install -g truffle</span><br><span class="line">// 開發智能合約的一套框架</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>安裝truffle上已經預先包好的練習專案(Truffle box: ETHEREUM PET SHOP)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir pet-shop-tutorial </span><br><span class="line">// 創建一個目錄</span><br><span class="line"></span><br><span class="line">cd pet-shop-tutorial </span><br><span class="line">// 切換到該目錄</span><br><span class="line"></span><br><span class="line">truffle unbox pet-shop</span><br><span class="line">// 安裝truffle打包好的pet-shop練習專案檔</span><br></pre></td></tr></table></figure></p>
+<h3 id="目錄架構"><a href="#目錄架構" class="headerlink" title="目錄架構"></a>目錄架構</h3><ul>
+<li><p>/contracts: 存放合約的地方，檔名為.sol，而Migrate.sol是負責紀錄其他合約如何deploy到區塊鏈，不能刪除！</p>
+</li>
+<li><p>/migrations: 負責將合約掛到區塊鏈上，並且追蹤合約的更動狀況。 </p>
+</li>
+<li><p>/test: 包含Javascript and solidity檔案，負責測試合約內容。</p>
+</li>
+<li><p><code>truffle.js</code> : truffle的設定檔</p>
+</li>
+</ul>
+<h2 id="合約內容"><a href="#合約內容" class="headerlink" title="合約內容"></a>合約內容</h2><h3 id="在-contract-建立-Adoption-sol"><a href="#在-contract-建立-Adoption-sol" class="headerlink" title="在/contract 建立 Adoption.sol"></a>在/contract 建立 Adoption.sol</h3><p>宣告一個contract:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.4</span>;</span><br><span class="line"><span class="comment">// 告訴compiler 現在要用哪個版本編譯</span></span><br><span class="line"></span><br><span class="line">contract Adoption &#123; <span class="comment">//宣告一個 contract的class 叫 Adoption</span></span><br><span class="line">  <span class="comment">// 存放領養飼主的地址（預設是有16隻狗等待被認養）</span></span><br><span class="line">  address[<span class="number">16</span>] public adopters; </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">// 有人要認養某隻寵物(petId)，判斷是否可以認養，</span></span><br><span class="line">  <span class="comment">// 回傳該認養的寵物ID以證明該寵物成功被某用戶認養</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">adopt</span>(<span class="params">uint petId</span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">uint</span>) </span>&#123;</span><br><span class="line">     </span><br><span class="line">      <span class="built_in">require</span>(petId &gt;= <span class="number">0</span> &amp;&amp; petId &lt;= <span class="number">15</span>);</span><br><span class="line">      <span class="comment">// 判斷petId，若不符合結束該函式，不再往下執行</span></span><br><span class="line">       </span><br><span class="line">      adopters[petId] = msg.sender;</span><br><span class="line">      <span class="comment">// 透過msg.sender取得呼叫該函式的使用者</span></span><br><span class="line">      <span class="comment">// 也就是認養該寵物的用戶ID</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> petId;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 回傳所有的認養者，回傳值的型態為address[16]</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getAdopters</span>(<span class="params"></span>) <span class="title">public</span> <span class="title">returns</span> (<span class="params">address[<span class="number">16</span>]</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> adopters;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="編譯-Compiling-和部署-Migrating-合約"><a href="#編譯-Compiling-和部署-Migrating-合約" class="headerlink" title="編譯(Compiling)和部署(Migrating)合約"></a>編譯(Compiling)和部署(Migrating)合約</h2><p>寫好合約後，需要將.sol檔進行編譯成.bytecode，才能在EVM (ethereum virtual machine上執行).</p>
+<p>然後在terminal上執行 <code>testrpc</code> 啟動</p>
+<p>啟動後會出現：</p>
+<ul>
+<li>數組帳戶的address以及私鑰</li>
+<li>HD wallet的資訊（稍後會提到metatask，會使用到Mnemonic section的資訊)</li>
+</ul>
+<blockquote>
+<p>Mnemonic為數個變數的資訊，如下<br>Mnemonic:  spider level team helmet shaft clarify abuse recipe stem ankle angry fee</p>
+</blockquote>
+<p>執行 <code>truffle compile</code> 會看到 .sol檔被編譯</p>
+<h3 id="Migration"><a href="#Migration" class="headerlink" title="Migration"></a>Migration</h3><p>migrate.sol描述如何將合約的內容部署到鏈上，並且處理合約上state的更動。</p>
+<p>在 <code>/migration</code> 檔案內：</p>
+<ul>
+<li>1_initial_migration.js：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入編譯合約的內容</span></span><br><span class="line"><span class="keyword">var</span> Migrations = artifacts.require(<span class="string">"./Migrations.sol"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">deployer</span>) </span>&#123;</span><br><span class="line">  deployer.deploy(Migrations);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>透過該檔案可以追蹤後續contract的變化，已部署過的合約且沒有被修改就不用再被部署（不然又會消耗gas).</p>
+<ul>
+<li>2_deploy_contracts.js<br><span style="color:red">注意，這邊的命名開頭要編號，因為truffle進行migrate時會依據該編號而進行。</span></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Adoption = artifacts.require(<span class="string">"./Adoption.sol"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">deployer</span>) </span>&#123;</span><br><span class="line">  deployer.deploy(Adoption);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在terminal執行 <code>truffle migrate</code> </p>
+<p>會看到如下結果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Using network &apos;development&apos;.</span><br><span class="line"></span><br><span class="line">Running migration: 1_initial_migration.js</span><br><span class="line">  Deploying Migrations...</span><br><span class="line">  Migrations: 0x75175eb116b36ff5fef15ebd15cbab01b50b50d1</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br><span class="line">Running migration: 2_deploy_contracts.js</span><br><span class="line">  Deploying Adoption...</span><br><span class="line">  Adoption: 0xb9f485451a945e65e48d9dd7fc5d759af0a89e21</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br></pre></td></tr></table></figure></p>
+<p>若看到上述表面表示我們寫的第一隻 Adoption.sol的合約已經成功被部署到鏈上！</p>
+<h2 id="為Smart-Contract寫測試"><a href="#為Smart-Contract寫測試" class="headerlink" title="為Smart Contract寫測試"></a>為Smart Contract寫測試</h2><p>我們可以用javascript或solidity寫測試，<br>不過本範例用solidity來寫。</p>
+<hr>
+<p>在 /test 目錄下創建 <code>TestAdoption.sol</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^<span class="number">0.4</span><span class="number">.11</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用truffle內建的檔案 </span></span><br><span class="line"><span class="comment">// Assert.sol用來做Unit test (判斷function input ?= output)</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"truffle/Assert.sol"</span>;</span><br><span class="line"><span class="comment">// 當測試執行，truffle會在testrpc中測試該合約，</span></span><br><span class="line"><span class="comment">// 該DeployedAddresses用來取得被部署合約的address</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"truffle/DeployedAddresses.sol"</span>;</span><br><span class="line"><span class="comment">// 要被測試的合約</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"../contracts/Adoption.sol"</span>;</span><br><span class="line"></span><br><span class="line">contract TestAdoption &#123;</span><br><span class="line">    Adoption adoption = Adoption(DeployedAddresses.Adoption());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Testing The adopt() Function</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">testUserCanAdoptPet</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 呼叫Adoption中的adopt方法</span></span><br><span class="line">      uint returnedId = adoption.adopt(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">      uint expected = <span class="number">8</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 判斷returnID 是否等於 expected的值</span></span><br><span class="line">      Assert.equal(returnedId, expected, <span class="string">"Adoption of pet ID 8 should be recorded."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Testing Retrieval of a Single Pet's Owner</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">testGetAdopterAddressByPetId</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 透過this取得目前合約的地址</span></span><br><span class="line">      address expected = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">      address adopter = adoption.adopters(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">      Assert.equal(adopter, expected, <span class="string">"Owner of pet ID 8 should be recorded."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Testing Retrieval of All Pet Owners</span></span><br><span class="line">    </span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">testGetAdopterAddressByPetIdInArray</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      address expected = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">      address[<span class="number">16</span>] memory adopters = adoption.getAdopters();</span><br><span class="line"></span><br><span class="line">      Assert.equal(adopters[<span class="number">8</span>], expected, <span class="string">"Owner of pet ID 8 should be recorded."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>執行 <code>truffle test</code>  若看到以下畫面表示test通過<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Using network &apos;development&apos;.</span><br><span class="line"></span><br><span class="line">Compiling ./contracts/Adoption.sol...</span><br><span class="line">Compiling ./test/TestAdoption.sol...</span><br><span class="line">Compiling truffle/Assert.sol...</span><br><span class="line">Compiling truffle/DeployedAddresses.sol...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  TestAdoption</span><br><span class="line">    ✓ testUserCanAdoptPet (91ms)</span><br><span class="line">    ✓ testGetAdopterAddressByPetId (70ms)</span><br><span class="line">    ✓ testGetAdopterAddressByPetIdInArray (89ms)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  3 passing (670ms)</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用UI和Smart-Contract互動"><a href="#使用UI和Smart-Contract互動" class="headerlink" title="使用UI和Smart Contract互動"></a>使用UI和Smart Contract互動</h2><p>當解開truffle box的pet-shop，可以看到在 <code>/src</code>目錄底下<br>會有已經預設好的UI檔供練習用。</p>
+<h3 id="使用Web3-js初始化前端環境"><a href="#使用Web3-js初始化前端環境" class="headerlink" title="使用Web3.js初始化前端環境"></a>使用Web3.js初始化前端環境</h3><p>Web3.js為用來和ethereum溝通的javascript library.<br>（而練習專案前端是使用jQuery)</p>
+<p>在 <code>/src/js/app.js</code>檔案的內容改為以下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">App = &#123;</span><br><span class="line">  web3Provider: <span class="literal">null</span>,</span><br><span class="line">  contracts: &#123;&#125;,</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 載入寵物的資料</span></span><br><span class="line">    $.getJSON(<span class="string">'../pets.json'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> petsRow = $(<span class="string">'#petsRow'</span>);</span><br><span class="line">      <span class="keyword">var</span> petTemplate = $(<span class="string">'#petTemplate'</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; data.length; i ++) &#123;</span><br><span class="line">        petTemplate.find(<span class="string">'.panel-title'</span>).text(data[i].name);</span><br><span class="line">        petTemplate.find(<span class="string">'img'</span>).attr(<span class="string">'src'</span>, data[i].picture);</span><br><span class="line">        petTemplate.find(<span class="string">'.pet-breed'</span>).text(data[i].breed);</span><br><span class="line">        petTemplate.find(<span class="string">'.pet-age'</span>).text(data[i].age);</span><br><span class="line">        petTemplate.find(<span class="string">'.pet-location'</span>).text(data[i].location);</span><br><span class="line">        petTemplate.find(<span class="string">'.btn-adopt'</span>).attr(<span class="string">'data-id'</span>, data[i].id);</span><br><span class="line"></span><br><span class="line">        petsRow.append(petTemplate.html());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> App.initWeb3();</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  initWeb3: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 初始化web3.js並且設置provider連接testrpc</span></span><br><span class="line">   </span><br><span class="line">     <span class="comment">// 如果偵測到有metamask注入在瀏覽器的web3 instance</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> web3 !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      App.web3Provider = web3.currentProvider;</span><br><span class="line">       <span class="comment">// 將currentProvider = metamask</span></span><br><span class="line">       <span class="comment">// </span></span><br><span class="line">      web3 = <span class="keyword">new</span> Web3(web3.currentProvider);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 若沒有metamask or mist等等之類的，</span></span><br><span class="line">      <span class="comment">// 那就用自己開啟testrpc當成是provider</span></span><br><span class="line">      App.web3Provider = <span class="keyword">new</span> web3.providers.HttpProvider(<span class="string">'http://localhost:8545'</span>);</span><br><span class="line">      web3 = <span class="keyword">new</span> Web3(App.web3Provider);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> App.initContract();</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  initContract: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">   $.getJSON(<span class="string">'Adoption.json'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">   </span><br><span class="line">      <span class="comment">// 取得contract的artifact(Adoption.json) </span></span><br><span class="line">      <span class="comment">// 例如contract address, ABI (Application Binary Interface)：</span></span><br><span class="line">      <span class="comment">// 即如何使用contract的變數、函式等等</span></span><br><span class="line">      <span class="keyword">var</span> AdoptionArtifact = data;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// truffle提供`truffle-contract`來幫助我們監聽已經被migrate的contract</span></span><br><span class="line">      <span class="comment">// 並把contract的artifact傳給truffle-contract'，好讓我們可以跟合約溝通</span></span><br><span class="line">      App.contracts.Adoption = TruffleContract(AdoptionArtifact);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 為contract設置Provider(我們是用metamask)</span></span><br><span class="line">      App.contracts.Adoption.setProvider(App.web3Provider);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 從Adpotion.json的合約資料中，判斷寵物的是否已被認養並做標示</span></span><br><span class="line">      <span class="keyword">return</span> App.markAdopted();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> App.bindEvents();</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="string">'.btn-adopt'</span>, App.handleAdopt);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  handleAdopt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    event.preventDefault();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> petId = <span class="built_in">parseInt</span>($(event.target).data(<span class="string">'id'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> adoptionInstance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用web3來取得user's accounts</span></span><br><span class="line">    <span class="comment">// 這時metamask會跳出交易訊息出來</span></span><br><span class="line">    web3.eth.getAccounts(<span class="function"><span class="keyword">function</span>(<span class="params">error, accounts</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 選擇第一個accounts作為我們的用戶</span></span><br><span class="line">      <span class="keyword">var</span> account = accounts[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">      App.contracts.Adoption.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">        adoptionInstance = instance;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在這裡要執行會花費gas的transaction</span></span><br><span class="line">        <span class="comment">// 取得認養用戶的account，以及點選欲認養的petId</span></span><br><span class="line">        <span class="keyword">return</span> adoptionInstance.adopt(petId, &#123;<span class="attr">from</span>: account&#125;);</span><br><span class="line">      &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 若回傳結果正常執行markAdopted刷新UI上寵物認養中的狀態</span></span><br><span class="line">        <span class="keyword">return</span> App.markAdopted();</span><br><span class="line">      &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err.message);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  markAdopted: <span class="function"><span class="keyword">function</span>(<span class="params">adopters, account</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> adoptionInstance;</span><br><span class="line"></span><br><span class="line">    App.contracts.Adoption.deployed().then(<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 取得Adpotion合約的內容</span></span><br><span class="line">      adoptionInstance = instance;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 呼叫合約中的getAdopters方法</span></span><br><span class="line">      <span class="comment">// 利用`call`可以直接讀取Blockchain上的資料，不用花費ether(gas)</span></span><br><span class="line">      <span class="keyword">return</span> adoptionInstance.getAdopters.call();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">adopters</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; adopters.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (adopters[i] !== <span class="string">'0x0000000000000000000000000000000000000000'</span>) &#123;</span><br><span class="line">          $(<span class="string">'.panel-pet'</span>).eq(i).find(<span class="string">'button'</span>).text(<span class="string">'Pending...'</span>).attr(<span class="string">'disabled'</span>, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err.message);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="built_in">window</span>).load(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    App.init();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="在Chrome上和Dapp互動"><a href="#在Chrome上和Dapp互動" class="headerlink" title="在Chrome上和Dapp互動"></a>在Chrome上和Dapp互動</h2><p>安裝 <code>metamask</code>的擴充套件</p>
+<p>長這樣：<br><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/37198612385/in/dateposted-public/" title="petshop_1" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4356/37198612385_95741b233a_o.png" width="300" style=" display: block;
+    margin: 0 auto;" alt="petshop_1"></a></p>
+<p>由於我們要測試自己的Dapp，點選該圖左上角切換到自己開啟testrpc:8545的私有鏈</p>
+<p>因為是初次登入，點選<code>I forgot my password</code></p>
+<p>將一開始開啟testrpc 產生的 Mnemonic（數組變數名稱）貼到wallet seed.<br>Mnemonic:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spider level team helmet shaft clarify abuse recipe stem ankle angry fee</span><br></pre></td></tr></table></figure></p>
+<p>(Warning：你的testrpc產生的Mnemonic變數組會跟上面的不一樣)</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/37026566092/in/dateposted-public/" title="petshop_2" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4440/37026566092_e498643295_o.png" width="300" alt="petshop_2" style="display:block; margin: 0px auto"></a></p>
+<p>設置自己的新密碼，確認後點選<code>OK</code></p>
+<p>進入後就會看到自己的第一筆account資訊了</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/37198612325/in/dateposted-public/" title="petshop_3" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4334/37198612325_b204dcfecd_o.png" width="300" alt="petshop_3" style="display:block; margin: 0px auto"></a></p>
+<p>若有顯示帳戶表示成功與testrpc連接<br>(原本testrpc是預設100 ether，顯示出來不是100 ether的原因是因為<br>部署合約到自己的private blockchain也需要費用)</p>
+<h2 id="安裝和設置lite-server啟動Dapp"><a href="#安裝和設置lite-server啟動Dapp" class="headerlink" title="安裝和設置lite-server啟動Dapp"></a>安裝和設置<code>lite-server</code>啟動Dapp</h2><p><code>lite-server</code>已經包含在pet-shop的box內</p>
+<p>在 <code>bs-config.json</code>檔案中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;server&quot;: &#123;</span><br><span class="line">    &quot;baseDir&quot;: [&quot;./src&quot;, &quot;./build/contracts&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>該設置告訴server要執行的基底目錄在哪。</p>
+<p><code>./src</code>：前端的內容<br><code>./build/contracts</code>：放置合約的內容</p>
+<p>在script檔中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;dev&quot;: &quot;lite-server&quot;,</span><br><span class="line">  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>設置 <code>&quot;dev&quot; : lite-server&quot;</code><br>方便我們可以直接在terminal下執行 <code>npm run dev</code> 來運行Dapp</p>
+<p>運行成功後的樣子</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/37026566282/in/dateposted-public/" title="petshop_4" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4442/37026566282_eee8a73f05_o.png" width="2468" alt="petshop_4"></a></p>
+<hr>
+<p>若要進行認養：點選 <code>Adopt</code>按鈕</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/36800845780/in/dateposted-public/" title="petshop_5" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4348/36800845780_f0c66f0cdc_o.png" width="2020" alt="petshop_5"></a></p>
+<p>點選<code>Sumit</code>後即完成認養的動作，並且把該認養的資訊透過合約掛到testrpc的鏈上，並在該寵物上狀態改成 <code>Pending...</code> （已認養）</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/151390350@N07/37198612255/in/dateposted-public/" title="petshop_6" target="_blank" rel="noopener"><img src="https://farm5.staticflickr.com/4404/37198612255_5f2e75a536_o.png" width="200" alt="petshop_6" style="display:block; margin: 0px auto"></a></p>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><ul>
+<li>將前端改成用Vue.js<br>可以考慮用以下package： Vue-Truffle-Webpack<br><a href="https://github.com/wilfreddenton/vue-truffle-webpack" target="_blank" rel="noopener">https://github.com/wilfreddenton/vue-truffle-webpack</a></li>
+<li>顯示該隻狗被哪位用戶認養走</li>
+<li>改成要付足夠的錢才能認養該隻狗</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2017/09/12/solidity/" class="pre-post btn btn-default" title="Solidity學習紀錄">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Solidity學習紀錄</span>
+    </a>
+    
+    
+    <a href="/2017/09/05/How_To_Use_Hexo/" class="next-post btn btn-default" title="利用Hexo來記錄自己的學習並使用Material-flow主題">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            利用Hexo來記錄自己的學習並使用Material-flow主題</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2017/09/07/truffle-petshop/';
+    this.page.identifier = '2017/09/07/truffle-petshop/';
+    this.page.title = '使用truffle來練習撰寫認養寵物的智能合約';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#執行環境"><span class="toc-text">執行環境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#開發前準備"><span class="toc-text">開發前準備</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目錄架構"><span class="toc-text">目錄架構</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合約內容"><span class="toc-text">合約內容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在-contract-建立-Adoption-sol"><span class="toc-text">在/contract 建立 Adoption.sol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#編譯-Compiling-和部署-Migrating-合約"><span class="toc-text">編譯(Compiling)和部署(Migrating)合約</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Migration"><span class="toc-text">Migration</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#為Smart-Contract寫測試"><span class="toc-text">為Smart Contract寫測試</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用UI和Smart-Contract互動"><span class="toc-text">使用UI和Smart Contract互動</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Web3-js初始化前端環境"><span class="toc-text">使用Web3.js初始化前端環境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Chrome上和Dapp互動"><span class="toc-text">在Chrome上和Dapp互動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安裝和設置lite-server啟動Dapp"><span class="toc-text">安裝和設置lite-server啟動Dapp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#延伸"><span class="toc-text">延伸</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>

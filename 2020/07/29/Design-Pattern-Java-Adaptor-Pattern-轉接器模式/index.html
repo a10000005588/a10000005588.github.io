@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Design Pattern,Java">
+
+
+<meta name="description" content="假如要使用A, 但無法直接使用, 只能使用B介面
+所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果
+
+用螢幕轉接器的例子直接解釋例如我們有個 HDMI的線, 叫做 HDMI inte...">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    Adaptor Pattern 轉接器模式 [Design Pattern in Java] |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+<div class="hide">
+    <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+
+
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(
+    http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Adaptor Pattern 轉接器模式 [Design Pattern in Java]">
+            
+            Adaptor Pattern 轉接器模式 [Design Pattern in Java]
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Design-Pattern/">Design Pattern</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Design-Pattern/">Design Pattern</a> <a class="tag-link" href="/tags/Java/">Java</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2020/07/29</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>假如要使用A, 但無法直接使用, 只能使用B介面</p>
+<p>所以我們用轉接器類別包裝A的方法，並且實作B，達到轉接的效果</p>
+<a id="more"></a>
+<h2 id="用螢幕轉接器的例子直接解釋"><a href="#用螢幕轉接器的例子直接解釋" class="headerlink" title="用螢幕轉接器的例子直接解釋"></a>用螢幕轉接器的例子直接解釋</h2><p>例如我們有個 HDMI的線, 叫做 HDMI interface</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">HDMI</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 定義連接裝置的方法格式</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">connect</span><span class="params">(String device)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但現在有個螢幕只有支援VGA的插孔</p>
+<p>所以我們需要個 HDMI轉VGA的Adaptor類別, 把VGA的類別引入進來, 並使用之</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HdmiToVgaAdpator</span> <span class="keyword">implements</span> <span class="title">HDMI</span> </span>&#123;</span><br><span class="line">    VGA vgaCable = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    HdmiToVgaAdpator(VGA vgaCable) &#123;</span><br><span class="line">        <span class="keyword">this</span>.vgaCable = vgaCable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 必須要實作HDMI的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connect</span><span class="params">(String device)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 介接Vga線的connect功能</span></span><br><span class="line">        System.out.println(<span class="string">"使用轉接器的connect功能!"</span>);</span><br><span class="line">        vgaCable.connect(device);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因為有使用到VGA類別, 所以來定義一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">VGA</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 定義連接裝置的方法格式</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">connect</span><span class="params">(String device)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VGACable</span> <span class="keyword">implements</span> <span class="title">VGA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connect</span><span class="params">(String device)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"VGA線連接: "</span> + device);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>來定義有台筆電, 是只有具備hdmi孔, 但具備著可以連接到某裝置進行投影</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Labtop</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 該台筆電只有hdmi孔, 並指定要連接的螢幕(device)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectToDevice</span><span class="params">(HDMI hdmi, String device)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"筆電只有hdmi孔, 使用實作hdmi介面的 'hdmi轉vga的轉接器' 類別！"</span>);</span><br><span class="line">        hdmi.connect(device);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著來使用吧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Labtop laptop = <span class="keyword">new</span> Labtop();</span><br><span class="line">        <span class="comment">// 如果某筆電只有hdmi插孔, 但要接的投影螢幕只有vga</span></span><br><span class="line">        laptop.connectToDevice(</span><br><span class="line">                <span class="keyword">new</span> HdmiToVgaAdpator( <span class="comment">// 這時可以使用Hdmi轉Vga的轉接器！ 轉接器需要帶入實際具有VGA功能的VGA線物件</span></span><br><span class="line">                        <span class="keyword">new</span> VGACable()),</span><br><span class="line">                <span class="string">"老舊投影機"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們可以看到結果為:</p>
+<p><img src="https://i.imgur.com/pwtgvua.png" alt=""></p>
+<ol>
+<li>筆電使用了 實作hdmi介面的轉接器 (轉接器因為實作了hdmi interface, 所以可以插入筆電的hdmi孔)</li>
+<li>接著轉接器引入了VGA cable類別, 故轉接器就可以使用VGA的connect()功能</li>
+<li>最後就觸發VGA功能, 與投影裝置連動</li>
+</ol>
+<h2 id="實際應用場景"><a href="#實際應用場景" class="headerlink" title="實際應用場景"></a>實際應用場景</h2><p>通常轉接器模式可用在轉接那些已經過時的模組&amp;方法</p>
+<p>例如有模組是用Java較舊迭代Collection的版本去寫的, 為Enumeration Interface</p>
+<p>但現在新的專案中，是使用Iterator方式去迭代Collection</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewLoopService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用Java 5版本之後支援的Iterator</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loopCollection</span><span class="params">(Collection col, Iterator itr)</span> </span>&#123;</span><br><span class="line">        itr = col.iterator();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(itr.hasNext()) &#123;</span><br><span class="line">            System.out.println(itr.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用NewLoopService<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">main</span>() </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">"apple"</span>);</span><br><span class="line">        list.add(<span class="string">"banana"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 宣告Iterator的變數</span></span><br><span class="line">        Iterator itr;</span><br><span class="line">        </span><br><span class="line">        NewLoopService loopService = <span class="keyword">new</span> NewLoopService();</span><br><span class="line">        loopService.loopCollection(list, itr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但現在若只能用舊版的 <code>Enumeration</code> 方式去迭代</p>
+<p>這時就可以寫一個 <code>EnumeratorAdaptor</code> 來實作可兼容<code>Iterator</code>的類別, 並可呼叫 <code>Enumeration</code>的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 實作Iterator的方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumeratorAdaptor</span>&lt;<span class="title">E</span>&gt; <span class="title">implement</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">    Enumeration&lt;E&gt; enumeration;</span><br><span class="line">    </span><br><span class="line">    EnumeratorAdaptor(Enumeration&lt;E&gt; enumeration) &#123;</span><br><span class="line">        <span class="keyword">this</span>.enumeration = enumeration;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 實作Iterator 介面所需的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 但實際上是使用Enumeration的方法</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.enumeration.hasMoreElements();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.enumeration.nextElement();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 但這時候會遇到Enumeration沒有的方法, 但又必須要實作 滿足Iterator的介面規範, 這時可以throw Exception來處理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這時我們可以在<code>main()</code>中改用轉接器, 來間接使用Enumeration了！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">main</span>() </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="string">"apple"</span>);</span><br><span class="line">        list.add(<span class="string">"banana"</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用 `實作Iterator介面` 的轉接器</span></span><br><span class="line">        EnumeratorAdaptor itr;</span><br><span class="line">        </span><br><span class="line">        NewLoopService loopService = <span class="keyword">new</span> NewLoopService();</span><br><span class="line">        loopService.loopCollection(list, itr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewLoopService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用Java 5版本之後支援的Iterator</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loopCollection</span><span class="params">(Collection col, Iterator itr)</span> </span>&#123;</span><br><span class="line">        itr = col.iterator();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 這時會是使用EnumeratorAdaptor內的hasNext()與next() 達到轉接的效果</span></span><br><span class="line">        <span class="keyword">while</span>(itr.hasNext()) &#123;</span><br><span class="line">            System.out.println(itr.next());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>透過以上方法, 可以把要使用Enumeration方式的service, 但該Service又是只能吃Iterator的輸入, 那就可以實作一個 <code>EnumeratorAdaptor</code>, 帶入Service, 並透過轉接器使用 Enumeration的方式去撈出Collection內容.</p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+            轉載聲明：
+            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
+            
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    <a href="/2020/07/29/Design-Pattern-Java-Facade-Pattern-表象模式/" class="pre-post btn btn-default" title="Facade Pattern 表象模式 [Design Pattern in Java]">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Facade Pattern 表象模式 [Design Pattern in Java]</span>
+    </a>
+    
+    
+    <a href="/2020/07/26/Design-Pattern-Java-Observer-Pattern-觀察者模式/" class="next-post btn btn-default" title="Observer Pattern 觀察者模式 [Design Pattern in Java]">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Observer Pattern 觀察者模式 [Design Pattern in Java]</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    
+
+<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/';
+    this.page.identifier = '2020/07/29/Design-Pattern-Java-Adaptor-Pattern-轉接器模式/';
+    this.page.title = 'Adaptor Pattern 轉接器模式 [Design Pattern in Java]';
+};
+var d = document,
+    s = d.createElement('script');
+s.src = 'https://williamblog-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用螢幕轉接器的例子直接解釋"><span class="toc-text">用螢幕轉接器的例子直接解釋</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#實際應用場景"><span class="toc-text">實際應用場景</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
+</html>
