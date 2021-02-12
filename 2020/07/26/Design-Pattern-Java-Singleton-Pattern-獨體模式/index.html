@@ -52,17 +52,6 @@
 <link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
 <link rel="stylesheet" href="/css/style.css?rev=@@hash">
     
-<div class="hide">
-    <script type="text/javascript">
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-</div>
-
-
-
-
-    
 
 </head></html>
 <!--[if lte IE 8]>
@@ -74,8 +63,7 @@
 <div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
 <![endif]-->
 <body>
-    <header class="main-header" style="background-image:url(
-    http://snippet.shenliyang.com/img/banner.jpg)">
+    <header class="main-header">
     <div class="main-header-box">
         <a class="header-avatar" href="/" title="William L.K.">
             <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
@@ -226,10 +214,6 @@ public static MyClass getInstance() {
     <div class="post-footer">
         <div>
             
-            轉載聲明：
-            請勿做商業用途，若非商業用途請著名出處，Thanks! © By William L.K.
-            
-            
         </div>
         <div>
             
@@ -254,9 +238,8 @@ public static MyClass getInstance() {
 </div>
 
 <div id="comments">
+    <div id="disqus_thread"></div>
     
-
-<script id="dsq-count-scr" src="https://williamblog-1.disqus.com/count.js" async></script>
 
 <script type="text/javascript">
 var disqus_config = function() {
@@ -264,11 +247,23 @@ var disqus_config = function() {
     this.page.identifier = '2020/07/26/Design-Pattern-Java-Singleton-Pattern-獨體模式/';
     this.page.title = 'Singleton Pattern 獨體模式 [Design Pattern in Java]';
 };
-var d = document,
-    s = d.createElement('script');
-s.src = 'https://williamblog-1.disqus.com/embed.js';
-s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);
+
+// Only if disqus_thread id is defined load the embed script
+if (document.getElementById('disqus_thread')) {
+    var dsq = document.createElement('script');
+    var head = document.getElementsByTagName('head')[0];
+    var body = document.getElementsByTagName('body')[0];
+
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.setAttribute('data-timestamp', '' + +new Date());
+    dsq.src = 'https://williamblog-1.disqus.com/embed.js';
+
+    console.log('head', head);
+    console.log('body', body);
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}
+  
 </script>
 
 </div>
@@ -325,5 +320,7 @@ s.setAttribute('data-timestamp', '' + +new Date());
 
 
 <script src="/js/app.js?rev=@@hash"></script>
+
+
 </body>
 </html>
