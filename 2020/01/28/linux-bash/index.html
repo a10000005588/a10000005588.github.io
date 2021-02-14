@@ -22,8 +22,11 @@
 <meta name="keywords" content="Linux">
 
 
-<meta name="description" content="Bash shell 功能打過的指令都是記錄在 ./bash_history.// 注意駭客可以透過 history 來查看你先前打過指令 ex MySQL 登入帳戶密碼資訊
-alias 取代很...">
+<meta name="description" content="Bash shell 功能打過的指令都是記錄在 ./bash_history.
+
+注意駭客可以透過 history 來查看你先前打過指令 ex: MySQL 登入帳戶密碼資訊
+
+alias 取代...">
 
 
 <meta name="robots" content="all">
@@ -165,58 +168,82 @@ alias 取代很...">
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">
-            2021/01/28</span>
+            2020/01/28</span>
     </span>
     
     
 </div>
         
         
+        <p class="fa fa-exclamation-triangle warning">
+            本文於<strong>
+                382</strong>
+            天之前發表，文章中的內容可能過期了，請謹慎服用。
+        </p>
+        
     </div>
     
     <div class="post-body post-content">
-        <h2 id="Bash-shell-功能"><a href="#Bash-shell-功能" class="headerlink" title="Bash shell 功能"></a>Bash shell 功能</h2><p>打過的指令都是記錄在 ./bash_history.<br>// 注意駭客可以透過 history 來查看你先前打過指令 ex MySQL 登入帳戶密碼資訊</p>
-<h3 id="alias-取代很長的指定"><a href="#alias-取代很長的指定" class="headerlink" title="alias 取代很長的指定"></a>alias 取代很長的指定</h3><p>若不想要每次打這麼長指令，可以用alias 來取代<br>例如： ls -a 可以透過 alias lm=’ls -al’ 以lm來取代</p>
-<h3 id="type-查看指令是內部指令或外部指令"><a href="#type-查看指令是內部指令或外部指令" class="headerlink" title="type 查看指令是內部指令或外部指令"></a>type 查看指令是內部指令或外部指令</h3><p>像上面例子 lm=’ls -al’ 的lm 為我們自行定義的外部指令<br>那cd, ls這些則是內部指令</p>
-<p>透過 type lm, 可以看到lm 為外部指令</p>
+        <h2 id="Bash-shell-功能"><a href="#Bash-shell-功能" class="headerlink" title="Bash shell 功能"></a>Bash shell 功能</h2><p>打過的指令都是記錄在 ./bash_history.</p>
+<blockquote>
+<p>注意駭客可以透過 <code>history</code> 來查看你先前打過指令 ex: MySQL 登入帳戶密碼資訊</p>
+</blockquote>
+<h3 id="alias-取代很長的指定"><a href="#alias-取代很長的指定" class="headerlink" title="alias 取代很長的指定"></a>alias 取代很長的指定</h3><p>若不想要每次打這麼長指令，可以用alias 來取代<br>例如： <code>ls -a</code> 可以透過 <code>alias lm=&#39;ls -al&#39;</code> 以<code>lm</code>來取代</p>
+<h3 id="type-查看指令是內部指令或外部指令"><a href="#type-查看指令是內部指令或外部指令" class="headerlink" title="type 查看指令是內部指令或外部指令"></a>type 查看指令是內部指令或外部指令</h3><p>像上面例子 <code>lm=&#39;ls -al&#39;</code> 的lm 為我們自行定義的外部指令<br>那<code>cd</code>, <code>ls</code>這些則是內部指令</p>
+<p>透過 <code>type lm</code>, 可以看到<code>lm</code> 為外部指令</p>
 <h3 id="若覺得下的指令太長-可以透過"><a href="#若覺得下的指令太長-可以透過" class="headerlink" title="若覺得下的指令太長 可以透過 \"></a>若覺得下的指令太長 可以透過 \</h3><p>將三個檔案cp到 /root內…並用 <code>\</code>來接續指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /var/spool/mail/root /etc/crontab \ </span><br><span class="line">&gt; /etc/fstab /root</span><br></pre></td></tr></table></figure></p>
 <h3 id="取得版本號"><a href="#取得版本號" class="headerlink" title="取得版本號"></a>取得版本號</h3><p>uname -r</p>
 <p>可用變數將版本號存起來<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">version=$(uname -r) // 將版本號放到version變數</span><br><span class="line"></span><br><span class="line">echo $version</span><br></pre></td></tr></table></figure></p>
-<h3 id="變數設定規則"><a href="#變數設定規則" class="headerlink" title="變數設定規則"></a>變數設定規則</h3><p>// 等號不能有空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myname=VBird</span><br></pre></td></tr></table></figure></p>
-<p>// 變數內容有空白，可用”” 或 ‘’包起來<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var=&quot;lang is $LANG&quot;</span><br></pre></td></tr></table></figure></p>
-<p>// 可用跳脫字元 “\” 將特殊符號變成一般字元</p>
-<p>//變數為擴增變數內容時，可以用$變數名稱 或${變數} 累加內容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/home/bin</span><br></pre></td></tr></table></figure></p>
-<p>// 變數需要在其他子程序執行，需要以 <code>export</code> 來使變數成為環境變數<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH</span><br></pre></td></tr></table></figure></p>
+<h3 id="變數設定規則"><a href="#變數設定規則" class="headerlink" title="變數設定規則"></a>變數設定規則</h3><p>等號不能有空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myname=VBird</span><br></pre></td></tr></table></figure></p>
+<p>變數內容有空白，可用”” 或 ‘’包起來<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var=&quot;lang is $LANG&quot;</span><br></pre></td></tr></table></figure></p>
+<p>可用跳脫字元 “\” 將特殊符號變成一般字元</p>
+<p>變數為擴增變數內容時，可以用$變數名稱 或${變數} 累加內容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/home/bin</span><br></pre></td></tr></table></figure></p>
+<p>變數需要在其他子程序執行，需要以 <code>export</code> 來使變數成為環境變數<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>什麼是子程序？ 在目前的shell情況下，開啟另外一個shell亦即為子程序</p>
 </blockquote>
-<p>// 取消變數的方法為 <code>unset</code></p>
-<p>// $() 被兩個逗號包起來的指令會優先執行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /lib/modules/$(uname -r)/kernal</span><br><span class="line"></span><br><span class="line">// 先用 uname -r 取得當前linux kernal版本號，再cd到該版本的目錄</span><br></pre></td></tr></table></figure>
-<h3 id="透過-env-可以看到目前設置的環境變數"><a href="#透過-env-可以看到目前設置的環境變數" class="headerlink" title="透過 env 可以看到目前設置的環境變數"></a>透過 env 可以看到目前設置的環境變數</h3><p>HOME: 家目錄<br>SHELL:目前shell使用的程式，預設是 /bin/bash<br>HISTSIZE: 紀錄歷史指令得數目<br>PATH: 執行黨搜尋的路徑<br>LANG: 語系資料<br>RANDOM: 隨機亂數</p>
+<p>取消變數的方法為 <code>unset</code></p>
+<blockquote>
+<p>$() 被兩個逗號包起來的指令會優先執行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /lib/modules/$(uname -r)/kernal</span><br><span class="line"></span><br><span class="line">先用 uname -r 取得當前linux kernal版本號，再cd到該版本的目錄</span><br></pre></td></tr></table></figure>
+<h3 id="透過-env-可以看到目前設置的環境變數"><a href="#透過-env-可以看到目前設置的環境變數" class="headerlink" title="透過 env 可以看到目前設置的環境變數"></a>透過 env 可以看到目前設置的環境變數</h3><ul>
+<li>HOME: 家目錄</li>
+<li>SHELL:目前shell使用的程式，預設是 /bin/bash</li>
+<li>HISTSIZE: 紀錄歷史指令得數目</li>
+<li>PATH: 執行黨搜尋的路徑</li>
+<li>LANG: 語系資料</li>
+<li>RANDOM: 隨機亂數</li>
+</ul>
 <blockquote>
 <p>RANDOM會產出 0~32767<br>若想要隨機取出0~9<br><code>declare -i number=$RANDOM*10/32768 ; echo $number</code></p>
 </blockquote>
-<h3 id="透過-set-可以看到所有變數-環境變數-自定義變數"><a href="#透過-set-可以看到所有變數-環境變數-自定義變數" class="headerlink" title="透過 set 可以看到所有變數 (環境變數+自定義變數)"></a>透過 set 可以看到所有變數 (環境變數+自定義變數)</h3><h3 id="透過-PS1-設定-提示字元"><a href="#透過-PS1-設定-提示字元" class="headerlink" title="透過 PS1 設定 提示字元"></a>透過 PS1 設定 提示字元</h3><p>ex: PS1=’[\u@\h \w \A ##]\$ ‘<br>設定命令提示字元顯示目前輸入幾次指令 ！</p>
+<h3 id="透過-set-可以看到所有變數-環境變數-自定義變數"><a href="#透過-set-可以看到所有變數-環境變數-自定義變數" class="headerlink" title="透過 set 可以看到所有變數 (環境變數+自定義變數)"></a>透過 set 可以看到所有變數 (環境變數+自定義變數)</h3><h3 id="透過-PS1-設定-提示字元"><a href="#透過-PS1-設定-提示字元" class="headerlink" title="透過 PS1 設定 提示字元"></a>透過 PS1 設定 提示字元</h3><p>ex: <code>PS1=&#39;[\u@\h \w \A #\#]\$ &#39;</code><br>設定命令提示字元顯示目前輸入幾次指令 ！</p>
 <h2 id="變數鍵盤的讀取、陣列與宣告-read-array-declare"><a href="#變數鍵盤的讀取、陣列與宣告-read-array-declare" class="headerlink" title="變數鍵盤的讀取、陣列與宣告: read, array, declare"></a>變數鍵盤的讀取、陣列與宣告: read, array, declare</h2><h3 id="read-讀取來自使用者-鍵盤的輸入"><a href="#read-讀取來自使用者-鍵盤的輸入" class="headerlink" title="read: 讀取來自使用者 鍵盤的輸入"></a>read: 讀取來自使用者 鍵盤的輸入</h3><p>ex: 提示使用者30秒內輸入自己的大名，並將大名塞入 $named 變數內<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read -p &quot;Please keyin your name: &quot; -t 30 named</span><br><span class="line"></span><br><span class="line">echo $named</span><br></pre></td></tr></table></figure></p>
 <h3 id="delcare-宣告變數的類型"><a href="#delcare-宣告變數的類型" class="headerlink" title="delcare: 宣告變數的類型"></a>delcare: 宣告變數的類型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">declare [-aixr] variable</span><br><span class="line"></span><br><span class="line">-a : 將後面名為variable定義為 array類型</span><br><span class="line">-i : integer</span><br><span class="line">-x : 變成環境變數</span><br><span class="line">-r : 設置成read only</span><br></pre></td></tr></table></figure>
 <p><span style="color:red">注意：若sum=100+300+200 echo $sum 會得到 “100+300+200”字串，並非是600的結果，需要用 declare -i sum 才能得到integer sum</span></p>
 <h3 id="unlimit-檔案系統與程序的限制關係"><a href="#unlimit-檔案系統與程序的限制關係" class="headerlink" title="unlimit 檔案系統與程序的限制關係"></a>unlimit 檔案系統與程序的限制關係</h3><p>限制使用者所使用的系統資源，<br>包括CPU時間，記憶體數量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ulimit [-SHacdltu] [配額]</span><br><span class="line"></span><br><span class="line">-H : hard limit 嚴德的限制，若超過則不能再用</span><br><span class="line">-S : Soft limit 警告的限制，超過只是會警告</span><br><span class="line">-a : 列出目前限制的數量，若不接參數則列出全部</span><br><span class="line">-c : 當某些程式發生錯誤，系統會將該程式在記憶體的資訊寫成檔案 (可除錯用)</span><br><span class="line">-f : 此shell 可以建立的最大檔案容量</span><br><span class="line">-u : 單一使用者可以使用的最大process數量</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <h3 id="變數的刪除、取代與替換"><a href="#變數的刪除、取代與替換" class="headerlink" title="變數的刪除、取代與替換"></a>變數的刪除、取代與替換</h3><p>直接看範例：</p>
-<h4 id="刪除"><a href="#刪除" class="headerlink" title="刪除"></a>刪除</h4><p>#：從前面開始刪除, 刪除符合取代文字的 『最短的』那一個<br>##： ．．．．『最長的』</p>
-<p>\%：從後面開始刪除，…..刪除『最短的』<br>\%%： 『最長的』</p>
+<h4 id="刪除"><a href="#刪除" class="headerlink" title="刪除"></a>刪除</h4><ul>
+<li><code>\#</code>：從前面開始刪除, 刪除符合取代文字的 『最短的』那一個</li>
+<li><p><code>\##</code>： ．．．．『最長的』</p>
+</li>
+<li><p><code>\%</code>：從後面開始刪除，…..刪除『最短的』</p>
+</li>
+<li><code>\%%</code>： 『最長的』</li>
+</ul>
 <h4 id="替換"><a href="#替換" class="headerlink" title="替換"></a>替換</h4><p>username=${username-root}<br>若username為空值，替換成root</p>
 <p>若加上<code>:</code> 可以強制替換<br>username=${username:-root}</p>
 <p>加上<code>?</code> 可以判斷是否有無此變數</p>
-<h3 id="bash的進站與歡迎訊息-etc-issue-etc-motd"><a href="#bash的進站與歡迎訊息-etc-issue-etc-motd" class="headerlink" title="bash的進站與歡迎訊息 : /etc/issue, /etc/motd"></a>bash的進站與歡迎訊息 : /etc/issue, /etc/motd</h3><p>cat /etc/issue</p>
+<h3 id="bash的進站與歡迎訊息-etc-issue-etc-motd"><a href="#bash的進站與歡迎訊息-etc-issue-etc-motd" class="headerlink" title="bash的進站與歡迎訊息 : /etc/issue, /etc/motd"></a>bash的進站與歡迎訊息 : /etc/issue, /etc/motd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/issue</span><br></pre></td></tr></table></figure>
 <h3 id="bash的環境設定檔"><a href="#bash的環境設定檔" class="headerlink" title="bash的環境設定檔"></a>bash的環境設定檔</h3><h4 id="login-與-non-login-shell"><a href="#login-與-non-login-shell" class="headerlink" title="login 與 non-login shell"></a>login 與 non-login shell</h4><ul>
 <li>login shell<br>取得bash時需要完整輸入登入流程(輸入帳號密碼)</li>
 </ul>
-<p>/etc/profile: 系統整體的設定（最好別修改)</p>
-<p>~/.bash_profile ~/.bash_login ~/.profile: 屬於使用者個人設定</p>
-<p>系統登入shell時，優先載入 /etc/profile</p>
-<p>再來才會依序載入使用者設定檔<br>~/.bash_profile<br>~/.bash_login<br>~/.profile</p>
+<p><code>/etc/profile</code>: 系統整體的設定（最好別修改)</p>
+<p><code>~/.bash_profile ~/.bash_login ~/.profile</code>: 屬於使用者個人設定</p>
+<p>系統登入shell時，優先載入 <code>/etc/profile</code></p>
+<p>再來才會依序載入使用者設定檔<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/.bash_profile</span><br><span class="line">~/.bash_login</span><br><span class="line">~/.profile</span><br></pre></td></tr></table></figure></p>
 <p>只會讀取上面的一個，由上而下<br>然而上面三個檔案可能會有包含執行 ~/.bashrc 的內容。。。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> if running bash</span><br><span class="line">  if [ -n "$BASH_VERSION" ]; then</span><br><span class="line">      # include .bashrc if it exists</span><br><span class="line">      if [ -f "$HOME/.bashrc" ]; then  # here is the .bashrc</span><br><span class="line">          . "$HOME/.bashrc"</span><br><span class="line">      fi</span><br><span class="line">  fi</span><br></pre></td></tr></table></figure>
 <ul>
@@ -225,13 +252,13 @@ alias 取代很...">
 <p>在non-login shell內要載入使用者， 得手動 ./bashrc</p>
 <h3 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="&gt;, &gt;&gt;, |"></a>&gt;, &gt;&gt;, |</h3><p><code>&gt;</code> : 取代<br><code>&gt;&gt;</code> : 累加</p>
 <h3 id="命令執行的判斷依據：-amp-amp"><a href="#命令執行的判斷依據：-amp-amp" class="headerlink" title="命令執行的判斷依據： ; , &amp;&amp; ||"></a>命令執行的判斷依據： ; , &amp;&amp; ||</h3><h4 id="分號-：-可以執行連續指令"><a href="#分號-：-可以執行連續指令" class="headerlink" title="分號 ; ： 可以執行連續指令"></a>分號 <code>;</code> ： 可以執行連續指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync; sync; shutdown -h now</span><br></pre></td></tr></table></figure>
-<h4 id="、-amp-amp-、-可以判斷指令是否成功執行"><a href="#、-amp-amp-、-可以判斷指令是否成功執行" class="headerlink" title="$? 、 &amp;&amp; 、 || 可以判斷指令是否成功執行"></a>$? 、 &amp;&amp; 、 || 可以判斷指令是否成功執行</h4><p>$?：若前一個指令執行的結果正確，在linux底下會回傳一個 $?=0的值</p>
-<p>(cmd1 &amp;&amp; cmd2): </p>
+<h4 id="、-amp-amp-、-可以判斷指令是否成功執行"><a href="#、-amp-amp-、-可以判斷指令是否成功執行" class="headerlink" title="$? 、 &amp;&amp; 、 || 可以判斷指令是否成功執行"></a>$? 、 &amp;&amp; 、 || 可以判斷指令是否成功執行</h4><p><code>$?</code>：若前一個指令執行的結果正確，在linux底下會回傳一個 $?=0的值</p>
+<p><code>(cmd1 &amp;&amp; cmd2)</code>: </p>
 <ul>
 <li>若cmd1執行完畢且正確執行($?=0)，則開始執行 cmd2</li>
 <li>若cmd1執行完畢且執行錯誤($? != 0)，則不執行 cmd2</li>
 </ul>
-<p>(cmd1 || cmd2): </p>
+<p><code>(cmd1 || cmd2)</code>: </p>
 <ul>
 <li>若cmd1執行完畢且正確執行($?=0)，則cmd2不執行</li>
 <li>若cmd1執行完畢且執行錯誤($? != 0)，則開始執行 cmd2</li>
@@ -253,17 +280,20 @@ alias 取代很...">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">last | cut -d &apos; &apos; -f1 | sort | uniq -c</span><br><span class="line">知道每位使用者的登入次數</span><br></pre></td></tr></table></figure>
 <p>wc: 知道某個檔案的組成</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/man.config | wc</span><br></pre></td></tr></table></figure>
-<h3 id="tee-雙向重新導向"><a href="#tee-雙向重新導向" class="headerlink" title="tee: 雙向重新導向"></a>tee: 雙向重新導向</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">last | tee last.list | cut -d &quot; &quot; -fi</span><br><span class="line">這個範例可以讓我們將last 的輸出存一份到last.list 檔案中</span><br><span class="line"></span><br><span class="line">last | /home | tee ~/homefile | more </span><br><span class="line">這個範例是將 ls 的資料存一份到 ~/homefile ，同時螢幕也有輸出訊息</span><br></pre></td></tr></table></figure>
-<h3 id="字元轉換命令-tr-col-join-paste-expand"><a href="#字元轉換命令-tr-col-join-paste-expand" class="headerlink" title="字元轉換命令: tr, col, join, paste, expand"></a>字元轉換命令: tr, col, join, paste, expand</h3><p>tr: 刪除一段訊息中的文字、或者是進行文字的轉換</p>
-<p>col: 經常被用來將 man page 轉存為純文字檔案以方便查閱</p>
+<h3 id="tee-雙向重新導向"><a href="#tee-雙向重新導向" class="headerlink" title="tee: 雙向重新導向"></a>tee: 雙向重新導向</h3><p><code>last | tee last.list | cut -d &quot; &quot; -fi</code>:</p>
+<p>這個範例可以讓我們將last 的輸出存一份到last.list 檔案中</p>
+<p><code>last | /home | tee ~/homefile | more</code>:</p>
+<p>這個範例是將 ls 的資料存一份到 ~/homefile ，同時螢幕也有輸出訊息</p>
+<h3 id="字元轉換命令-tr-col-join-paste-expand"><a href="#字元轉換命令-tr-col-join-paste-expand" class="headerlink" title="字元轉換命令: tr, col, join, paste, expand"></a>字元轉換命令: tr, col, join, paste, expand</h3><p><code>tr</code>: 刪除一段訊息中的文字、或者是進行文字的轉換</p>
+<p><code>col</code>: 經常被用來將 man page 轉存為純文字檔案以方便查閱</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man col | col -b &gt; /root/col.man</span><br></pre></td></tr></table></figure>
-<p>join: 兩個檔案當中，有相同資料的那一行，才將它加在一起</p>
+<p><code>join</code>: 兩個檔案當中，有相同資料的那一行，才將它加在一起</p>
 <h3 id="分割命令-split"><a href="#分割命令-split" class="headerlink" title="分割命令: split"></a>分割命令: split</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat termcap* &gt;&gt; termcapback</span><br></pre></td></tr></table></figure>
 <p>使用 ls -al / 輸出的資訊中，每十行紀錄變成一個檔案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al / | split -l 10 lsroot</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l lsroot*</span><br></pre></td></tr></table></figure>
 <h3 id="參數代換：-xargs-產生某個指令的參數"><a href="#參數代換：-xargs-產生某個指令的參數" class="headerlink" title="參數代換： xargs: 產生某個指令的參數"></a>參數代換： xargs: 產生某個指令的參數</h3><p>有些指令不其實並不支援管線命令，因此我們可以透過xarg該指令引用 standard input之用。</p>
-<h3 id="減號-的用途"><a href="#減號-的用途" class="headerlink" title="減號 -的用途"></a>減號 <code>-</code>的用途</h3><p>tar -cvf - /home | tar -xvf -</p>
-<p>我將/home裡面的檔案給他打包，但打包的資料不是記錄到檔案，而是傳送到stdout; 經過管線後，將tar -cvf - /home 傳送給後面的tar -xvf -</p>
+<h3 id="減號-的用途"><a href="#減號-的用途" class="headerlink" title="減號 -的用途"></a>減號 <code>-</code>的用途</h3><p><code>tar -cvf - /home | tar -xvf -</code></p>
+<p>我將/home裡面的檔案給他打包，但打包的資料不是記錄到檔案，而是傳送到stdout; 經過管線後，將tar <code>-cvf - /home</code> 傳送給後面的<code>tar -xvf -</code></p>
 <p>後面 - 取用前一個指令的stdout， 因此不需要使用file</p>
 
     </div>
@@ -279,11 +309,17 @@ alias 取代很...">
 </article>
 <div class="article-nav prev-next-wrap clearfix">
     
+    <a href="/2020/03/10/Spring-Annotation介紹/" class="pre-post btn btn-default" title="Spring Annotation筆記整理">
+        <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+        <span class="hidden-xs">
+            Spring Annotation筆記整理</span>
+    </a>
     
-    <a href="/2020/11/08/Go-new與make的介紹與差異/" class="next-post btn btn-default" title="Go new與make的介紹與差異 [Golang]">
+    
+    <a href="/2020/01/01/2020年的想法與自修規劃/" class="next-post btn btn-default" title="2020年的想法與自修規劃">
         <span class="hidden-lg">下一篇</span>
         <span class="hidden-xs">
-            Go new與make的介紹與差異 [Golang]</span><i class="fa fa-angle-right fa-fw"></i>
+            2020年的想法與自修規劃</span><i class="fa fa-angle-right fa-fw"></i>
     </a>
     
 </div>
@@ -294,8 +330,8 @@ alias 取代很...">
 
 <script type="text/javascript">
 var disqus_config = function() {
-    this.page.url = 'http://a10000005588.github.io/2021/01/28/linux/';
-    this.page.identifier = '2021/01/28/linux/';
+    this.page.url = 'http://a10000005588.github.io/2020/01/28/linux-bash/';
+    this.page.identifier = '2020/01/28/linux-bash/';
     this.page.title = '認識與學習Bash [Linux鳥哥 Ch10]';
 };
 
