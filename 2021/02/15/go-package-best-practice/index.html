@@ -22,10 +22,10 @@
 <meta name="keywords" content="Golang">
 
 
-<meta name="description" content="用Golang撰寫Package的Best Practice以下收錄撰寫golang package可以遵循的內容
+<meta name="description" content="以下收錄撰寫golang package可以遵循的內容
 Package 概覽一個Go Pakcage的基本元素包含了如下：
 
-Pack...">
+Package declaration: 基本定義，告訴develo...">
 
 
 <meta name="robots" content="all">
@@ -36,7 +36,7 @@ Pack...">
 
 <title>
     
-    post |
+    用Golang撰寫Package的Best Practice |
     
     William&#39;s 隨手札記
 </title>
@@ -140,9 +140,9 @@ Pack...">
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="post">
+        <h1 id="用Golang撰寫Package的Best Practice">
             
-            post
+            用Golang撰寫Package的Best Practice
             
         </h1>
         <div class="post-meta">
@@ -177,7 +177,7 @@ Pack...">
     </div>
     
     <div class="post-body post-content">
-        <h1 id="用Golang撰寫Package的Best-Practice"><a href="#用Golang撰寫Package的Best-Practice" class="headerlink" title="用Golang撰寫Package的Best Practice"></a>用Golang撰寫Package的Best Practice</h1><p>以下收錄撰寫golang package可以遵循的內容</p>
+        <p>以下收錄撰寫golang package可以遵循的內容</p>
 <h2 id="Package-概覽"><a href="#Package-概覽" class="headerlink" title="Package 概覽"></a>Package 概覽</h2><p>一個Go Pakcage的基本元素包含了如下：</p>
 <ul>
 <li>Package declaration: 基本定義，告訴developer package的功能是什麼</li>
@@ -397,7 +397,7 @@ Pack...">
 var disqus_config = function() {
     this.page.url = 'http://a10000005588.github.io/2021/02/15/go-package-best-practice/';
     this.page.identifier = '2021/02/15/go-package-best-practice/';
-    this.page.title = 'post';
+    this.page.title = '用Golang撰寫Package的Best Practice';
 };
 
 // Only if disqus_thread id is defined load the embed script
@@ -428,7 +428,7 @@ if (document.getElementById('disqus_thread')) {
             Table of Contents
         </h3>
         
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用Golang撰寫Package的Best-Practice"><span class="toc-text">用Golang撰寫Package的Best Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Package-概覽"><span class="toc-text">Package 概覽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Package的範圍：一個資料夾內的所有-go檔案，其他除外"><span class="toc-text">Package的範圍：一個資料夾內的所有.go檔案，其他除外</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Package種類"><span class="toc-text">Package種類</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Library-Packages"><span class="toc-text">Library Packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Package"><span class="toc-text">Main Package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#範例"><span class="toc-text">範例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage-的生命週期"><span class="toc-text">Pakcage 的生命週期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#範例-1"><span class="toc-text">範例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage-存取範疇"><span class="toc-text">Pakcage 存取範疇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage設計的Best-Practice"><span class="toc-text">Pakcage設計的Best Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pakcage-名稱"><span class="toc-text">Pakcage 名稱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package-說明"><span class="toc-text">Package 說明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-doc-go-做更複雜的說明"><span class="toc-text">使用 doc.go 做更複雜的說明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pakcage內容的描述撰寫指引"><span class="toc-text">Pakcage內容的描述撰寫指引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package內容準則"><span class="toc-text">Package內容準則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#結構設計"><span class="toc-text">結構設計</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Import-Package方法"><span class="toc-text">Import Package方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Typical-Imports"><span class="toc-text">1. Typical Imports</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Alternative-Imports"><span class="toc-text">2. Alternative Imports</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Import-for-side-effect-為引入的package，在引入其他的package使其作用"><span class="toc-text">3. Import for side effect: 為引入的package，在引入其他的package使其作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Internal-packages"><span class="toc-text">4. Internal packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Relative-Import"><span class="toc-text">4. Relative Import</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資源"><span class="toc-text">參考資源</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Package-概覽"><span class="toc-text">Package 概覽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Package的範圍：一個資料夾內的所有-go檔案，其他除外"><span class="toc-text">Package的範圍：一個資料夾內的所有.go檔案，其他除外</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Package種類"><span class="toc-text">Package種類</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Library-Packages"><span class="toc-text">Library Packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Package"><span class="toc-text">Main Package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#範例"><span class="toc-text">範例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage-的生命週期"><span class="toc-text">Pakcage 的生命週期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#範例-1"><span class="toc-text">範例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage-存取範疇"><span class="toc-text">Pakcage 存取範疇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pakcage設計的Best-Practice"><span class="toc-text">Pakcage設計的Best Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pakcage-名稱"><span class="toc-text">Pakcage 名稱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package-說明"><span class="toc-text">Package 說明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-doc-go-做更複雜的說明"><span class="toc-text">使用 doc.go 做更複雜的說明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pakcage內容的描述撰寫指引"><span class="toc-text">Pakcage內容的描述撰寫指引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package內容準則"><span class="toc-text">Package內容準則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#結構設計"><span class="toc-text">結構設計</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Import-Package方法"><span class="toc-text">Import Package方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Typical-Imports"><span class="toc-text">1. Typical Imports</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Alternative-Imports"><span class="toc-text">2. Alternative Imports</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Import-for-side-effect-為引入的package，在引入其他的package使其作用"><span class="toc-text">3. Import for side effect: 為引入的package，在引入其他的package使其作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Internal-packages"><span class="toc-text">4. Internal packages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Relative-Import"><span class="toc-text">4. Relative Import</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資源"><span class="toc-text">參考資源</span></a></li></ol>
         
     </div>
 </aside>
