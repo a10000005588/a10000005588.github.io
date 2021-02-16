@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="William&#39;s 隨手札記">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="theme-version" content="1.2.3">
+    <meta name="root" content="/">
+    <link rel="dns-prefetch" href="http://a10000005588.github.io">
+    <!--SEO-->
+
+<meta name="keywords" content="Golang">
+
+
+<meta name="description" content="這篇主要介紹如何在Golang底下使用Array, Slice, Map等操作技巧
+
+array用法新增array方式1. 透過 []12var arr [5]intfmt.Println(" a..."="">
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+<title>
+    
+    Go使用Array、Slice與Map的介紹 |
+    
+    William&#39;s 隨手札記
+</title>
+
+<link rel="alternate" href="/atom.xml" title="William&#39;s 隨手札記" type="application/atom+xml">
+
+
+<link rel="icon" href="/favicon.ico">
+
+    
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.7.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    
+
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="William L.K.">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+            <h2>
+                Just Code It.
+            </h2>
+            
+        </div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                        <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://a10000005588.github.io">
+                        William&#39;s 隨手札記</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/"><i class="fa "></i>
+                                最新貼文串</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/programming"><i class="fa "></i>
+                                程式語言筆記</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/backend/"><i class="fa "></i>
+                                Web後端工程</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/tools/"><i class="fa "></i>
+                                工具使用</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/blockchain/"><i class="fa "></i>
+                                區塊鏈</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/archives/"><i class="fa clock"></i>
+                                貼文軌跡</a>
+                        </li>
+                        
+                        <li role="presentation" class="text-center">
+                            <a href="/about/"><i class="fa "></i>
+                                關於我(=´ᴥ`)</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Go使用Array、Slice與Map的介紹">
+            
+            Go使用Array、Slice與Map的介紹
+            
+        </h1>
+        <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a class="category-link" href="/categories/Golang/">Golang</a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a class="tag-link" href="/tags/Golang/">Golang</a>
+            
+        </span>
+    </span>
+    
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">
+            2021/02/16</span>
+    </span>
+    
+    
+</div>
+        
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>這篇主要介紹如何在Golang底下使用Array, Slice, Map等操作技巧</p>
+<a id="more"></a>
+<h2 id="array用法"><a href="#array用法" class="headerlink" title="array用法"></a>array用法</h2><h3 id="新增array方式"><a href="#新增array方式" class="headerlink" title="新增array方式"></a>新增array方式</h3><h4 id="1-透過"><a href="#1-透過" class="headerlink" title="1. 透過 []"></a>1. 透過 <code>[]</code></h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr [<span class="number">5</span>]<span class="keyword">int</span></span><br><span class="line">fmt.Println(<span class="string">"array arr:"</span>, a)</span><br></pre></td></tr></table></figure>
+<h4 id="2-透過-make"><a href="#2-透過-make" class="headerlink" title="2. 透過 make"></a>2. 透過 <code>make</code></h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr := <span class="built_in">make</span>([]<span class="keyword">int64</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3-動態分配array"><a href="#3-動態分配array" class="headerlink" title="3. 動態分配array"></a>3. 動態分配array</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr=<span class="built_in">make</span>([][]<span class="keyword">int64</span>,<span class="number">10</span>) <span class="comment">//外層有10格</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++&#123;</span><br><span class="line">    arr[i]=<span class="built_in">make</span>([]<span class="keyword">int64</span>,i) <span class="comment">//動態分裡面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="array遍歷方法"><a href="#array遍歷方法" class="headerlink" title="array遍歷方法"></a>array遍歷方法</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt;<span class="built_in">len</span>(a); i++ &#123; </span><br><span class="line">    fmt.Println(<span class="string">"arr["</span>, i, <span class="string">"] ="</span>, a[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 用range, 第一個值 key為索引，value為索引的值</span></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> arr &#123; </span><br><span class="line">    fmt.Println(<span class="string">"arr["</span>, i, <span class="string">"] ="</span>, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="slice用法"><a href="#slice用法" class="headerlink" title="slice用法"></a>slice用法</h2><h3 id="新增slice方式"><a href="#新增slice方式" class="headerlink" title="新增slice方式"></a>新增slice方式</h3><h4 id="1-使用array"><a href="#1-使用array" class="headerlink" title="1. 使用array"></a>1. 使用array</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myArray [<span class="number">10</span>]<span class="keyword">int</span> = [<span class="number">10</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;</span><br><span class="line"><span class="keyword">var</span> mySlice []<span class="keyword">int</span> = myArray[:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用-make"><a href="#2-使用-make" class="headerlink" title="2. 使用 make"></a>2. 使用 <code>make</code></h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// make([]T, length, capacity)</span></span><br><span class="line"><span class="comment">// 創建長度為5，容量為10的切片</span></span><br><span class="line">slice1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 創建長度為5，並初始化該切片</span></span><br><span class="line">slice2 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>註： make的capacity若沒有設置會預設跟length一樣，為slice最大長度之上限。</p>
+</blockquote>
+<h3 id="動態新增slice長度-使用append"><a href="#動態新增slice長度-使用append" class="headerlink" title="動態新增slice長度: 使用append"></a>動態新增slice長度: 使用append</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在slice2 增加6</span></span><br><span class="line">slice2 = <span class="built_in">append</span>(slice2, <span class="number">6</span>)</span><br><span class="line">fmt.Println(<span class="string">"slice:"</span>, slice2)</span><br><span class="line"><span class="comment">// slice: 1 2 3 4 5 6</span></span><br></pre></td></tr></table></figure>
+<h3 id="動態減少slice長度-slice"><a href="#動態減少slice長度-slice" class="headerlink" title="動態減少slice長度: slice[:]"></a>動態減少slice長度: slice[:]</h3><p>例如：去除最前面一個元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">queue := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">queue = queue[<span class="number">1</span>:]  <span class="comment">// queue = &#123;2,3&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用slcie實作一個簡單的queue結構"><a href="#使用slcie實作一個簡單的queue結構" class="headerlink" title="使用slcie實作一個簡單的queue結構"></a>使用slcie實作一個簡單的queue結構</h3><ul>
+<li><p>宣告一個queue結構</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">queue := []int&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增一個元素到queue</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">queue = append(queue, 6)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>從queue的開頭pop一個元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element := queue[0]</span><br><span class="line">queue = queue[1:]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="檢查slice是否為空-len"><a href="#檢查slice是否為空-len" class="headerlink" title="檢查slice是否為空 len()"></a>檢查slice是否為空 <code>len()</code></h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">slice := []<span class="keyword">int</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">len</span>(slice) == <span class="number">0</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="slice-搭配-struct的傳值與回傳"><a href="#slice-搭配-struct的傳值與回傳" class="headerlink" title="slice 搭配 struct的傳值與回傳"></a>slice 搭配 struct的傳值與回傳</h3><p>以我做 <a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="noopener">Leetcode 111. Minimum Depth of Binary Tree</a> 的範例來看，怎麼使用slice搭配struct進行傳值與回傳</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> pair <span class="keyword">struct</span> &#123;</span><br><span class="line">    node *TreeNode</span><br><span class="line">    height <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">minDepth</span><span class="params">(root *TreeNode)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="comment">// 若目前root為nil 高度為0</span></span><br><span class="line">    <span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用queue存放當前的root, 透過golang的slice來實作</span></span><br><span class="line">    queue := []pair&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// make a new pair for root</span></span><br><span class="line">    rootPair := pair&#123;node: root, height: <span class="number">1</span>&#125;</span><br><span class="line">    queue = <span class="built_in">append</span>(queue, rootPair)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">len</span>(queue) != <span class="number">0</span> &#123;</span><br><span class="line">        element := queue[<span class="number">0</span>]</span><br><span class="line">        elementNode := element.node</span><br><span class="line">        <span class="comment">// 將取出來的elemenet去掉</span></span><br><span class="line">        queue = queue[<span class="number">1</span>:]</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 如果左右子樹都還有值，那就繼續找，將left, right塞進queue</span></span><br><span class="line">        <span class="keyword">if</span> elementNode.Left == <span class="literal">nil</span> &amp;&amp; elementNode.Right == <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> element.height</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> elementNode.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">            queue = push(queue, elementNode.Left, element.height)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> elementNode.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">            queue = push(queue, elementNode.Right, element.height)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">push</span><span class="params">(queue []pair, root *TreeNode, currHeight <span class="keyword">int</span>)</span> []<span class="title">pair</span></span> &#123;</span><br><span class="line">    newElement := pair&#123;node: root, height: currHeight + <span class="number">1</span>&#125;</span><br><span class="line">    newQueue := <span class="built_in">append</span>(queue, newElement)</span><br><span class="line">    <span class="keyword">return</span> newQueue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>line 14: 宣告一個型態為pair的struct slice</p>
+<p>line 42: 將struct slice傳入<code>push()</code>，並回傳之</p>
+<h2 id="Array-和-Slice差異"><a href="#Array-和-Slice差異" class="headerlink" title="Array 和 Slice差異"></a>Array 和 Slice差異</h2><table>
+<thead>
+<tr>
+<th>array</th>
+<th>slice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>長度宣告後不可以變動</td>
+<td>長度可以透過append()或slice[:]做變動</td>
+</tr>
+<tr>
+<td>X</td>
+<td>slice為array的指標，若更動slice，也會更動到原本array的內容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="如何避免Slice更動到原本Array"><a href="#如何避免Slice更動到原本Array" class="headerlink" title="如何避免Slice更動到原本Array?"></a>如何避免Slice更動到原本Array?</h3><h4 id="方法-1-make-and-Copy"><a href="#方法-1-make-and-Copy" class="headerlink" title="方法 1 : make and Copy"></a>方法 1 : <code>make</code> and <code>Copy</code></h4><p>先開一個新的空間，用make開好，用copy拷貝過去<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr:=[]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">newSlice := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(arr))</span><br><span class="line"><span class="built_in">copy</span>(newSlice, arr)</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法-2-append"><a href="#方法-2-append" class="headerlink" title="方法 2 : append"></a>方法 2 : <code>append</code></h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr:=[]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">newSlice = <span class="built_in">append</span>([]<span class="keyword">int64</span>(<span class="literal">nil</span>), arr[<span class="number">1</span>:<span class="number">3</span>]...) <span class="comment">//一定要「…」</span></span><br></pre></td></tr></table></figure>
+<h2 id="Map用法"><a href="#Map用法" class="headerlink" title="Map用法"></a>Map用法</h2><p>建立一個 map 兩種方式</p>
+<h3 id="使用make"><a href="#使用make" class="headerlink" title="使用make"></a>使用make</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line"><span class="comment">// m["age"] = 16</span></span><br><span class="line">m := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>回傳值, 和 map 是否存在<br>如果是不存在的 key , value = 0 , ok = false<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value , ok := m[<span class="string">"age"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>利用 range 取得 map 中所有的 key 和 value, 並列印<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> m &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Key:"</span>, key, <span class="string">"Value:"</span>, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一次宣告多值<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">person := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">       <span class="string">"age"</span> : <span class="number">16</span>,</span><br><span class="line">       <span class="string">"height"</span> : <span class="number">180</span>,</span><br><span class="line">       <span class="string">"weight"</span> : <span class="number">6</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>Golang 兩三事<ul>
+<li><a href="http://daniel0076.logdown.com/posts/280719-golang-slice-notes" target="_blank" rel="noopener">http://daniel0076.logdown.com/posts/280719-golang-slice-notes</a></li>
+</ul>
+</li>
+<li>Golang slice trick<ul>
+<li><a href="https://github.com/golang/go/wiki/SliceTricks" target="_blank" rel="noopener">https://github.com/golang/go/wiki/SliceTricks</a></li>
+</ul>
+</li>
+<li>How to implement a queue in Go?<ul>
+<li><a href="https://stackoverflow.com/questions/3042329/how-to-implement-a-queue-in-go" target="_blank" rel="noopener">https://stackoverflow.com/questions/3042329/how-to-implement-a-queue-in-go</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+    <a href="/2021/02/15/go-cli/" class="next-post btn btn-default" title="Go CLI Playbook 學習筆記">
+        <span class="hidden-lg">下一篇</span>
+        <span class="hidden-xs">
+            Go CLI Playbook 學習筆記</span><i class="fa fa-angle-right fa-fw"></i>
+    </a>
+    
+</div>
+
+<div id="comments">
+    <div id="disqus_thread"></div>
+    
+
+<script type="text/javascript">
+var disqus_config = function() {
+    this.page.url = 'http://a10000005588.github.io/2021/02/16/go-array-slice-map/';
+    this.page.identifier = '2021/02/16/go-array-slice-map/';
+    this.page.title = 'Go使用Array、Slice與Map的介紹';
+};
+
+// Only if disqus_thread id is defined load the embed script
+if (document.getElementById('disqus_thread')) {
+    var dsq = document.createElement('script');
+    var head = document.getElementsByTagName('head')[0];
+    var body = document.getElementsByTagName('body')[0];
+
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.setAttribute('data-timestamp', '' + +new Date());
+    dsq.src = 'https://williamblog-1.disqus.com/embed.js';
+
+    console.log('head', head);
+    console.log('body', body);
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}
+  
+</script>
+
+</div>
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">
+            Table of Contents
+        </h3>
+        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#array用法"><span class="toc-text">array用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增array方式"><span class="toc-text">新增array方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-透過"><span class="toc-text">1. 透過 []</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-透過-make"><span class="toc-text">2. 透過 make</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-動態分配array"><span class="toc-text">3. 動態分配array</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array遍歷方法"><span class="toc-text">array遍歷方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slice用法"><span class="toc-text">slice用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新增slice方式"><span class="toc-text">新增slice方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-使用array"><span class="toc-text">1. 使用array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-使用-make"><span class="toc-text">2. 使用 make</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#動態新增slice長度-使用append"><span class="toc-text">動態新增slice長度: 使用append</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#動態減少slice長度-slice"><span class="toc-text">動態減少slice長度: slice[:]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用slcie實作一個簡單的queue結構"><span class="toc-text">使用slcie實作一個簡單的queue結構</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#檢查slice是否為空-len"><span class="toc-text">檢查slice是否為空 len()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slice-搭配-struct的傳值與回傳"><span class="toc-text">slice 搭配 struct的傳值與回傳</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array-和-Slice差異"><span class="toc-text">Array 和 Slice差異</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何避免Slice更動到原本Array"><span class="toc-text">如何避免Slice更動到原本Array?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法-1-make-and-Copy"><span class="toc-text">方法 1 : make and Copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法-2-append"><span class="toc-text">方法 2 : append</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map用法"><span class="toc-text">Map用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用make"><span class="toc-text">使用make</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        
+    </div>
+</aside>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+<a id="back-to-top" class="icon-btn hide">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy;
+                    2017
+                    
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
